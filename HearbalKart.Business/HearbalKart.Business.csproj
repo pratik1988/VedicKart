@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BDD3AAF3-FD31-4681-BCE9-53AA94AA2517}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HearbalKart.Business</RootNamespace>
+    <AssemblyName>HearbalKart.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Classes\AccountValidation.cs" />
+    <Compile Include="Classes\CustomerClass.cs" />
+    <Compile Include="Classes\Order.cs" />
+    <Compile Include="Classes\Product.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HearbalKartDB.Data.SqlClient\HearbalKartDB.Data.SqlClient.csproj">
+      <Project>{895B99C8-A8AB-408D-8B06-4E6FDE778208}</Project>
+      <Name>HearbalKartDB.Data.SqlClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HearbalKartDB.Data\HearbalKartDB.Data.csproj">
+      <Project>{4D659160-7478-4243-B563-90A28CE45000}</Project>
+      <Name>HearbalKartDB.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HearbalKartDB.Entities\HearbalKartDB.Entities.csproj">
+      <Project>{FBFBF314-043B-49A3-97E9-2B62FE4760E3}</Project>
+      <Name>HearbalKartDB.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HearbalKartDB.Web\HearbalKartDB.Web.csproj">
+      <Project>{97081F1F-14B5-4B25-A918-12AE07DDF923}</Project>
+      <Name>HearbalKartDB.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EBSTEST1", "http://localhost/EBSTEST1/EBSTEST1.vbproj", "{CA8E98D0-EE26-469F-86A9-9D352CFB0712}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA8E98D0-EE26-469F-86A9-9D352CFB0712}.Debug|Default.ActiveCfg = Debug|.NET
+		{CA8E98D0-EE26-469F-86A9-9D352CFB0712}.Debug|Default.Build.0 = Debug|.NET
+		{CA8E98D0-EE26-469F-86A9-9D352CFB0712}.Release|Default.ActiveCfg = Release|.NET
+		{CA8E98D0-EE26-469F-86A9-9D352CFB0712}.Release|Default.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

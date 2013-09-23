@@ -1,0 +1,5 @@
+C:\inetpub\wwwroot\EBS\EBS\bin\EBS.dll
+C:\inetpub\wwwroot\EBS\EBS\bin\EBS.pdb
+C:\inetpub\wwwroot\EBS\EBS\obj\Debug\ResolveAssemblyReference.cache
+C:\inetpub\wwwroot\EBS\EBS\obj\Debug\EBS.dll
+C:\inetpub\wwwroot\EBS\EBS\obj\Debug\EBS.pdb

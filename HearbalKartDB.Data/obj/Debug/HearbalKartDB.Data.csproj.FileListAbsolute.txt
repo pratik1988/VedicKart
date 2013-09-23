@@ -1,0 +1,17 @@
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\HearbalKartDB.Data.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\HearbalKartDB.Data.pdb
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\HearbalKartDB.Data.xml
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\HearbalKartDB.Entities.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\Microsoft.Practices.Unity.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Caching.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\HearbalKartDB.Entities.pdb
+E:\Office\Vedickart\HearbalKartDB.Data\bin\Debug\HearbalKartDB.Entities.xml
+E:\Office\Vedickart\HearbalKartDB.Data\obj\Debug\HearbalKartDB.Data.csprojResolveAssemblyReference.cache
+E:\Office\Vedickart\HearbalKartDB.Data\obj\Debug\HearbalKartDB.Data.dll
+E:\Office\Vedickart\HearbalKartDB.Data\obj\Debug\HearbalKartDB.Data.pdb

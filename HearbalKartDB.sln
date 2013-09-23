@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearbalKartDB.Entities", "HearbalKartDB.Entities\HearbalKartDB.Entities.csproj", "{FD75E6D6-6F2A-4006-B5E9-B390D4F33815}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearbalKartDB.Data", "HearbalKartDB.Data\HearbalKartDB.Data.csproj", "{EDE809F7-84D9-42C2-AE5A-96BFB132BF3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearbalKartDB.Data.SqlClient", "HearbalKartDB.Data.SqlClient\HearbalKartDB.Data.SqlClient.csproj", "{70F83E1A-1C88-4CF0-A1EC-98493D95D3C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearbalKartDB.Web", "HearbalKartDB.Web\HearbalKartDB.Web.csproj", "{F15ABC9B-9199-4530-A0B7-BA4311245B20}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HearbalKartDB.Website", "HearbalKartDB.Website\", "{ADDA8337-5C83-4697-A5C1-9A6FB728049E}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{FD75E6D6-6F2A-4006-B5E9-B390D4F33815}|HearbalKartDB.Entities.dll;{EDE809F7-84D9-42C2-AE5A-96BFB132BF3E}|HearbalKartDB.Data.dll;{70F83E1A-1C88-4CF0-A1EC-98493D95D3C6}|HearbalKartDB.Data.SqlClient.dll;{F15ABC9B-9199-4530-A0B7-BA4311245B20}|HearbalKartDB.Web.dll;{BDD3AAF3-FD31-4681-BCE9-53AA94AA2517}|HearbalKart.Business.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/HearbalKartDB.Website"
+		Debug.AspNetCompiler.PhysicalPath = "HearbalKartDB.Website\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\HearbalKartDB.Website\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/HearbalKartDB.Website"
+		Release.AspNetCompiler.PhysicalPath = "HearbalKartDB.Website\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\HearbalKartDB.Website\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "2005"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetTiers", "NetTiers", "{F3A10C8D-3227-449F-A2CB-014DE2D7F415}"
+	ProjectSection(SolutionItems) = preProject
+		AssemblyInfo.cs = AssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HearbalKart.Business", "HearbalKart.Business\HearbalKart.Business.csproj", "{BDD3AAF3-FD31-4681-BCE9-53AA94AA2517}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD75E6D6-6F2A-4006-B5E9-B390D4F33815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD75E6D6-6F2A-4006-B5E9-B390D4F33815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD75E6D6-6F2A-4006-B5E9-B390D4F33815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD75E6D6-6F2A-4006-B5E9-B390D4F33815}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE809F7-84D9-42C2-AE5A-96BFB132BF3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE809F7-84D9-42C2-AE5A-96BFB132BF3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE809F7-84D9-42C2-AE5A-96BFB132BF3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE809F7-84D9-42C2-AE5A-96BFB132BF3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F83E1A-1C88-4CF0-A1EC-98493D95D3C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F83E1A-1C88-4CF0-A1EC-98493D95D3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F83E1A-1C88-4CF0-A1EC-98493D95D3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F83E1A-1C88-4CF0-A1EC-98493D95D3C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F15ABC9B-9199-4530-A0B7-BA4311245B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F15ABC9B-9199-4530-A0B7-BA4311245B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F15ABC9B-9199-4530-A0B7-BA4311245B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F15ABC9B-9199-4530-A0B7-BA4311245B20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADDA8337-5C83-4697-A5C1-9A6FB728049E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDA8337-5C83-4697-A5C1-9A6FB728049E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDA8337-5C83-4697-A5C1-9A6FB728049E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDA8337-5C83-4697-A5C1-9A6FB728049E}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{BDD3AAF3-FD31-4681-BCE9-53AA94AA2517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD3AAF3-FD31-4681-BCE9-53AA94AA2517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD3AAF3-FD31-4681-BCE9-53AA94AA2517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDD3AAF3-FD31-4681-BCE9-53AA94AA2517}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EDE809F7-84D9-42C2-AE5A-96BFB132BF3E} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{70F83E1A-1C88-4CF0-A1EC-98493D95D3C6} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{F15ABC9B-9199-4530-A0B7-BA4311245B20} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{ADDA8337-5C83-4697-A5C1-9A6FB728049E} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{FD75E6D6-6F2A-4006-B5E9-B390D4F33815} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+		{BDD3AAF3-FD31-4681-BCE9-53AA94AA2517} = {F3A10C8D-3227-449F-A2CB-014DE2D7F415}
+	EndGlobalSection
+EndGlobal

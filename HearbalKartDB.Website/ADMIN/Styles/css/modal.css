@@ -1,0 +1,427 @@
+﻿ /*<<<<<<<<<<popup>>>>>>>>>>>*/
+ 
+ input.file {
+	width: 150px;
+	height: 20px;
+	border: 1px solid #BBB;
+	border-right: 0;
+	color: #888;
+	padding: 5px;
+	
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	
+	outline: none;
+}
+
+div.file_upload {
+	width: 80px;
+	height: 24px;
+	background: #7abcff;
+	background: -moz-linear-gradient(top,  #7abcff 0%, #60abf8 44%, #4096ee 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7abcff), color-stop(44%,#60abf8), color-stop(100%,#4096ee));
+	background: -webkit-linear-gradient(top,  #7abcff 0%,#60abf8 44%,#4096ee 100%);
+	background: -o-linear-gradient(top,  #7abcff 0%,#60abf8 44%,#4096ee 100%);
+	background: -ms-linear-gradient(top,  #7abcff 0%,#60abf8 44%,#4096ee 100%);
+	background: linear-gradient(top,  #7abcff 0%,#60abf8 44%,#4096ee 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#4096ee',GradientType=0 );
+
+	display: inline;
+	position: absolute;
+	overflow: hidden;
+	cursor: pointer;
+	
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	
+	font-weight: bold;
+	color: #FFF;
+	text-align: center;
+	padding-top: 8px;
+}
+div.file_upload:before {
+	content: 'UPLOAD';
+	position: absolute;
+	left: 0; right: 0;
+	text-align: center;
+	
+	cursor: pointer;
+}
+
+div.file_upload input {
+	position: relative;
+	height: 30px;
+	width: 250px;
+	display: inline;
+	cursor: pointer;
+	opacity: 0;
+}
+        .black_overlay1, .black_overlay2
+        {
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.6;
+            opacity: .60;
+            filter: alpha(opacity=60);
+        }
+        .white_box
+        {
+            display: none;
+            position: fixed;
+            top: 25%;
+            left: 35%;
+            -moz-box-shadow: 0px 0px 8px 2px #333;
+            -webkit-box-shadow: 0px 0px 8px 2px #333;
+            box-shadow: 0px 0px 8px 2px #333;
+             padding: 15px 12px 13px;
+            border-radius: 9px 9px 9px 9px;
+            background-color: white;
+            z-index: 99999;
+            overflow: auto;
+        }
+        
+         .white_box_big
+        {
+            display: none;
+            position: fixed;
+            top: 16%;
+            left: 21%;
+            -moz-box-shadow: 0px 0px 8px 2px #333;
+            -webkit-box-shadow: 0px 0px 8px 2px #333;
+            box-shadow: 0px 0px 8px 2px #333;
+             padding: 15px 12px 13px;
+            border-radius: 9px 9px 9px 9px;
+            background-color: white;
+            z-index: 99999;
+            overflow: auto;
+        }
+         .white_box_big_error
+        {
+            display: none;
+            position: fixed;
+            top: 0%;
+            left: 21%;
+            -moz-box-shadow: 0px 0px 8px 2px #333;
+            -webkit-box-shadow: 0px 0px 8px 2px #333;
+            box-shadow: 0px 0px 8px 2px #333;
+             padding: 15px 12px 13px;
+            border-radius: 9px 9px 9px 9px;
+            background-color: white;
+            z-index: 99999;
+            overflow: auto;
+        }
+        .white_box .add-address
+        {
+            border-bottom: 1px solid #ccc;
+            float: left;
+            padding: 0 0 10px 0;
+            width: 100%;
+        }
+        .white_box .add-address h3
+        {
+            font-size: 16px;
+            color: #373737;
+            float: left;
+            width: 340px;
+            margin: 0px;
+            padding: 0px;
+        }
+        #light.white_box .add-address h2
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            color: #5AC706;
+            text-align: center;
+            border-bottom: 1px solid #DDDDDD;
+            padding-bottom: 10px;
+            float: none;
+            margin: 0 0 10px 0;
+        }
+        .fk-err-all {
+	background: #fce7e7;
+	border: 1px solid #b00;
+	color: #b00;
+    float: left;
+    margin: 6px 0 0;
+    padding: 3px 5px;
+    text-align: left;
+    width: 97%;
+
+}
+.fk-suc-msg {
+	background: url("../prod/images/tick1-60243164.png") no-repeat scroll 5px 10px #cfc;
+	border: 1px solid #696;
+	color: green;
+	font-size: 13px;
+	padding: 10px 0 10px 30px;
+	text-align: left
+}
+.fk-alert {
+	border: 1px solid #fcf3d3;
+	padding: 5px;
+	background: #fdf7df
+}
+.fk-msg-success {
+	background-color: #e9ffd7;
+	border: 1px solid #a8e296;
+	color: #565656;
+	float: left;
+    margin: 6px 0 0;
+    padding: 3px 5px;
+    text-align: left;
+    width: 97%;
+}
+.fk-msg-fail {
+	background-color: #fff8f8;
+	border: 1px solid #f7c4c4;
+	color: #e83452;
+	font-size: 13px;
+	padding: 10px
+}
+.fk-ac-results {
+	padding: 0;
+	overflow: hidden;
+	z-index: 99999;
+	text-align: left
+}
+
+        .cross
+        {
+            
+            background: url("../../../images/cross.png") no-repeat scroll 0 0 transparent;
+            float: right;
+            height: 21px;
+            width: 22px;
+            margin: -6px 0 0 0;
+        }
+        
+.cross1 {
+    background: url("../../../images/cross.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 21px;
+    margin: -22px 8px 9px;
+    width: 22px;
+}
+        body header #headerwrapper #headerright .add-address a
+        {
+            border: none;
+            float: left;
+        }
+        .white_box .add-adres-footer
+        {
+            margin: 0px;
+            padding: 5px 0 0;
+            float: left;
+        }
+        body header #headerwrapper #headerright .white_box .add-adres-footer a
+        {
+            color: #fff;
+            border: none;
+            font-size: 11px;
+        }
+        .mini-cart
+        {
+            margin: 0;
+            padding: 5px;
+            width: 382px;
+            z-index: 9999;
+            float: left;
+        }
+        .mini-cart .popupheading
+        {
+            color: #373737;
+            border-bottom: 1px solid #D2D2D2;
+            width: 369px;
+            text-align: left;
+            font-size: 17px;
+            line-height: 45px;
+            padding: 0 0 0 16px;
+        }
+        
+         .mini-cart1
+        {
+            margin: 0;
+            padding: 5px;
+            width: 100%;
+            z-index: 9999;
+            float: left;
+        }
+        .mini-cart1 .popupheading1
+        {
+            color: #373737;
+            border-bottom: 1px solid #D2D2D2;
+            width: 369px;
+            text-align: left;
+            font-size: 17px;
+            line-height: 45px;
+            padding: 0 0 0 16px;
+        }
+        .loginform
+        {
+            width: 380px;
+            margin: 0px;
+            padding: 3px 0 11px;
+            float: left;
+            border-bottom: 1px solid #D2D2D2;
+        }
+        .loginouter
+        {
+            float: left;
+            width: 380px;
+             margin: 0 0 8px;
+            padding: 0px;
+        }
+        .loginform1
+        {
+            width: 100%;
+            margin: 4px;
+            padding: 3px 0 11px;
+            float: left;
+            border-bottom: 1px solid #D2D2D2;
+        }
+        .loginouter1
+        {
+            float: left;
+            width: 100%;
+             margin: 0 0 8px;
+            padding: 0px;
+        }
+        .loginouter1 .loginlabel1
+        {
+            color: #373737;
+            float: left;
+            font-size: 14px;
+           margin: 3px 6px 0 0;
+            padding: 0;
+            width: 91px;
+            text-align: left;
+        }
+        .loginouter1 .logininput1
+        {
+            float: left;
+            margin: 0;
+            padding: 0;
+            width: 248px;
+        }
+        .loginouter1 .logininput1
+        {
+            
+            
+        }
+        .textboxstyle
+        {
+          background: white;
+        border: 1px double #DDD;
+        border-radius: 5px;
+        box-shadow: 0 0 5px #333;
+        color: #666;
+    float: left;
+    padding: 5px 10px;
+    width: 165px;
+    outline: none;  
+    }
+         .textboxstyleerror
+        {
+         
+        box-shadow: 0 0 5px red;
+    }
+        .loginouter .loginlabel
+        {
+            color: #373737;
+            float: left;
+            font-size: 14px;
+           margin: 3px 6px 0 0;
+            padding: 0;
+            width: 73px;
+            text-align: left;
+        }
+        .loginouter .logininput
+        {
+            float: left;
+            margin: 0;
+            padding: 0;
+            width: 295px;
+        }
+        .loginouter .logininput input
+        {
+            border: 1px solid #DDDDDD;
+            border-radius: 4px 4px 4px 4px;
+            min-height: 20px;
+            width: 230px;
+        }
+        .rememberme
+        {
+            float: left;
+            margin: 0px;
+            padding: 0px;
+            color: #373737;
+            font-size: 12px;
+        }
+        .lostpas
+        {
+            float: right;
+            margin: 0 41px 0 0;
+            padding: 0px;
+        }
+        #headerwrapper #headerright .loginouter .lostpas a
+        {
+            color: #373737;
+            font-size: 11px;
+            border: none;
+            text-decoration: underline;
+        }
+        .loginbtn
+        {
+            background: url("../images/miximgbtn.png") no-repeat scroll left -137px transparent;
+            margin: 2px 18px 0 0;
+            padding: 4px 0;
+            float: left;
+            border-radius: 4px 4px 4px 4px;
+            width: 70px;
+        }
+        .loginfbbtn
+        {
+            background: url("../images/miximgsitebtn.png") no-repeat scroll left top transparent;
+            margin: 0px;
+            width: 149px;
+            padding: 4px 0;
+            float: left;
+        }
+        .logintwbtn
+        {
+            background: url("../images/miximgsitebtn.png") no-repeat scroll left -34px transparent;
+            margin: 0px;
+            padding: 4px 0;
+            float: left;
+            width: 121px;
+        }
+        .add-address
+        {
+            float:left; width:100%; border-bottom:1px solid #ddd; padding:0px; text-align:center;
+            }
+            select
+            {
+                width:190px; border:1px solid #ddd; border-radius:5px; padding:5px 5px;box-shadow: 0 0 6px #CCCCCC inset;
+                }
+                selecterror
+            {
+                width:190px; border:1px solid #ddd; border-radius:5px; padding:5px 5px;box-shadow: 0 0 6px Red inset;
+                }
+                 select:focus
+            {
+                width:190px; border:1px solid #ddd; border-radius:5px; padding:5px 5px;
+                }

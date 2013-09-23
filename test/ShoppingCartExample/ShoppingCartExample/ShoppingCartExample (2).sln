@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ShoppingCartExample", "ShoppingCartExample\", "{6139F4C3-3626-4B83-B403-19351A894567}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		Debug.AspNetCompiler.VirtualPath = "/ShoppingCartExample"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\Desktop\ShoppingCartExample\ShoppingCartExample\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ShoppingCartExample\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ShoppingCartExample"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\Desktop\ShoppingCartExample\ShoppingCartExample\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ShoppingCartExample\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4340"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6139F4C3-3626-4B83-B403-19351A894567}.Debug|.NET.ActiveCfg = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
