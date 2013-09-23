@@ -2,7 +2,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <div class="statisticsTitle">
     Country
-    <asp:LinkButton ID="lnkAddNewState" runat="server" OnClick="lnkAddNewState_Click">Add New</asp:LinkButton>
+    <asp:LinkButton ID="lnkAddNewState" runat="server" >Add New</asp:LinkButton>
 </div>
 <table class="adminContent">
     <asp:GridView ID="grdState" CssClass="t-widget t-grid" runat="server" Width="100%"
@@ -10,7 +10,7 @@
         CellPadding="0" CellSpacing="1" EmptyDataText="No record Found!" EmptyDataRowStyle-Font-Bold="true"
         EmptyDataRowStyle-HorizontalAlign="Center" EditRowStyle-VerticalAlign="Top" AllowPaging="true"
         RowStyle-CssClass="con" AlternatingRowStyle-CssClass="con-dark" GridLines="None"
-        PageSize="10" BackColor="#ffffff" ShowHeader="true" OnRowDataBound="grdState_RowDataBound">
+        PageSize="10" BackColor="#ffffff" ShowHeader="true" >
         <AlternatingRowStyle CssClass="con-dark"></AlternatingRowStyle>
         <Columns>
             <asp:TemplateField>
@@ -56,12 +56,12 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <asp:ImageButton ID="IMGBTNStateisActive" runat="server" CommandArgument='<%# Eval("Id") %>'
-                        OnClick="IMGBTNStateisActive_Click"></asp:ImageButton>
+                        ></asp:ImageButton>
                     <asp:HiddenField ID="HDFStateID" runat="server" />
                 </ItemTemplate>
                 <AlternatingItemTemplate>
                     <asp:ImageButton ID="IMGBTNStateisActive" runat="server" CssClass="t-alt" CommandArgument='<%# Eval("Id") %>'
-                        OnClick="IMGBTNStateisActive_Click"></asp:ImageButton>
+                        ></asp:ImageButton>
                     <asp:HiddenField ID="HDFStateID" runat="server" />
                 </AlternatingItemTemplate>
             </asp:TemplateField>
@@ -115,7 +115,7 @@
     <div class="add-adres-footer">
         <div class="loginbtn">
             <asp:LinkButton ID="btnSubmitState" Text="Submit" runat="server" OnClientClick="return btnSubmitState();"
-                OnClick="btnSubmitState_Click" />
+                 />
         </div>
         <div class="loginfbbtn">
             <asp:LinkButton ID="btncancel" runat="server" OnClientClick="return ClosePOPUPState();"
