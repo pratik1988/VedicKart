@@ -22,4 +22,10 @@ public partial class ADMIN_Admin : System.Web.UI.MasterPage
     {
         Response.Cache.SetCacheability(HttpCacheability.NoCache);
     }
+    protected void lnkLogOut_Click(object sender, EventArgs e)
+    {
+        Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        Session["UserName"] = null;
+        Server.Transfer("~/Default.aspx");
+    }
 }

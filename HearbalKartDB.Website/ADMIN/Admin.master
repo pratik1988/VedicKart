@@ -36,7 +36,7 @@
                         onclick="lnkclearecache_Click" />
                 </div>
                 <div class="login-info">
-                    Logged in as: <asp:Label ID="LblUserNme" runat="server" /><a href="/logout">Logout?</a>
+                    Logged in as: <asp:Label ID="LblUserNme" runat="server" /><asp:LinkButton ID="lnkLogOut" runat="server" Text="LogOut"  onclick="lnkLogOut_Click" />
                 </div>
                 <div class="version">
                     <span>VedicKart 3.10</span></div>
