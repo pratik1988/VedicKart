@@ -2,7 +2,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <div class="statisticsTitle">
     Country
-    <asp:LinkButton ID="lnkAddNewState" runat="server" >Add New</asp:LinkButton>
+   
+    <asp:LinkButton ID="lnkAddNewState" runat="server">Add New</asp:LinkButton>
 </div>
 <table class="adminContent">
     <asp:GridView ID="grdState" CssClass="t-widget t-grid" runat="server" Width="100%"
@@ -10,13 +11,14 @@
         CellPadding="0" CellSpacing="1" EmptyDataText="No record Found!" EmptyDataRowStyle-Font-Bold="true"
         EmptyDataRowStyle-HorizontalAlign="Center" EditRowStyle-VerticalAlign="Top" AllowPaging="true"
         RowStyle-CssClass="con" AlternatingRowStyle-CssClass="con-dark" GridLines="None"
-        PageSize="10" BackColor="#ffffff" ShowHeader="true" >
+        PageSize="10" BackColor="#ffffff" ShowHeader="true">
         <AlternatingRowStyle CssClass="con-dark"></AlternatingRowStyle>
         <Columns>
             <asp:TemplateField>
                 <HeaderStyle CssClass="t-grid-header" HorizontalAlign="Center" />
                 <HeaderTemplate>
                     State
+               
                 </HeaderTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblState" runat="server"></asp:Label>
@@ -29,6 +31,7 @@
                 <HeaderStyle CssClass="t-grid-header" HorizontalAlign="Center" />
                 <HeaderTemplate>
                     Country
+               
                 </HeaderTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblCountryS" runat="server"></asp:Label>
@@ -41,6 +44,7 @@
                 <HeaderStyle CssClass="t-grid-header" HorizontalAlign="Center" />
                 <HeaderTemplate>
                     Pin
+               
                 </HeaderTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblStatePin" runat="server"></asp:Label>
@@ -53,15 +57,14 @@
                 <HeaderStyle CssClass="t-grid-header" HorizontalAlign="Center" />
                 <HeaderTemplate>
                     IsActive
+               
                 </HeaderTemplate>
                 <ItemTemplate>
-                    <asp:ImageButton ID="IMGBTNStateisActive" runat="server" CommandArgument='<%# Eval("Id") %>'
-                        ></asp:ImageButton>
+                    <asp:ImageButton ID="IMGBTNStateisActive" runat="server" CommandArgument='<%# Eval("Id") %>'></asp:ImageButton>
                     <asp:HiddenField ID="HDFStateID" runat="server" />
                 </ItemTemplate>
                 <AlternatingItemTemplate>
-                    <asp:ImageButton ID="IMGBTNStateisActive" runat="server" CssClass="t-alt" CommandArgument='<%# Eval("Id") %>'
-                        ></asp:ImageButton>
+                    <asp:ImageButton ID="IMGBTNStateisActive" runat="server" CssClass="t-alt" CommandArgument='<%# Eval("Id") %>'></asp:ImageButton>
                     <asp:HiddenField ID="HDFStateID" runat="server" />
                 </AlternatingItemTemplate>
             </asp:TemplateField>
@@ -96,11 +99,11 @@
                 <span class="loginlabel">State:</span><span class="logininput">
                     <asp:TextBox ID="TXTState" runat="server" Text="Submit" CssClass="textboxstyle" /></span>
             </div>
-             <div class="loginouter">
+            <div class="loginouter">
                 <span class="loginlabel">Pin:</span><span class="logininput">
                     <asp:TextBox ID="TXTStatePIN" runat="server" Text="Submit" CssClass="textboxstyle" /></span>
             </div>
-             <div class="loginouter">
+            <div class="loginouter">
                 <span class="loginlabel">Country:</span><span class="logininput">
                     <asp:TextBox ID="DrpCountry" runat="server" Text="Submit" CssClass="textboxstyle" /></span>
             </div>
@@ -114,12 +117,12 @@
     </div>
     <div class="add-adres-footer">
         <div class="loginbtn">
-            <asp:LinkButton ID="btnSubmitState" Text="Submit" runat="server" OnClientClick="return btnSubmitState();"
-                 />
+            <asp:LinkButton ID="btnSubmitState" Text="Submit" runat="server" OnClientClick="return btnSubmitState();" />
         </div>
         <div class="loginfbbtn">
             <asp:LinkButton ID="btncancel" runat="server" OnClientClick="return ClosePOPUPState();"
-                Text="Cancel" /></div>
+                Text="Cancel" />
+        </div>
     </div>
     <!--add-adres-footer-->
 </div>
@@ -128,7 +131,7 @@
     <div id="fadeState" class="black_overlay1" onclick="document.getElementById('lightSate').style.display='none';document.getElementById('fadeState').style.display='none'">
     </div>
 </a>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
     function btnSubmitState() {
         var errorMessage = "";
         var isValid = true;
@@ -180,7 +183,7 @@
         jQuery('#<%=lblpopheaderState.ClientID %>').text('Add States');
         //alert(status);
         if (status == 'true') {
-            
+
             //alert(status);
         }
         else {

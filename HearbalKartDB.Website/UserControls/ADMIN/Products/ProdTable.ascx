@@ -78,7 +78,7 @@
                 <asp:TemplateField>
                     <HeaderStyle CssClass="t-grid-header" HorizontalAlign="Center" />
                     <HeaderTemplate>
-                        Product Supplyment
+                        Product Supplement
                     </HeaderTemplate>
                     <ItemTemplate>
                         <asp:Label ID="lblProdsupp" runat="server"></asp:Label>

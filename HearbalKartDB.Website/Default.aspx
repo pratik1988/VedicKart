@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Home Page</title>
-    <script language="javascript">
+    <script type="text/javascript">
 
         function DisplayBox() {
 
@@ -23,8 +23,7 @@
 
     </script>
     <style type="text/css">
-        .black_overlay
-        {
+        .black_overlay {
             display: none;
             position: absolute;
             top: 0%;
@@ -37,9 +36,8 @@
             opacity: .80;
             filter: alpha(opacity=80);
         }
-        
-        .white_content
-        {
+
+        .white_content {
             display: none;
             position: absolute;
             top: 25%;
@@ -51,23 +49,20 @@
             z-index: 1002;
             overflow: auto;
         }
-        
-        .headertext
-        {
+
+        .headertext {
             font-family: Arial, Helvetica, sans-serif;
             font-size: 14px;
             color: #f19a19;
             font-weight: bold;
         }
-        
-        .textfield
-        {
+
+        .textfield {
             border: 1px solid black;
             width: 135px;
         }
-        
-        .buttonclass
-        {
+
+        .buttonclass {
             background-color: blue;
             color: White;
             font-size: 11px;
@@ -81,95 +76,85 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <a href="javascript:void(0)" onclick="javascript:DisplayBox();">Click here to display</a>
-    <div id="boxdiv" class="white_content">
-        <table cellpadding="0" cellspacing="0" border="0" style="background-color: Yellow;"
-            width="100%">
-            <tr>
-                <td height="16px">
-                </td>
-            </tr>
-            <tr>
-                <td style="padding-left: 16px; padding-right: 16px; padding-bottom: 16px">
-                    <table align="center" border="0" cellpadding="0" cellspacing="0" style="background-color: #fff">
-                        <div id="Div1" class="white_content">
-                            <table border="0" cellpadding="0" cellspacing="0" style="background-color: Yellow;"
-                                width="100%">
-                                <tr>
-                                    <td height="16px">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-left: 16px; padding-right: 16px; padding-bottom: 16px">
-                                        <table align="center" border="0" cellpadding="0" cellspacing="0" style="background-color: #fff"
-                                            width="100%">
-                                            <tr>
-                                                <td align="center" class="headertext" colspan="2">
-                                                    Login Form
+        <a href="javascript:void(0)" onclick="javascript:DisplayBox();">Click here to display</a>
+        <div id="boxdiv" class="white_content">
+            <table cellpadding="0" cellspacing="0" border="0" style="background-color: Yellow;"
+                width="100%">
+                <tr>
+                    <td height="16px"></td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 16px; padding-right: 16px; padding-bottom: 16px">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" style="background-color: #fff">
+                            <div id="Div1" class="white_content">
+                                <table border="0" cellpadding="0" cellspacing="0" style="background-color: Yellow;"
+                                    width="100%">
+                                    <tr>
+                                        <td height="16px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left: 16px; padding-right: 16px; padding-bottom: 16px">
+                                            <table align="center" border="0" cellpadding="0" cellspacing="0" style="background-color: #fff"
+                                                width="100%">
+                                                <tr>
+                                                    <td align="center" class="headertext" colspan="2">Login Form
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    &nbsp;
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center">
-                                                    <table>
-                                                        <tr>
-                                                            <td align="right">
-                                                                Username:
+                                                </tr>
+                                                <tr>
+                                                    <td align="center">
+                                                        <table>
+                                                            <tr>
+                                                                <td align="right">Username:
                                                             </td>
-                                                            <td>
-                                                                <asp:TextBox ID="TxtUser" runat="server" CssClass="textfield"></asp:TextBox>
+                                                                <td>
+                                                                    <asp:TextBox ID="TxtUser" runat="server" CssClass="textfield"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td height="10px"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="right">Password:
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td height="10px">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="right">
-                                                                Password:
-                                                            </td>
-                                                            <td>
-                                                                <asp:TextBox ID="Txtpass" runat="server" CssClass="textfield"></asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td height="10px">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                            </td>
-                                                            <td>
-                                                                <%--<input type="submit" value="Log in" class="btn btn-primary" />--%>
-                                                                <asp:Button ID="btnSub" runat="server" Text="Submit" class="btn btn-primary" OnClick="btnSub_Click" />
-                                                                <input type="reset" value="Cancel" class="btn btn-primary" />
-                                                                <input class="buttonclass" onclick="javascript:CloseBox();" type="button" value="Close" />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td height="10px">
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                </td>
-            </tr>
-        </table>
-        <div align="center" class=" headertext">
-            <asp:Label ID="lblmessage" runat="server"></asp:Label>
+                                                                <td>
+                                                                    <asp:TextBox ID="Txtpass" runat="server" CssClass="textfield" TextMode="Password"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td height="10px"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td>
+                                                                    <%--<input type="submit" value="Log in" class="btn btn-primary" />--%>
+                                                                    <asp:Button ID="btnSub" runat="server" Text="Submit" class="btn btn-primary" OnClick="btnSub_Click" />
+                                                                    <input type="reset" value="Cancel" class="btn btn-primary" />
+                                                                    <input class="buttonclass" onclick="javascript: CloseBox();" type="button" value="Close" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="10px"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                    </td>
+                </tr>
+            </table>
+            <div align="center" class=" headertext">
+                <asp:Label ID="lblmessage" runat="server"></asp:Label>
+            </div>
         </div>
-    </div>
-    <div id="outerdiv" class="black_overlay">
-    </div>
+        <div id="outerdiv" class="black_overlay">
+        </div>
     </form>
 </body>
 </html>

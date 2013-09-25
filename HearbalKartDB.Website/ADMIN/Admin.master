@@ -12,62 +12,63 @@
     <script src="Styles/js/main-3a273bd.js" type="text/javascript"></script>
 </head>
 <body>
-<form id="form1" runat="server">
-    <cc1:ToolkitScriptManager ID="TKSM"  runat="server">
-    </cc1:ToolkitScriptManager>
-    <div id="ajaxBusy">
-        <span>&nbsp;</span>
-    </div>
-    <div class="master-wrapper-page">
-        <div class="master-wrapper-content">
-            <div class="demo-warning">
-                <%--This is a demo admin panel. This site is reset to its original state every hour.
+    <form id="form1" runat="server">
+        <cc1:ToolkitScriptManager ID="TKSM" runat="server">
+        </cc1:ToolkitScriptManager>
+        <div id="ajaxBusy">
+            <span>&nbsp;</span>
+        </div>
+        <div class="master-wrapper-page">
+            <div class="master-wrapper-content">
+                <div class="demo-warning">
+                    <%--This is a demo admin panel. This site is reset to its original state every hour.
                 Note that other demo users may have made changes to the site since it was last reset.
                 The next reset will be in about 52 minutes.--%>
                 WelCome TO VedicKart AdminPanel
-            </div>
-            <div class="header">
-                <div class="logo">
+           
                 </div>
-                <div class="languageselector">
+                <div class="header">
+                    <div class="logo">
+                    </div>
+                    <div class="languageselector">
+                    </div>
+                    <div class="links">
+                        <asp:LinkButton ID="lnkclearecache" runat="server" Text="Clear Cache"
+                            OnClick="lnkclearecache_Click" />
+                    </div>
+                    <div class="login-info">
+                        Logged in as:
+                        <asp:Label ID="LblUserNme" runat="server" /><asp:LinkButton ID="lnkLogOut" runat="server" Text="LogOut" OnClick="lnkLogOut_Click" />
+                    </div>
+                    <div class="version">
+                        <span>VedicKart 3.10</span>
+                    </div>
                 </div>
-                <div class="links">
-                    <asp:LinkButton ID="lnkclearecache" runat="server" Text="Clear Cache" 
-                        onclick="lnkclearecache_Click" />
+                <div class="header-menu">
+                    <uc1:TopMenu ID="topmenu1" runat="server"></uc1:TopMenu>
                 </div>
-                <div class="login-info">
-                    Logged in as: <asp:Label ID="LblUserNme" runat="server" /><asp:LinkButton ID="lnkLogOut" runat="server" Text="LogOut"  onclick="lnkLogOut_Click" />
+                <div class="status-bar">
+                    <%--      Tuesday, September 03, 2013 3:08 AMDateTime.Now.ToString("F")--%>
+                    <asp:Label ID="LblDttime" runat="server" />
                 </div>
-                <div class="version">
-                    <span>VedicKart 3.10</span></div>
-            </div>
-            <div class="header-menu">
-                <uc1:TopMenu ID="topmenu1" runat="server"></uc1:TopMenu>
-            </div>
-            <div class="status-bar">
-         <%--      Tuesday, September 03, 2013 3:08 AMDateTime.Now.ToString("F")--%>
-               <asp:Label ID="LblDttime" runat="server" />
-            </div>
-            <div class="content">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-
-                </asp:ContentPlaceHolder>
-            </div>
-            <div class="throbber">
-                <div class="curtain">
+                <div class="content">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
                 </div>
-                <div class="curtain-content">
-                    <div>
-                        <h1 class="throbber-header">
-                            Wait...</h1>
-                        <p>
-                            <img src="../images/throbber-synchronizing.gif" alt="" />
-                        </p>
+                <div class="throbber">
+                    <div class="curtain">
+                    </div>
+                    <div class="curtain-content">
+                        <div>
+                            <h1 class="throbber-header">Wait...</h1>
+                            <p>
+                                <img src="../images/throbber-synchronizing.gif" alt="" />
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
     <!--These need to be at the end of the page to ensure that all the controls requiring scripts have been rendered-->
 </body>

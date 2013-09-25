@@ -7,6 +7,7 @@
         <div class="section-title">
             <img src="../images/ico-dashboard.png" />
             OrderDashboard
+       
         </div>
         <table class="dashboard">
             <tr>
@@ -17,6 +18,7 @@
                                 <td class="orderstatistics">
                                     <div class="statisticsTitle">
                                         Order Status
+                                       
                                         <asp:LinkButton ID="lnkAddNewordStats" OnClientClick="return ShowPOPUP(false);" runat="server">Add New</asp:LinkButton>
                                     </div>
                                     <table class="adminContent">
@@ -32,6 +34,7 @@
                                                     <HeaderStyle CssClass="t-grid-header" HorizontalAlign="Center" />
                                                     <HeaderTemplate>
                                                         Order Status
+                                                   
                                                     </HeaderTemplate>
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblOrdStatusname" runat="server"></asp:Label>
@@ -44,6 +47,7 @@
                                                     <HeaderStyle CssClass="t-grid-header" HorizontalAlign="Center" />
                                                     <HeaderTemplate>
                                                         IsActive
+                                                   
                                                     </HeaderTemplate>
                                                     <ItemTemplate>
                                                         <asp:ImageButton ID="IMGBTNOrdStatusisActive" runat="server" CommandArgument='<%# Eval("Id") %>'
@@ -73,8 +77,7 @@
                                     </table>
                                     <div id="light" class="white_box" style="width: 380px;">
                                         <div class="add-address">
-                                            <h3>
-                                                Add Order Status</h3>
+                                            <h3>Add Order Status</h3>
                                             <a href="javascript:void(0);" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
                                                 <span class="cross"></span></a>
                                         </div>
@@ -86,13 +89,13 @@
                                                     <span class="loginlabel">Name:</span><span class="logininput">
                                                         <asp:TextBox ID="TXTOrdstas" runat="server" Text="Submit" /></span>
                                                 </div>
-                                                 
-                                                <div class="loginouter" id="DIVIsActive" runat="server" style="display:none;">
+
+                                                <div class="loginouter" id="DIVIsActive" runat="server" style="display: none;">
                                                     <span class="loginlabel">IsActive:</span><span class="logininput">
                                                         <asp:CheckBox ID="ChkIsActive" runat="server" /></span>
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
                                         <div class="cl">
                                         </div>
@@ -103,7 +106,8 @@
                                             </div>
                                             <div class="loginfbbtn">
                                                 <asp:LinkButton ID="btncancel" runat="server" OnClientClick="return ClosePOPUP();"
-                                                    Text="Cancel" /></div>
+                                                    Text="Cancel" />
+                                            </div>
                                         </div>
                                         <!--add-adres-footer-->
                                     </div>
@@ -115,7 +119,8 @@
                                 </td>
                                 <td class="customerstatistics">
                                     <div class="statisticsTitle">
-                                        Registered customers</div>
+                                        Registered customers
+                                    </div>
                                     <table class="adminContent">
                                         <tr>
                                             <td>
@@ -133,42 +138,35 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>
-                                                                    In the last 7 days
+                                                                <td>In the last 7 days
                                                                 </td>
-                                                                <td>
-                                                                    0
+                                                                <td>0
                                                                 </td>
                                                             </tr>
                                                             <tr class="t-alt">
-                                                                <td>
-                                                                    In the last 14 days
+                                                                <td>In the last 14 days
                                                                 </td>
-                                                                <td>
-                                                                    0
+                                                                <td>0
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>
-                                                                    In the last month
+                                                                <td>In the last month
                                                                 </td>
-                                                                <td>
-                                                                    0
+                                                                <td>0
                                                                 </td>
                                                             </tr>
                                                             <tr class="t-alt">
-                                                                <td>
-                                                                    In the last year
+                                                                <td>In the last year
                                                                 </td>
-                                                                <td>
-                                                                    0
+                                                                <td>0
                                                                 </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                     <div class="t-grid-pager t-grid-bottom">
                                                         <div class="t-status">
-                                                            <a class="t-icon t-refresh" href="#">Refresh</a></div>
+                                                            <a class="t-icon t-refresh" href="#">Refresh</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
