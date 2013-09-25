@@ -11,3 +11,16 @@ E:\Office\Vedickart\HearbalKartDB.Entities\bin\Debug\Microsoft.Practices.Enterpr
 E:\Office\Vedickart\HearbalKartDB.Entities\obj\Debug\HearbalKartDB.Entities.dll
 E:\Office\Vedickart\HearbalKartDB.Entities\obj\Debug\HearbalKartDB.Entities.pdb
 E:\Office\Vedickart\HearbalKartDB.Entities\obj\Debug\HearbalKartDB.Entities.csprojResolveAssemblyReference.cache
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\HearbalKartDB.Entities.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\HearbalKartDB.Entities.pdb
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\HearbalKartDB.Entities.xml
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Caching.Cryptography.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Caching.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\Microsoft.Practices.Unity.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Security.Cryptography.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\obj\Debug\HearbalKartDB.Entities.dll
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\obj\Debug\HearbalKartDB.Entities.pdb
+E:\Office\VedicKartGit\trunk\HearbalKartDB.Entities\obj\Debug\HearbalKartDB.Entities.csprojResolveAssemblyReference.cache
