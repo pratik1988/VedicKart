@@ -9,7 +9,7 @@ namespace HearbalKart.Business.Classes
 {
     public class AccountValidation
     {
-        public int validateUser(string Email, string Password)
+        public Customers validateUser(string Email, string Password)
         {
             TList<Customers> objcust = new TList<Customers>();
             Email.Trim();
@@ -17,16 +17,15 @@ namespace HearbalKart.Business.Classes
             //string whereclaus = CustomersColumn.EmailId + " LIKE '" + SearchPanel1.Username + "%'  and Usertype=7";
             //string whereclaus = CustomersColumn.EmailId + " LIKE '" + username + "%' and "+CustomersColumn.Password+ "='" + Password + "' and " +CustomersColumn.IsActive +"=1";
             string whereclaus = CustomersColumn.EmailId + " ='" + Email + "' and " + CustomersColumn.Password + "='" + Password + "' and " + CustomersColumn.IsActive + "=1";
-
             int Total = 0;
             string orderby = string.Empty;
             objcust = DataRepository.CustomersProvider.GetPaged(whereclaus, orderby, 0, int.MaxValue, out Total);
             //DataRepository.CustomersProvider.DeepLoad(objcust, true);
             if ((objcust != null) && (objcust.Count > 0))
             {
-                return objcust.Select(x => x.Id).First();
+                return objcust.First();
             }
-            return 0;
+            return null;
         }
     }
 }
