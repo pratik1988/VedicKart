@@ -1,6 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ProdTable.ascx.cs" Inherits="UserControls_ADMIN_Products_ProdTable" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-
+<style type="text/css">
+    .imggrdstyle {
+        height:50px;
+    }
+   </style>
 <td class="orderaveragereport">
     <div class="statisticsTitle">
         Products
@@ -21,10 +25,10 @@
                         Product
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:Image ID="IMGProd" runat="server" ></asp:Image>
+                        <asp:Image ID="IMGProd" runat="server"  CssClass="imggrdstyle" ></asp:Image>
                     </ItemTemplate>
                     <AlternatingItemTemplate>
-                        <asp:Image ID="IMGProd" runat="server" ></asp:Image>
+                        <asp:Image ID="IMGProd" runat="server" CssClass="imggrdstyle" ></asp:Image>
                     </AlternatingItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField>

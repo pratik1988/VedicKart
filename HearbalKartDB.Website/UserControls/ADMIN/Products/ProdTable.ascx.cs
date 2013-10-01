@@ -257,8 +257,8 @@ public partial class UserControls_ADMIN_Products_ProdTable : System.Web.UI.UserC
                     //Get Filename from fileupload control
                     string filename = Path.GetFileName(file_upload.PostedFile.FileName);
                     //Save images into Images folder
-                    file_upload.SaveAs(Server.MapPath("~/ProdImages/" + filename));
-                    objprod.ImageUrl = "~/ProdImages/" + filename;
+                    file_upload.SaveAs(Server.MapPath("~/images/Products/" + filename));
+                    objprod.ImageUrl = "~/images/Products/" + filename;
                     Status = null;
                     Status = ObjprodClass.insertProd(objitem, objitempurchase, objitemsell, objprod);
                     if (Status == "Information Insert successfully.")
@@ -323,8 +323,8 @@ public partial class UserControls_ADMIN_Products_ProdTable : System.Web.UI.UserC
                     //string filename = Path.GetFileName(file_upload.PostedFile.FileName);
                     ////Save images into Images folder
                     
-                    objprod.ImageUrl = "~/ProdImages/" + TXTProdimg.Text;
-                    file_upload.SaveAs(Server.MapPath("~/ProdImages/" + TXTProdimg.Text));
+                    objprod.ImageUrl = "~/images/Products/" + TXTProdimg.Text;
+                    file_upload.SaveAs(Server.MapPath("~/images/Products/" + TXTProdimg.Text));
                     Status = null;
                     Status = ObjprodClass.UpdateProd(objitem, objitempurchase, objitemsell, objprod);
                     if (Status == "Information Update successfully.")

@@ -15,7 +15,7 @@ public partial class ADMIN_Admin : System.Web.UI.MasterPage
         }
         else
         {
-            Response.Redirect("~/Default.aspx");
+            Response.Redirect("~/Home.aspx", false);
         }
     }
     protected void lnkclearecache_Click(object sender, EventArgs e)
@@ -24,8 +24,8 @@ public partial class ADMIN_Admin : System.Web.UI.MasterPage
     }
     protected void lnkLogOut_Click(object sender, EventArgs e)
     {
-        Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        Session["UserName"] = null;
-        Server.Transfer("~/Default.aspx");
+        Response.Cache.SetCacheability(HttpCacheability.Public);
+        Session.Remove("UserName");
+        Response.Redirect("~/Home.aspx", false);
     }
 }
