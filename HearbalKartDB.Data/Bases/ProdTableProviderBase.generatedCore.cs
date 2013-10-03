@@ -315,91 +315,6 @@ namespace HearbalKartDB.Data.Bases
 		
 	
 		/// <summary>
-		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCategory key.
-		///		FK_ProdTable_ProdCategory Description: 
-		/// </summary>
-		/// <param name="_categoryId"></param>
-		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
-		public TList<ProdTable> GetByCategoryId(System.Int32? _categoryId)
-		{
-			int count = -1;
-			return GetByCategoryId(_categoryId, 0,int.MaxValue, out count);
-		}
-		
-		/// <summary>
-		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCategory key.
-		///		FK_ProdTable_ProdCategory Description: 
-		/// </summary>
-		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
-		/// <param name="_categoryId"></param>
-		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
-		/// <remarks></remarks>
-		public TList<ProdTable> GetByCategoryId(TransactionManager transactionManager, System.Int32? _categoryId)
-		{
-			int count = -1;
-			return GetByCategoryId(transactionManager, _categoryId, 0, int.MaxValue, out count);
-		}
-		
-			/// <summary>
-		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCategory key.
-		///		FK_ProdTable_ProdCategory Description: 
-		/// </summary>
-		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
-		/// <param name="_categoryId"></param>
-		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
-		///  <param name="pageLength">Number of rows to return.</param>
-		/// <remarks></remarks>
-		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
-		public TList<ProdTable> GetByCategoryId(TransactionManager transactionManager, System.Int32? _categoryId, int start, int pageLength)
-		{
-			int count = -1;
-			return GetByCategoryId(transactionManager, _categoryId, start, pageLength, out count);
-		}
-		
-		/// <summary>
-		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCategory key.
-		///		fkProdTableProdCategory Description: 
-		/// </summary>
-		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
-		/// <param name="pageLength">Number of rows to return.</param>
-		/// <param name="_categoryId"></param>
-		/// <remarks></remarks>
-		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
-		public TList<ProdTable> GetByCategoryId(System.Int32? _categoryId, int start, int pageLength)
-		{
-			int count =  -1;
-			return GetByCategoryId(null, _categoryId, start, pageLength,out count);	
-		}
-		
-		/// <summary>
-		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCategory key.
-		///		fkProdTableProdCategory Description: 
-		/// </summary>
-		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
-		/// <param name="pageLength">Number of rows to return.</param>
-		/// <param name="_categoryId"></param>
-		/// <param name="count">out parameter to get total records for query</param>
-		/// <remarks></remarks>
-		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
-		public TList<ProdTable> GetByCategoryId(System.Int32? _categoryId, int start, int pageLength,out int count)
-		{
-			return GetByCategoryId(null, _categoryId, start, pageLength, out count);	
-		}
-						
-		/// <summary>
-		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCategory key.
-		///		FK_ProdTable_ProdCategory Description: 
-		/// </summary>
-		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
-		/// <param name="_categoryId"></param>
-		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
-		/// <param name="pageLength">Number of rows to return.</param>
-		/// <param name="count">The total number of records.</param>
-		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
-		public abstract TList<ProdTable> GetByCategoryId(TransactionManager transactionManager, System.Int32? _categoryId, int start, int pageLength, out int count);
-		
-	
-		/// <summary>
 		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCompany key.
 		///		FK_ProdTable_ProdCompany Description: 
 		/// </summary>
@@ -567,6 +482,91 @@ namespace HearbalKartDB.Data.Bases
 		/// <param name="count">The total number of records.</param>
 		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
 		public abstract TList<ProdTable> GetByMedicineForId(TransactionManager transactionManager, System.Int32? _medicineForId, int start, int pageLength, out int count);
+		
+	
+		/// <summary>
+		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdSubcategory key.
+		///		FK_ProdTable_ProdSubcategory Description: 
+		/// </summary>
+		/// <param name="_categoryId"></param>
+		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
+		public TList<ProdTable> GetByCategoryId(System.Int32? _categoryId)
+		{
+			int count = -1;
+			return GetByCategoryId(_categoryId, 0,int.MaxValue, out count);
+		}
+		
+		/// <summary>
+		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdSubcategory key.
+		///		FK_ProdTable_ProdSubcategory Description: 
+		/// </summary>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <param name="_categoryId"></param>
+		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
+		/// <remarks></remarks>
+		public TList<ProdTable> GetByCategoryId(TransactionManager transactionManager, System.Int32? _categoryId)
+		{
+			int count = -1;
+			return GetByCategoryId(transactionManager, _categoryId, 0, int.MaxValue, out count);
+		}
+		
+			/// <summary>
+		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdSubcategory key.
+		///		FK_ProdTable_ProdSubcategory Description: 
+		/// </summary>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <param name="_categoryId"></param>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		///  <param name="pageLength">Number of rows to return.</param>
+		/// <remarks></remarks>
+		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
+		public TList<ProdTable> GetByCategoryId(TransactionManager transactionManager, System.Int32? _categoryId, int start, int pageLength)
+		{
+			int count = -1;
+			return GetByCategoryId(transactionManager, _categoryId, start, pageLength, out count);
+		}
+		
+		/// <summary>
+		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdSubcategory key.
+		///		fkProdTableProdSubcategory Description: 
+		/// </summary>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="_categoryId"></param>
+		/// <remarks></remarks>
+		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
+		public TList<ProdTable> GetByCategoryId(System.Int32? _categoryId, int start, int pageLength)
+		{
+			int count =  -1;
+			return GetByCategoryId(null, _categoryId, start, pageLength,out count);	
+		}
+		
+		/// <summary>
+		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdSubcategory key.
+		///		fkProdTableProdSubcategory Description: 
+		/// </summary>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="_categoryId"></param>
+		/// <param name="count">out parameter to get total records for query</param>
+		/// <remarks></remarks>
+		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
+		public TList<ProdTable> GetByCategoryId(System.Int32? _categoryId, int start, int pageLength,out int count)
+		{
+			return GetByCategoryId(null, _categoryId, start, pageLength, out count);	
+		}
+						
+		/// <summary>
+		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdSubcategory key.
+		///		FK_ProdTable_ProdSubcategory Description: 
+		/// </summary>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <param name="_categoryId"></param>
+		/// <param name="start">Row number at which to start reading, the first row is 0.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="count">The total number of records.</param>
+		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
+		public abstract TList<ProdTable> GetByCategoryId(TransactionManager transactionManager, System.Int32? _categoryId, int start, int pageLength, out int count);
 		
 	
 		/// <summary>
@@ -1076,32 +1076,6 @@ namespace HearbalKartDB.Data.Bases
 			}
 			#endregion SellIdSource
 
-			#region CategoryIdSource	
-			if (CanDeepLoad(entity, "ProdCategory|CategoryIdSource", deepLoadType, innerList) 
-				&& entity.CategoryIdSource == null)
-			{
-				object[] pkItems = new object[1];
-				pkItems[0] = (entity.CategoryId ?? (int)0);
-				ProdCategory tmpEntity = EntityManager.LocateEntity<ProdCategory>(EntityLocator.ConstructKeyFromPkItems(typeof(ProdCategory), pkItems), DataRepository.Provider.EnableEntityTracking);
-				if (tmpEntity != null)
-					entity.CategoryIdSource = tmpEntity;
-				else
-					entity.CategoryIdSource = DataRepository.ProdCategoryProvider.GetById(transactionManager, (entity.CategoryId ?? (int)0));		
-				
-				#if NETTIERS_DEBUG
-				System.Diagnostics.Debug.WriteLine("- property 'CategoryIdSource' loaded. key " + entity.EntityTrackingKey);
-				#endif 
-				
-				if (deep && entity.CategoryIdSource != null)
-				{
-					innerList.SkipChildren = true;
-					DataRepository.ProdCategoryProvider.DeepLoad(transactionManager, entity.CategoryIdSource, deep, deepLoadType, childTypes, innerList);
-					innerList.SkipChildren = false;
-				}
-					
-			}
-			#endregion CategoryIdSource
-
 			#region CompanyIdSource	
 			if (CanDeepLoad(entity, "ProdCompany|CompanyIdSource", deepLoadType, innerList) 
 				&& entity.CompanyIdSource == null)
@@ -1153,6 +1127,32 @@ namespace HearbalKartDB.Data.Bases
 					
 			}
 			#endregion MedicineForIdSource
+
+			#region CategoryIdSource	
+			if (CanDeepLoad(entity, "ProdSubcategory|CategoryIdSource", deepLoadType, innerList) 
+				&& entity.CategoryIdSource == null)
+			{
+				object[] pkItems = new object[1];
+				pkItems[0] = (entity.CategoryId ?? (int)0);
+				ProdSubcategory tmpEntity = EntityManager.LocateEntity<ProdSubcategory>(EntityLocator.ConstructKeyFromPkItems(typeof(ProdSubcategory), pkItems), DataRepository.Provider.EnableEntityTracking);
+				if (tmpEntity != null)
+					entity.CategoryIdSource = tmpEntity;
+				else
+					entity.CategoryIdSource = DataRepository.ProdSubcategoryProvider.GetById(transactionManager, (entity.CategoryId ?? (int)0));		
+				
+				#if NETTIERS_DEBUG
+				System.Diagnostics.Debug.WriteLine("- property 'CategoryIdSource' loaded. key " + entity.EntityTrackingKey);
+				#endif 
+				
+				if (deep && entity.CategoryIdSource != null)
+				{
+					innerList.SkipChildren = true;
+					DataRepository.ProdSubcategoryProvider.DeepLoad(transactionManager, entity.CategoryIdSource, deep, deepLoadType, childTypes, innerList);
+					innerList.SkipChildren = false;
+				}
+					
+			}
+			#endregion CategoryIdSource
 
 			#region SupplementIdSource	
 			if (CanDeepLoad(entity, "ProdSupplymentType|SupplementIdSource", deepLoadType, innerList) 
@@ -1266,15 +1266,6 @@ namespace HearbalKartDB.Data.Bases
 			}
 			#endregion 
 			
-			#region CategoryIdSource
-			if (CanDeepSave(entity, "ProdCategory|CategoryIdSource", deepSaveType, innerList) 
-				&& entity.CategoryIdSource != null)
-			{
-				DataRepository.ProdCategoryProvider.Save(transactionManager, entity.CategoryIdSource);
-				entity.CategoryId = entity.CategoryIdSource.Id;
-			}
-			#endregion 
-			
 			#region CompanyIdSource
 			if (CanDeepSave(entity, "ProdCompany|CompanyIdSource", deepSaveType, innerList) 
 				&& entity.CompanyIdSource != null)
@@ -1290,6 +1281,15 @@ namespace HearbalKartDB.Data.Bases
 			{
 				DataRepository.ProdMedicineForProvider.Save(transactionManager, entity.MedicineForIdSource);
 				entity.MedicineForId = entity.MedicineForIdSource.Id;
+			}
+			#endregion 
+			
+			#region CategoryIdSource
+			if (CanDeepSave(entity, "ProdSubcategory|CategoryIdSource", deepSaveType, innerList) 
+				&& entity.CategoryIdSource != null)
+			{
+				DataRepository.ProdSubcategoryProvider.Save(transactionManager, entity.CategoryIdSource);
+				entity.CategoryId = entity.CategoryIdSource.Id;
 			}
 			#endregion 
 			
@@ -1364,12 +1364,6 @@ namespace HearbalKartDB.Data.Bases
 		ItemSell,
 		
 		///<summary>
-		/// Composite Property for <c>ProdCategory</c> at CategoryIdSource
-		///</summary>
-		[ChildEntityType(typeof(ProdCategory))]
-		ProdCategory,
-		
-		///<summary>
 		/// Composite Property for <c>ProdCompany</c> at CompanyIdSource
 		///</summary>
 		[ChildEntityType(typeof(ProdCompany))]
@@ -1380,6 +1374,12 @@ namespace HearbalKartDB.Data.Bases
 		///</summary>
 		[ChildEntityType(typeof(ProdMedicineFor))]
 		ProdMedicineFor,
+		
+		///<summary>
+		/// Composite Property for <c>ProdSubcategory</c> at CategoryIdSource
+		///</summary>
+		[ChildEntityType(typeof(ProdSubcategory))]
+		ProdSubcategory,
 		
 		///<summary>
 		/// Composite Property for <c>ProdSupplymentType</c> at SupplementIdSource

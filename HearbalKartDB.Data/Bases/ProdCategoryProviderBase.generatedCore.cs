@@ -295,21 +295,21 @@ namespace HearbalKartDB.Data.Bases
 			Dictionary<string, KeyValuePair<Delegate, object>> deepHandles = new Dictionary<string, KeyValuePair<Delegate, object>>();
 			// Deep load child collections  - Call GetById methods when available
 			
-			#region ProdTableCollection
+			#region ProdCategoryMappingCollection
 			//Relationship Type One : Many
-			if (CanDeepLoad(entity, "List<ProdTable>|ProdTableCollection", deepLoadType, innerList)) 
+			if (CanDeepLoad(entity, "List<ProdCategoryMapping>|ProdCategoryMappingCollection", deepLoadType, innerList)) 
 			{
 				#if NETTIERS_DEBUG
-				System.Diagnostics.Debug.WriteLine("- property 'ProdTableCollection' loaded. key " + entity.EntityTrackingKey);
+				System.Diagnostics.Debug.WriteLine("- property 'ProdCategoryMappingCollection' loaded. key " + entity.EntityTrackingKey);
 				#endif 
 
-				entity.ProdTableCollection = DataRepository.ProdTableProvider.GetByCategoryId(transactionManager, entity.Id);
+				entity.ProdCategoryMappingCollection = DataRepository.ProdCategoryMappingProvider.GetByCategoryId(transactionManager, entity.Id);
 
-				if (deep && entity.ProdTableCollection.Count > 0)
+				if (deep && entity.ProdCategoryMappingCollection.Count > 0)
 				{
-					deepHandles.Add("ProdTableCollection",
-						new KeyValuePair<Delegate, object>((DeepLoadHandle<ProdTable>) DataRepository.ProdTableProvider.DeepLoad,
-						new object[] { transactionManager, entity.ProdTableCollection, deep, deepLoadType, childTypes, innerList }
+					deepHandles.Add("ProdCategoryMappingCollection",
+						new KeyValuePair<Delegate, object>((DeepLoadHandle<ProdCategoryMapping>) DataRepository.ProdCategoryMappingProvider.DeepLoad,
+						new object[] { transactionManager, entity.ProdCategoryMappingCollection, deep, deepLoadType, childTypes, innerList }
 					));
 				}
 			}		
@@ -354,11 +354,11 @@ namespace HearbalKartDB.Data.Bases
 			//used to hold DeepSave method delegates and fire after all the local children have been saved.
 			Dictionary<string, KeyValuePair<Delegate, object>> deepHandles = new Dictionary<string, KeyValuePair<Delegate, object>>();
 	
-			#region List<ProdTable>
-				if (CanDeepSave(entity.ProdTableCollection, "List<ProdTable>|ProdTableCollection", deepSaveType, innerList)) 
+			#region List<ProdCategoryMapping>
+				if (CanDeepSave(entity.ProdCategoryMappingCollection, "List<ProdCategoryMapping>|ProdCategoryMappingCollection", deepSaveType, innerList)) 
 				{	
 					// update each child parent id with the real parent id (mostly used on insert)
-					foreach(ProdTable child in entity.ProdTableCollection)
+					foreach(ProdCategoryMapping child in entity.ProdCategoryMappingCollection)
 					{
 						if(child.CategoryIdSource != null)
 						{
@@ -371,13 +371,13 @@ namespace HearbalKartDB.Data.Bases
 
 					}
 
-					if (entity.ProdTableCollection.Count > 0 || entity.ProdTableCollection.DeletedItems.Count > 0)
+					if (entity.ProdCategoryMappingCollection.Count > 0 || entity.ProdCategoryMappingCollection.DeletedItems.Count > 0)
 					{
-						//DataRepository.ProdTableProvider.Save(transactionManager, entity.ProdTableCollection);
+						//DataRepository.ProdCategoryMappingProvider.Save(transactionManager, entity.ProdCategoryMappingCollection);
 						
-						deepHandles.Add("ProdTableCollection",
-						new KeyValuePair<Delegate, object>((DeepSaveHandle< ProdTable >) DataRepository.ProdTableProvider.DeepSave,
-							new object[] { transactionManager, entity.ProdTableCollection, deepSaveType, childTypes, innerList }
+						deepHandles.Add("ProdCategoryMappingCollection",
+						new KeyValuePair<Delegate, object>((DeepSaveHandle< ProdCategoryMapping >) DataRepository.ProdCategoryMappingProvider.DeepSave,
+							new object[] { transactionManager, entity.ProdCategoryMappingCollection, deepSaveType, childTypes, innerList }
 						));
 					}
 				} 
@@ -410,10 +410,10 @@ namespace HearbalKartDB.Data.Bases
 	public enum ProdCategoryChildEntityTypes
 	{
 		///<summary>
-		/// Collection of <c>ProdCategory</c> as OneToMany for ProdTableCollection
+		/// Collection of <c>ProdCategory</c> as OneToMany for ProdCategoryMappingCollection
 		///</summary>
-		[ChildEntityType(typeof(TList<ProdTable>))]
-		ProdTableCollection,
+		[ChildEntityType(typeof(TList<ProdCategoryMapping>))]
+		ProdCategoryMappingCollection,
 	}
 	
 	#endregion ProdCategoryChildEntityTypes

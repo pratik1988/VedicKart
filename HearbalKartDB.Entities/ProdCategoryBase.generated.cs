@@ -370,14 +370,14 @@ namespace HearbalKartDB.Entities
 		#region Children Collections
 	
 		/// <summary>
-		///	Holds a collection of ProdTable objects
-		///	which are related to this object through the relation FK_ProdTable_ProdCategory
+		///	Holds a collection of ProdCategoryMapping objects
+		///	which are related to this object through the relation FK_ProdCategoryMapping_ProdCategory
 		/// </summary>	
 		[System.ComponentModel.Bindable(System.ComponentModel.BindableSupport.Yes)]
-		public virtual TList<ProdTable> ProdTableCollection
+		public virtual TList<ProdCategoryMapping> ProdCategoryMappingCollection
 		{
-			get { return entityData.ProdTableCollection; }
-			set { entityData.ProdTableCollection = value; }	
+			get { return entityData.ProdCategoryMappingCollection; }
+			set { entityData.ProdCategoryMappingCollection = value; }	
 		}
 		#endregion Children Collections
 		
@@ -569,7 +569,7 @@ namespace HearbalKartDB.Entities
 			
 		
 			//deep copy nested objects
-			copy.ProdTableCollection = (TList<ProdTable>) MakeCopyOf(this.ProdTableCollection, existingCopies); 
+			copy.ProdCategoryMappingCollection = (TList<ProdCategoryMapping>) MakeCopyOf(this.ProdCategoryMappingCollection, existingCopies); 
 			copy.EntityState = this.EntityState;
 			copy.SuppressEntityEvents = false;
 			return copy;
@@ -1160,27 +1160,27 @@ namespace HearbalKartDB.Entities
 
 		#region Data Properties
 
-		#region ProdTableCollection
+		#region ProdCategoryMappingCollection
 		
-		private TList<ProdTable> _prodTableCategoryId;
+		private TList<ProdCategoryMapping> _prodCategoryMappingCategoryId;
 		
 		/// <summary>
 		///	Holds a collection of entity objects
-		///	which are related to this object through the relation _prodTableCategoryId
+		///	which are related to this object through the relation _prodCategoryMappingCategoryId
 		/// </summary>
 		
-		public TList<ProdTable> ProdTableCollection
+		public TList<ProdCategoryMapping> ProdCategoryMappingCollection
 		{
 			get
 			{
-				if (_prodTableCategoryId == null)
+				if (_prodCategoryMappingCategoryId == null)
 				{
-				_prodTableCategoryId = new TList<ProdTable>();
+				_prodCategoryMappingCategoryId = new TList<ProdCategoryMapping>();
 				}
 	
-				return _prodTableCategoryId;
+				return _prodCategoryMappingCategoryId;
 			}
-			set { _prodTableCategoryId = value; }
+			set { _prodCategoryMappingCategoryId = value; }
 		}
 		
 		#endregion
@@ -1209,8 +1209,8 @@ namespace HearbalKartDB.Entities
 		
 			#region Child Collections
 			//deep copy nested objects
-			if (this._prodTableCategoryId != null)
-				_tmp.ProdTableCollection = (TList<ProdTable>) MakeCopyOf(this.ProdTableCollection); 
+			if (this._prodCategoryMappingCategoryId != null)
+				_tmp.ProdCategoryMappingCollection = (TList<ProdCategoryMapping>) MakeCopyOf(this.ProdCategoryMappingCollection); 
 			#endregion Child Collections
 			
 			//EntityState
@@ -1243,7 +1243,7 @@ namespace HearbalKartDB.Entities
 		
 			#region Child Collections
 			//deep copy nested objects
-			_tmp.ProdTableCollection = (TList<ProdTable>) MakeCopyOf(this.ProdTableCollection, existingCopies); 
+			_tmp.ProdCategoryMappingCollection = (TList<ProdCategoryMapping>) MakeCopyOf(this.ProdCategoryMappingCollection, existingCopies); 
 			#endregion Child Collections
 			
 			//EntityState

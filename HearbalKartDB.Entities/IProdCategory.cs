@@ -55,9 +55,9 @@ namespace HearbalKartDB.Entities
 
 		/// <summary>
 		///	Holds a collection of entity objects
-		///	which are related to this object through the relation _prodTableCategoryId
+		///	which are related to this object through the relation _prodCategoryMappingCategoryId
 		/// </summary>	
-		TList<ProdTable> ProdTableCollection {  get;  set;}	
+		TList<ProdCategoryMapping> ProdCategoryMappingCollection {  get;  set;}	
 
 		#endregion Data Properties
 

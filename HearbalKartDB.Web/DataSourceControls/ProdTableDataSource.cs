@@ -165,9 +165,9 @@ namespace HearbalKartDB.Web.Data
 			System.Int32? _purchaseId_nullable;
 			System.Int32? _itemId_nullable;
 			System.Int32? _sellId_nullable;
-			System.Int32? _categoryId_nullable;
 			System.Int32? _companyId_nullable;
 			System.Int32? _medicineForId_nullable;
+			System.Int32? _categoryId_nullable;
 			System.Int32? _supplementId_nullable;
 			System.Int32? _typeId_nullable;
 
@@ -215,10 +215,6 @@ namespace HearbalKartDB.Web.Data
 					_sellId_nullable = (System.Int32?) EntityUtil.ChangeType(values["SellId"], typeof(System.Int32?));
 					results = ProdTableProvider.GetBySellId(GetTransactionManager(), _sellId_nullable, this.StartIndex, this.PageSize, out count);
 					break;
-				case ProdTableSelectMethod.GetByCategoryId:
-					_categoryId_nullable = (System.Int32?) EntityUtil.ChangeType(values["CategoryId"], typeof(System.Int32?));
-					results = ProdTableProvider.GetByCategoryId(GetTransactionManager(), _categoryId_nullable, this.StartIndex, this.PageSize, out count);
-					break;
 				case ProdTableSelectMethod.GetByCompanyId:
 					_companyId_nullable = (System.Int32?) EntityUtil.ChangeType(values["CompanyId"], typeof(System.Int32?));
 					results = ProdTableProvider.GetByCompanyId(GetTransactionManager(), _companyId_nullable, this.StartIndex, this.PageSize, out count);
@@ -226,6 +222,10 @@ namespace HearbalKartDB.Web.Data
 				case ProdTableSelectMethod.GetByMedicineForId:
 					_medicineForId_nullable = (System.Int32?) EntityUtil.ChangeType(values["MedicineForId"], typeof(System.Int32?));
 					results = ProdTableProvider.GetByMedicineForId(GetTransactionManager(), _medicineForId_nullable, this.StartIndex, this.PageSize, out count);
+					break;
+				case ProdTableSelectMethod.GetByCategoryId:
+					_categoryId_nullable = (System.Int32?) EntityUtil.ChangeType(values["CategoryId"], typeof(System.Int32?));
+					results = ProdTableProvider.GetByCategoryId(GetTransactionManager(), _categoryId_nullable, this.StartIndex, this.PageSize, out count);
 					break;
 				case ProdTableSelectMethod.GetBySupplementId:
 					_supplementId_nullable = (System.Int32?) EntityUtil.ChangeType(values["SupplementId"], typeof(System.Int32?));
@@ -428,10 +428,6 @@ namespace HearbalKartDB.Web.Data
 		/// </summary>
 		GetBySellId,
 		/// <summary>
-		/// Represents the GetByCategoryId method.
-		/// </summary>
-		GetByCategoryId,
-		/// <summary>
 		/// Represents the GetByCompanyId method.
 		/// </summary>
 		GetByCompanyId,
@@ -439,6 +435,10 @@ namespace HearbalKartDB.Web.Data
 		/// Represents the GetByMedicineForId method.
 		/// </summary>
 		GetByMedicineForId,
+		/// <summary>
+		/// Represents the GetByCategoryId method.
+		/// </summary>
+		GetByCategoryId,
 		/// <summary>
 		/// Represents the GetBySupplementId method.
 		/// </summary>

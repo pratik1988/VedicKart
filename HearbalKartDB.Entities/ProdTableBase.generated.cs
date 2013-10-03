@@ -799,17 +799,6 @@ namespace HearbalKartDB.Entities
             set { entityData.SellIdSource = value; }
       	}
 		/// <summary>
-		/// Gets or sets the source <see cref="ProdCategory"/>.
-		/// </summary>
-		/// <value>The source ProdCategory for CategoryId.</value>
-        [XmlIgnore()]
-		[Browsable(false), System.ComponentModel.Bindable(System.ComponentModel.BindableSupport.Yes)]
-		public virtual ProdCategory CategoryIdSource
-      	{
-            get { return entityData.CategoryIdSource; }
-            set { entityData.CategoryIdSource = value; }
-      	}
-		/// <summary>
 		/// Gets or sets the source <see cref="ProdCompany"/>.
 		/// </summary>
 		/// <value>The source ProdCompany for CompanyId.</value>
@@ -830,6 +819,17 @@ namespace HearbalKartDB.Entities
       	{
             get { return entityData.MedicineForIdSource; }
             set { entityData.MedicineForIdSource = value; }
+      	}
+		/// <summary>
+		/// Gets or sets the source <see cref="ProdSubcategory"/>.
+		/// </summary>
+		/// <value>The source ProdSubcategory for CategoryId.</value>
+        [XmlIgnore()]
+		[Browsable(false), System.ComponentModel.Bindable(System.ComponentModel.BindableSupport.Yes)]
+		public virtual ProdSubcategory CategoryIdSource
+      	{
+            get { return entityData.CategoryIdSource; }
+            set { entityData.CategoryIdSource = value; }
       	}
 		/// <summary>
 		/// Gets or sets the source <see cref="ProdSupplymentType"/>.
@@ -1065,10 +1065,6 @@ namespace HearbalKartDB.Entities
 				copy.SellIdSource = existingCopies[this.SellIdSource] as ItemSell;
 			else
 				copy.SellIdSource = MakeCopyOf(this.SellIdSource, existingCopies) as ItemSell;
-			if (this.CategoryIdSource != null && existingCopies.Contains(this.CategoryIdSource))
-				copy.CategoryIdSource = existingCopies[this.CategoryIdSource] as ProdCategory;
-			else
-				copy.CategoryIdSource = MakeCopyOf(this.CategoryIdSource, existingCopies) as ProdCategory;
 			if (this.CompanyIdSource != null && existingCopies.Contains(this.CompanyIdSource))
 				copy.CompanyIdSource = existingCopies[this.CompanyIdSource] as ProdCompany;
 			else
@@ -1077,6 +1073,10 @@ namespace HearbalKartDB.Entities
 				copy.MedicineForIdSource = existingCopies[this.MedicineForIdSource] as ProdMedicineFor;
 			else
 				copy.MedicineForIdSource = MakeCopyOf(this.MedicineForIdSource, existingCopies) as ProdMedicineFor;
+			if (this.CategoryIdSource != null && existingCopies.Contains(this.CategoryIdSource))
+				copy.CategoryIdSource = existingCopies[this.CategoryIdSource] as ProdSubcategory;
+			else
+				copy.CategoryIdSource = MakeCopyOf(this.CategoryIdSource, existingCopies) as ProdSubcategory;
 			if (this.SupplementIdSource != null && existingCopies.Contains(this.SupplementIdSource))
 				copy.SupplementIdSource = existingCopies[this.SupplementIdSource] as ProdSupplymentType;
 			else
@@ -1943,19 +1943,6 @@ namespace HearbalKartDB.Entities
             get { return this._sellIdSource; }
             set { this._sellIdSource = value; }
       	}
-		private ProdCategory _categoryIdSource = null;
-		
-		/// <summary>
-		/// Gets or sets the source <see cref="ProdCategory"/>.
-		/// </summary>
-		/// <value>The source ProdCategory for CategoryId.</value>
-		[XmlIgnore()]
-		[Browsable(false)]
-		public virtual ProdCategory CategoryIdSource
-      	{
-            get { return this._categoryIdSource; }
-            set { this._categoryIdSource = value; }
-      	}
 		private ProdCompany _companyIdSource = null;
 		
 		/// <summary>
@@ -1981,6 +1968,19 @@ namespace HearbalKartDB.Entities
       	{
             get { return this._medicineForIdSource; }
             set { this._medicineForIdSource = value; }
+      	}
+		private ProdSubcategory _categoryIdSource = null;
+		
+		/// <summary>
+		/// Gets or sets the source <see cref="ProdSubcategory"/>.
+		/// </summary>
+		/// <value>The source ProdSubcategory for CategoryId.</value>
+		[XmlIgnore()]
+		[Browsable(false)]
+		public virtual ProdSubcategory CategoryIdSource
+      	{
+            get { return this._categoryIdSource; }
+            set { this._categoryIdSource = value; }
       	}
 		private ProdSupplymentType _supplementIdSource = null;
 		
@@ -2049,12 +2049,12 @@ namespace HearbalKartDB.Entities
 				_tmp.ItemIdSource = MakeCopyOf(this.ItemIdSource) as Items;
 			if (this.SellIdSource != null)
 				_tmp.SellIdSource = MakeCopyOf(this.SellIdSource) as ItemSell;
-			if (this.CategoryIdSource != null)
-				_tmp.CategoryIdSource = MakeCopyOf(this.CategoryIdSource) as ProdCategory;
 			if (this.CompanyIdSource != null)
 				_tmp.CompanyIdSource = MakeCopyOf(this.CompanyIdSource) as ProdCompany;
 			if (this.MedicineForIdSource != null)
 				_tmp.MedicineForIdSource = MakeCopyOf(this.MedicineForIdSource) as ProdMedicineFor;
+			if (this.CategoryIdSource != null)
+				_tmp.CategoryIdSource = MakeCopyOf(this.CategoryIdSource) as ProdSubcategory;
 			if (this.SupplementIdSource != null)
 				_tmp.SupplementIdSource = MakeCopyOf(this.SupplementIdSource) as ProdSupplymentType;
 			if (this.TypeIdSource != null)
@@ -2111,10 +2111,6 @@ namespace HearbalKartDB.Entities
 				_tmp.SellIdSource = existingCopies[this.SellIdSource] as ItemSell;
 			else
 				_tmp.SellIdSource = MakeCopyOf(this.SellIdSource, existingCopies) as ItemSell;
-			if (this.CategoryIdSource != null && existingCopies.Contains(this.CategoryIdSource))
-				_tmp.CategoryIdSource = existingCopies[this.CategoryIdSource] as ProdCategory;
-			else
-				_tmp.CategoryIdSource = MakeCopyOf(this.CategoryIdSource, existingCopies) as ProdCategory;
 			if (this.CompanyIdSource != null && existingCopies.Contains(this.CompanyIdSource))
 				_tmp.CompanyIdSource = existingCopies[this.CompanyIdSource] as ProdCompany;
 			else
@@ -2123,6 +2119,10 @@ namespace HearbalKartDB.Entities
 				_tmp.MedicineForIdSource = existingCopies[this.MedicineForIdSource] as ProdMedicineFor;
 			else
 				_tmp.MedicineForIdSource = MakeCopyOf(this.MedicineForIdSource, existingCopies) as ProdMedicineFor;
+			if (this.CategoryIdSource != null && existingCopies.Contains(this.CategoryIdSource))
+				_tmp.CategoryIdSource = existingCopies[this.CategoryIdSource] as ProdSubcategory;
+			else
+				_tmp.CategoryIdSource = MakeCopyOf(this.CategoryIdSource, existingCopies) as ProdSubcategory;
 			if (this.SupplementIdSource != null && existingCopies.Contains(this.SupplementIdSource))
 				_tmp.SupplementIdSource = existingCopies[this.SupplementIdSource] as ProdSupplymentType;
 			else

@@ -757,70 +757,6 @@ namespace HearbalKartDB.Data.SqlClient
 		#endregion
 	
 
-		#region GetByCategoryId
-		/// <summary>
-		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCategory key.
-		///		FK_ProdTable_ProdCategory Description: 
-		/// </summary>
-		/// <param name="start">Row number at which to start reading.</param>
-		/// <param name="pageLength">Number of rows to return.</param>
-		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
-		/// <param name="_categoryId"></param>
-		/// <param name="count">out parameter to get total records for query</param>
-		/// <remarks></remarks>
-		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
-        /// <exception cref="System.Exception">The command could not be executed.</exception>
-        /// <exception cref="System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
-        /// <exception cref="System.Data.Common.DbException">The command could not be executed.</exception>
-		public override TList<ProdTable> GetByCategoryId(TransactionManager transactionManager, System.Int32? _categoryId, int start, int pageLength, out int count)
-		{
-			SqlDatabase database = new SqlDatabase(this._connectionString);
-			DbCommand commandWrapper = StoredProcedureProvider.GetCommandWrapper(database, "dbo.ProdTable_GetByCategoryId", _useStoredProcedure);
-			
-				database.AddInParameter(commandWrapper, "@CategoryId", DbType.Int32, _categoryId);
-			
-			IDataReader reader = null;
-			TList<ProdTable> rows = new TList<ProdTable>();
-			try
-			{
-				//Provider Data Requesting Command Event
-				OnDataRequesting(new CommandEventArgs(commandWrapper, "GetByCategoryId", rows)); 
-
-				if (transactionManager != null)
-				{
-					reader = Utility.ExecuteReader(transactionManager, commandWrapper);
-				}
-				else
-				{
-					reader = Utility.ExecuteReader(database, commandWrapper);
-				}
-			
-				//Create Collection
-				Fill(reader, rows, start, pageLength);
-				count = -1;
-				if(reader.NextResult())
-				{
-					if(reader.Read())
-					{
-						count = reader.GetInt32(0);
-					}
-				}
-				
-				//Provider Data Requested Command Event
-				OnDataRequested(new CommandEventArgs(commandWrapper, "GetByCategoryId", rows)); 
-			}
-			finally
-			{
-				if (reader != null) 
-					reader.Close();
-					
-				commandWrapper = null;
-			}
-			return rows;
-		}	
-		#endregion
-	
-
 		#region GetByCompanyId
 		/// <summary>
 		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdCompany key.
@@ -936,6 +872,70 @@ namespace HearbalKartDB.Data.SqlClient
 				
 				//Provider Data Requested Command Event
 				OnDataRequested(new CommandEventArgs(commandWrapper, "GetByMedicineForId", rows)); 
+			}
+			finally
+			{
+				if (reader != null) 
+					reader.Close();
+					
+				commandWrapper = null;
+			}
+			return rows;
+		}	
+		#endregion
+	
+
+		#region GetByCategoryId
+		/// <summary>
+		/// 	Gets rows from the datasource based on the FK_ProdTable_ProdSubcategory key.
+		///		FK_ProdTable_ProdSubcategory Description: 
+		/// </summary>
+		/// <param name="start">Row number at which to start reading.</param>
+		/// <param name="pageLength">Number of rows to return.</param>
+		/// <param name="transactionManager"><see cref="TransactionManager"/> object</param>
+		/// <param name="_categoryId"></param>
+		/// <param name="count">out parameter to get total records for query</param>
+		/// <remarks></remarks>
+		/// <returns>Returns a typed collection of HearbalKartDB.Entities.ProdTable objects.</returns>
+        /// <exception cref="System.Exception">The command could not be executed.</exception>
+        /// <exception cref="System.Data.DataException">The <paramref name="transactionManager"/> is not open.</exception>
+        /// <exception cref="System.Data.Common.DbException">The command could not be executed.</exception>
+		public override TList<ProdTable> GetByCategoryId(TransactionManager transactionManager, System.Int32? _categoryId, int start, int pageLength, out int count)
+		{
+			SqlDatabase database = new SqlDatabase(this._connectionString);
+			DbCommand commandWrapper = StoredProcedureProvider.GetCommandWrapper(database, "dbo.ProdTable_GetByCategoryId", _useStoredProcedure);
+			
+				database.AddInParameter(commandWrapper, "@CategoryId", DbType.Int32, _categoryId);
+			
+			IDataReader reader = null;
+			TList<ProdTable> rows = new TList<ProdTable>();
+			try
+			{
+				//Provider Data Requesting Command Event
+				OnDataRequesting(new CommandEventArgs(commandWrapper, "GetByCategoryId", rows)); 
+
+				if (transactionManager != null)
+				{
+					reader = Utility.ExecuteReader(transactionManager, commandWrapper);
+				}
+				else
+				{
+					reader = Utility.ExecuteReader(database, commandWrapper);
+				}
+			
+				//Create Collection
+				Fill(reader, rows, start, pageLength);
+				count = -1;
+				if(reader.NextResult())
+				{
+					if(reader.Read())
+					{
+						count = reader.GetInt32(0);
+					}
+				}
+				
+				//Provider Data Requested Command Event
+				OnDataRequested(new CommandEventArgs(commandWrapper, "GetByCategoryId", rows)); 
 			}
 			finally
 			{

@@ -8,21 +8,21 @@ GO
 
 	
 
--- Drop the dbo.UserType_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.UserType_Get_List
+-- Drop the dbo.ProdMedicineFor_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdMedicineFor_Get_List
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets all records from the UserType table
+-- Created By:  ()
+-- Purpose: Gets all records from the ProdMedicineFor table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.UserType_Get_List
+CREATE PROCEDURE dbo.ProdMedicineFor_Get_List
 
 AS
 
@@ -30,13 +30,13 @@ AS
 				
 				SELECT
 					[ID],
-					[UserType],
+					[Name],
 					[IsActive],
 					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[UserType]
+					[dbo].[ProdMedicineFor]
 					
 				SELECT @@ROWCOUNT
 			
@@ -51,21 +51,21 @@ GO
 
 	
 
--- Drop the dbo.UserType_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.UserType_GetPaged
+-- Drop the dbo.ProdMedicineFor_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdMedicineFor_GetPaged
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets records from the UserType table passing page index and page count parameters
+-- Created By:  ()
+-- Purpose: Gets records from the ProdMedicineFor table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.UserType_GetPaged
+CREATE PROCEDURE dbo.ProdMedicineFor_GetPaged
 (
 
 	@WhereClause varchar (8000)  ,
@@ -100,7 +100,7 @@ AS
 				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
 				SET @SQL = @SQL + ' SELECT'
 				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[UserType]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdMedicineFor]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -120,9 +120,9 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[ID], O.[UserType], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
+				SELECT O.[ID], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
 				FROM
-				    [dbo].[UserType] O,
+				    [dbo].[ProdMedicineFor] O,
 				    #PageIndex PageIndex
 				WHERE
 				    PageIndex.IndexId > @PageLowerBound
@@ -132,7 +132,7 @@ AS
                 
 				-- get row count
 				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[UserType]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdMedicineFor]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -152,26 +152,26 @@ GO
 
 	
 
--- Drop the dbo.UserType_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.UserType_Insert
+-- Drop the dbo.ProdMedicineFor_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdMedicineFor_Insert
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the UserType table
+-- Created By:  ()
+-- Purpose: Inserts a record into the ProdMedicineFor table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.UserType_Insert
+CREATE PROCEDURE dbo.ProdMedicineFor_Insert
 (
 
 	@Id int    OUTPUT,
 
-	@UserType nvarchar (100)  ,
+	@Name nvarchar (MAX)  ,
 
 	@IsActive bit   ,
 
@@ -185,9 +185,9 @@ AS
 
 
 				
-				INSERT INTO [dbo].[UserType]
+				INSERT INTO [dbo].[ProdMedicineFor]
 					(
-					[UserType]
+					[Name]
 					,[IsActive]
 					,[CreatedDate]
 					,[ModifiedDate]
@@ -195,7 +195,7 @@ AS
 					)
 				VALUES
 					(
-					@UserType
+					@Name
 					,@IsActive
 					,@CreatedDate
 					,@ModifiedDate
@@ -217,26 +217,26 @@ GO
 
 	
 
--- Drop the dbo.UserType_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.UserType_Update
+-- Drop the dbo.ProdMedicineFor_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdMedicineFor_Update
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Updates a record in the UserType table
+-- Created By:  ()
+-- Purpose: Updates a record in the ProdMedicineFor table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.UserType_Update
+CREATE PROCEDURE dbo.ProdMedicineFor_Update
 (
 
 	@Id int   ,
 
-	@UserType nvarchar (100)  ,
+	@Name nvarchar (MAX)  ,
 
 	@IsActive bit   ,
 
@@ -253,9 +253,9 @@ AS
 				
 				-- Modify the updatable columns
 				UPDATE
-					[dbo].[UserType]
+					[dbo].[ProdMedicineFor]
 				SET
-					[UserType] = @UserType
+					[Name] = @Name
 					,[IsActive] = @IsActive
 					,[CreatedDate] = @CreatedDate
 					,[ModifiedDate] = @ModifiedDate
@@ -275,21 +275,21 @@ GO
 
 	
 
--- Drop the dbo.UserType_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.UserType_Delete
+-- Drop the dbo.ProdMedicineFor_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdMedicineFor_Delete
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the UserType table
+-- Created By:  ()
+-- Purpose: Deletes a record in the ProdMedicineFor table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.UserType_Delete
+CREATE PROCEDURE dbo.ProdMedicineFor_Delete
 (
 
 	@Id int   
@@ -297,7 +297,7 @@ CREATE PROCEDURE dbo.UserType_Delete
 AS
 
 
-				DELETE FROM [dbo].[UserType] WITH (ROWLOCK) 
+				DELETE FROM [dbo].[ProdMedicineFor] WITH (ROWLOCK) 
 				WHERE
 					[ID] = @Id
 					
@@ -313,21 +313,21 @@ GO
 
 	
 
--- Drop the dbo.UserType_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.UserType_GetById
+-- Drop the dbo.ProdMedicineFor_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdMedicineFor_GetById
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Select records from the UserType table through an index
+-- Created By:  ()
+-- Purpose: Select records from the ProdMedicineFor table through an index
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.UserType_GetById
+CREATE PROCEDURE dbo.ProdMedicineFor_GetById
 (
 
 	@Id int   
@@ -337,13 +337,13 @@ AS
 
 				SELECT
 					[ID],
-					[UserType],
+					[Name],
 					[IsActive],
 					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[UserType]
+					[dbo].[ProdMedicineFor]
 				WHERE
 					[ID] = @Id
 				SELECT @@ROWCOUNT
@@ -360,28 +360,28 @@ GO
 
 	
 
--- Drop the dbo.UserType_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.UserType_Find
+-- Drop the dbo.ProdMedicineFor_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdMedicineFor_Find
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Finds records in the UserType table passing nullable parameters
+-- Created By:  ()
+-- Purpose: Finds records in the ProdMedicineFor table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.UserType_Find
+CREATE PROCEDURE dbo.ProdMedicineFor_Find
 (
 
 	@SearchUsingOR bit   = null ,
 
 	@Id int   = null ,
 
-	@UserType nvarchar (100)  = null ,
+	@Name nvarchar (MAX)  = null ,
 
 	@IsActive bit   = null ,
 
@@ -399,16 +399,16 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [UserType]
+	, [Name]
 	, [IsActive]
 	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
     FROM
-	[dbo].[UserType]
+	[dbo].[ProdMedicineFor]
     WHERE 
 	 ([ID] = @Id OR @Id IS NULL)
-	AND ([UserType] = @UserType OR @UserType IS NULL)
+	AND ([Name] = @Name OR @Name IS NULL)
 	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
 	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
 	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
@@ -419,20 +419,557 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [UserType]
+	, [Name]
 	, [IsActive]
 	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
     FROM
-	[dbo].[UserType]
+	[dbo].[ProdMedicineFor]
     WHERE 
 	 ([ID] = @Id AND @Id is not null)
-	OR ([UserType] = @UserType AND @UserType is not null)
+	OR ([Name] = @Name AND @Name is not null)
 	OR ([IsActive] = @IsActive AND @IsActive is not null)
 	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
 	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
 	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.States_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.States_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the States table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.States_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[CountryID],
+					[Name],
+					[Pin],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate],
+					[PinCode]
+				FROM
+					[dbo].[States]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.States_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.States_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the States table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.States_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[States]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[CountryID], O.[Name], O.[Pin], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate], O.[PinCode]
+				FROM
+				    [dbo].[States] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[States]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.States_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.States_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the States table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.States_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@CountryId int   ,
+
+	@Name nvarchar (MAX)  ,
+
+	@Pin bigint   ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   ,
+
+	@PinCode nvarchar (MAX)  
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[States]
+					(
+					[CountryID]
+					,[Name]
+					,[Pin]
+					,[IsActive]
+					,[CreatedDate]
+					,[ModifiedDate]
+					,[DeletedDate]
+					,[PinCode]
+					)
+				VALUES
+					(
+					@CountryId
+					,@Name
+					,@Pin
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@DeletedDate
+					,@PinCode
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.States_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.States_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the States table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.States_Update
+(
+
+	@Id int   ,
+
+	@CountryId int   ,
+
+	@Name nvarchar (MAX)  ,
+
+	@Pin bigint   ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   ,
+
+	@PinCode nvarchar (MAX)  
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[States]
+				SET
+					[CountryID] = @CountryId
+					,[Name] = @Name
+					,[Pin] = @Pin
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+					,[PinCode] = @PinCode
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.States_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.States_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the States table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.States_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[States] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.States_GetByCountryId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_GetByCountryId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.States_GetByCountryId
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the States table through a foreign key
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.States_GetByCountryId
+(
+
+	@CountryId int   
+)
+AS
+
+
+				SET ANSI_NULLS OFF
+				
+				SELECT
+					[ID],
+					[CountryID],
+					[Name],
+					[Pin],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate],
+					[PinCode]
+				FROM
+					[dbo].[States]
+				WHERE
+					[CountryID] = @CountryId
+				
+				SELECT @@ROWCOUNT
+				SET ANSI_NULLS ON
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.States_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.States_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the States table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.States_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[CountryID],
+					[Name],
+					[Pin],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate],
+					[PinCode]
+				FROM
+					[dbo].[States]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.States_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.States_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the States table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.States_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@CountryId int   = null ,
+
+	@Name nvarchar (MAX)  = null ,
+
+	@Pin bigint   = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null ,
+
+	@PinCode nvarchar (MAX)  = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [CountryID]
+	, [Name]
+	, [Pin]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+	, [PinCode]
+    FROM
+	[dbo].[States]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([CountryID] = @CountryId OR @CountryId IS NULL)
+	AND ([Name] = @Name OR @Name IS NULL)
+	AND ([Pin] = @Pin OR @Pin IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+	AND ([PinCode] = @PinCode OR @PinCode IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [CountryID]
+	, [Name]
+	, [Pin]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+	, [PinCode]
+    FROM
+	[dbo].[States]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([CountryID] = @CountryId AND @CountryId is not null)
+	OR ([Name] = @Name AND @Name is not null)
+	OR ([Pin] = @Pin AND @Pin is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	OR ([PinCode] = @PinCode AND @PinCode is not null)
 	SELECT @@ROWCOUNT			
   END
 				
@@ -455,7 +992,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the ProdCompany table
 ----------------------------------------------------------------------------------------------------
 */
@@ -498,7 +1035,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the ProdCompany table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -599,7 +1136,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the ProdCompany table
 ----------------------------------------------------------------------------------------------------
 */
@@ -664,7 +1201,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the ProdCompany table
 ----------------------------------------------------------------------------------------------------
 */
@@ -722,7 +1259,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the ProdCompany table
 ----------------------------------------------------------------------------------------------------
 */
@@ -760,7 +1297,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdCompany table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -807,7 +1344,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the ProdCompany table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -886,21 +1423,21 @@ GO
 
 	
 
--- Drop the dbo.ItemSell_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ItemSell_Get_List
+-- Drop the dbo.ProdOffer_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdOffer_Get_List
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets all records from the ItemSell table
+-- Created By:  ()
+-- Purpose: Gets all records from the ProdOffer table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ItemSell_Get_List
+CREATE PROCEDURE dbo.ProdOffer_Get_List
 
 AS
 
@@ -908,14 +1445,13 @@ AS
 				
 				SELECT
 					[ID],
-					[ItemID],
-					[Cost],
-					[CostVary],
-					[Createdate],
+					[OfferPercent],
+					[IsActive],
+					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[ItemSell]
+					[dbo].[ProdOffer]
 					
 				SELECT @@ROWCOUNT
 			
@@ -930,21 +1466,21 @@ GO
 
 	
 
--- Drop the dbo.ItemSell_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ItemSell_GetPaged
+-- Drop the dbo.ProdOffer_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdOffer_GetPaged
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets records from the ItemSell table passing page index and page count parameters
+-- Created By:  ()
+-- Purpose: Gets records from the ProdOffer table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ItemSell_GetPaged
+CREATE PROCEDURE dbo.ProdOffer_GetPaged
 (
 
 	@WhereClause varchar (8000)  ,
@@ -979,7 +1515,7 @@ AS
 				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
 				SET @SQL = @SQL + ' SELECT'
 				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[ItemSell]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdOffer]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -999,9 +1535,9 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[ID], O.[ItemID], O.[Cost], O.[CostVary], O.[Createdate], O.[ModifiedDate], O.[DeletedDate]
+				SELECT O.[ID], O.[OfferPercent], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
 				FROM
-				    [dbo].[ItemSell] O,
+				    [dbo].[ProdOffer] O,
 				    #PageIndex PageIndex
 				WHERE
 				    PageIndex.IndexId > @PageLowerBound
@@ -1011,7 +1547,7 @@ AS
                 
 				-- get row count
 				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[ItemSell]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdOffer]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -1031,32 +1567,30 @@ GO
 
 	
 
--- Drop the dbo.ItemSell_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ItemSell_Insert
+-- Drop the dbo.ProdOffer_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdOffer_Insert
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the ItemSell table
+-- Created By:  ()
+-- Purpose: Inserts a record into the ProdOffer table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ItemSell_Insert
+CREATE PROCEDURE dbo.ProdOffer_Insert
 (
 
 	@Id int    OUTPUT,
 
-	@ItemId int   ,
+	@OfferPercent decimal (18, 0)  ,
 
-	@Cost nvarchar (MAX)  ,
+	@IsActive bit   ,
 
-	@CostVary decimal (18, 0)  ,
-
-	@Createdate datetime   ,
+	@CreatedDate datetime   ,
 
 	@ModifiedDate datetime   ,
 
@@ -1066,21 +1600,19 @@ AS
 
 
 				
-				INSERT INTO [dbo].[ItemSell]
+				INSERT INTO [dbo].[ProdOffer]
 					(
-					[ItemID]
-					,[Cost]
-					,[CostVary]
-					,[Createdate]
+					[OfferPercent]
+					,[IsActive]
+					,[CreatedDate]
 					,[ModifiedDate]
 					,[DeletedDate]
 					)
 				VALUES
 					(
-					@ItemId
-					,@Cost
-					,@CostVary
-					,@Createdate
+					@OfferPercent
+					,@IsActive
+					,@CreatedDate
 					,@ModifiedDate
 					,@DeletedDate
 					)
@@ -1100,32 +1632,30 @@ GO
 
 	
 
--- Drop the dbo.ItemSell_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ItemSell_Update
+-- Drop the dbo.ProdOffer_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdOffer_Update
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Updates a record in the ItemSell table
+-- Created By:  ()
+-- Purpose: Updates a record in the ProdOffer table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ItemSell_Update
+CREATE PROCEDURE dbo.ProdOffer_Update
 (
 
 	@Id int   ,
 
-	@ItemId int   ,
+	@OfferPercent decimal (18, 0)  ,
 
-	@Cost nvarchar (MAX)  ,
+	@IsActive bit   ,
 
-	@CostVary decimal (18, 0)  ,
-
-	@Createdate datetime   ,
+	@CreatedDate datetime   ,
 
 	@ModifiedDate datetime   ,
 
@@ -1138,12 +1668,11 @@ AS
 				
 				-- Modify the updatable columns
 				UPDATE
-					[dbo].[ItemSell]
+					[dbo].[ProdOffer]
 				SET
-					[ItemID] = @ItemId
-					,[Cost] = @Cost
-					,[CostVary] = @CostVary
-					,[Createdate] = @Createdate
+					[OfferPercent] = @OfferPercent
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
 					,[ModifiedDate] = @ModifiedDate
 					,[DeletedDate] = @DeletedDate
 				WHERE
@@ -1161,21 +1690,21 @@ GO
 
 	
 
--- Drop the dbo.ItemSell_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ItemSell_Delete
+-- Drop the dbo.ProdOffer_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdOffer_Delete
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the ItemSell table
+-- Created By:  ()
+-- Purpose: Deletes a record in the ProdOffer table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ItemSell_Delete
+CREATE PROCEDURE dbo.ProdOffer_Delete
 (
 
 	@Id int   
@@ -1183,7 +1712,7 @@ CREATE PROCEDURE dbo.ItemSell_Delete
 AS
 
 
-				DELETE FROM [dbo].[ItemSell] WITH (ROWLOCK) 
+				DELETE FROM [dbo].[ProdOffer] WITH (ROWLOCK) 
 				WHERE
 					[ID] = @Id
 					
@@ -1199,24 +1728,2242 @@ GO
 
 	
 
--- Drop the dbo.ItemSell_GetByItemId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_GetByItemId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ItemSell_GetByItemId
+-- Drop the dbo.ProdOffer_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdOffer_GetById
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Select records from the ItemSell table through a foreign key
+-- Created By:  ()
+-- Purpose: Select records from the ProdOffer table through an index
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ItemSell_GetByItemId
+CREATE PROCEDURE dbo.ProdOffer_GetById
 (
 
-	@ItemId int   
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[OfferPercent],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdOffer]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdOffer_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdOffer_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the ProdOffer table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdOffer_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@OfferPercent decimal (18, 0)  = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [OfferPercent]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdOffer]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([OfferPercent] = @OfferPercent OR @OfferPercent IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [OfferPercent]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdOffer]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([OfferPercent] = @OfferPercent AND @OfferPercent is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategory_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategory_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the ProdCategory table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategory_Get_List
+
+AS
+
+
+				
+				SELECT
+					[Id],
+					[Name],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdCategory]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategory_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategory_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the ProdCategory table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategory_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [Id] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([Id])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [Id]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdCategory]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[Id], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
+				FROM
+				    [dbo].[ProdCategory] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[Id] = PageIndex.[Id]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdCategory]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategory_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategory_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the ProdCategory table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategory_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@Name nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[ProdCategory]
+					(
+					[Name]
+					,[IsActive]
+					,[CreatedDate]
+					,[ModifiedDate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@Name
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategory_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategory_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the ProdCategory table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategory_Update
+(
+
+	@Id int   ,
+
+	@Name nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[ProdCategory]
+				SET
+					[Name] = @Name
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[Id] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategory_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategory_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the ProdCategory table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategory_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[ProdCategory] WITH (ROWLOCK) 
+				WHERE
+					[Id] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategory_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategory_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ProdCategory table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategory_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[Id],
+					[Name],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdCategory]
+				WHERE
+					[Id] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategory_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategory_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the ProdCategory table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategory_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@Name nvarchar (MAX)  = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [Id]
+	, [Name]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdCategory]
+    WHERE 
+	 ([Id] = @Id OR @Id IS NULL)
+	AND ([Name] = @Name OR @Name IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [Id]
+	, [Name]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdCategory]
+    WHERE 
+	 ([Id] = @Id AND @Id is not null)
+	OR ([Name] = @Name AND @Name is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSubcategory_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSubcategory_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSubcategory_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the ProdSubcategory table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSubcategory_Get_List
+
+AS
+
+
+				
+				SELECT
+					[Id],
+					[CategoryID],
+					[SubCategoryName],
+					[ISActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdSubcategory]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSubcategory_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSubcategory_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSubcategory_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the ProdSubcategory table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSubcategory_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [Id] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([Id])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [Id]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdSubcategory]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[Id], O.[CategoryID], O.[SubCategoryName], O.[ISActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
+				FROM
+				    [dbo].[ProdSubcategory] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[Id] = PageIndex.[Id]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdSubcategory]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSubcategory_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSubcategory_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSubcategory_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the ProdSubcategory table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSubcategory_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@CategoryId int   ,
+
+	@SubCategoryName nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[ProdSubcategory]
+					(
+					[CategoryID]
+					,[SubCategoryName]
+					,[ISActive]
+					,[CreatedDate]
+					,[ModifiedDate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@CategoryId
+					,@SubCategoryName
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSubcategory_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSubcategory_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSubcategory_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the ProdSubcategory table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSubcategory_Update
+(
+
+	@Id int   ,
+
+	@CategoryId int   ,
+
+	@SubCategoryName nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[ProdSubcategory]
+				SET
+					[CategoryID] = @CategoryId
+					,[SubCategoryName] = @SubCategoryName
+					,[ISActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[Id] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSubcategory_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSubcategory_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSubcategory_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the ProdSubcategory table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSubcategory_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[ProdSubcategory] WITH (ROWLOCK) 
+				WHERE
+					[Id] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSubcategory_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSubcategory_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSubcategory_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ProdSubcategory table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSubcategory_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[Id],
+					[CategoryID],
+					[SubCategoryName],
+					[ISActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdSubcategory]
+				WHERE
+					[Id] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSubcategory_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSubcategory_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSubcategory_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the ProdSubcategory table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSubcategory_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@CategoryId int   = null ,
+
+	@SubCategoryName nvarchar (MAX)  = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [Id]
+	, [CategoryID]
+	, [SubCategoryName]
+	, [ISActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdSubcategory]
+    WHERE 
+	 ([Id] = @Id OR @Id IS NULL)
+	AND ([CategoryID] = @CategoryId OR @CategoryId IS NULL)
+	AND ([SubCategoryName] = @SubCategoryName OR @SubCategoryName IS NULL)
+	AND ([ISActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [Id]
+	, [CategoryID]
+	, [SubCategoryName]
+	, [ISActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdSubcategory]
+    WHERE 
+	 ([Id] = @Id AND @Id is not null)
+	OR ([CategoryID] = @CategoryId AND @CategoryId is not null)
+	OR ([SubCategoryName] = @SubCategoryName AND @SubCategoryName is not null)
+	OR ([ISActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSupplymentType_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSupplymentType_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the ProdSupplymentType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSupplymentType_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[Name],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdSupplymentType]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSupplymentType_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSupplymentType_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the ProdSupplymentType table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSupplymentType_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdSupplymentType]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
+				FROM
+				    [dbo].[ProdSupplymentType] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdSupplymentType]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSupplymentType_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSupplymentType_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the ProdSupplymentType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSupplymentType_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@Name nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[ProdSupplymentType]
+					(
+					[Name]
+					,[IsActive]
+					,[CreatedDate]
+					,[ModifiedDate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@Name
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSupplymentType_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSupplymentType_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the ProdSupplymentType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSupplymentType_Update
+(
+
+	@Id int   ,
+
+	@Name nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[ProdSupplymentType]
+				SET
+					[Name] = @Name
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSupplymentType_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSupplymentType_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the ProdSupplymentType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSupplymentType_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[ProdSupplymentType] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSupplymentType_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSupplymentType_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ProdSupplymentType table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSupplymentType_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[Name],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdSupplymentType]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdSupplymentType_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdSupplymentType_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the ProdSupplymentType table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdSupplymentType_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@Name nvarchar (MAX)  = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [Name]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdSupplymentType]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([Name] = @Name OR @Name IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [Name]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdSupplymentType]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([Name] = @Name AND @Name is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Countries_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Countries_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the Countries table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Countries_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[Name],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[Deleteddate]
+				FROM
+					[dbo].[Countries]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Countries_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Countries_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the Countries table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Countries_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[Countries]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[Deleteddate]
+				FROM
+				    [dbo].[Countries] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[Countries]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Countries_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Countries_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the Countries table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Countries_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@Name nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@Deleteddate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[Countries]
+					(
+					[Name]
+					,[IsActive]
+					,[CreatedDate]
+					,[ModifiedDate]
+					,[Deleteddate]
+					)
+				VALUES
+					(
+					@Name
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@Deleteddate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Countries_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Countries_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the Countries table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Countries_Update
+(
+
+	@Id int   ,
+
+	@Name nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@Deleteddate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[Countries]
+				SET
+					[Name] = @Name
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[Deleteddate] = @Deleteddate
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Countries_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Countries_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the Countries table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Countries_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[Countries] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Countries_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Countries_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the Countries table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Countries_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[Name],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[Deleteddate]
+				FROM
+					[dbo].[Countries]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Countries_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Countries_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the Countries table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Countries_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@Name nvarchar (MAX)  = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@Deleteddate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [Name]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [Deleteddate]
+    FROM
+	[dbo].[Countries]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([Name] = @Name OR @Name IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([Deleteddate] = @Deleteddate OR @Deleteddate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [Name]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [Deleteddate]
+    FROM
+	[dbo].[Countries]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([Name] = @Name AND @Name is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([Deleteddate] = @Deleteddate AND @Deleteddate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategoryMapping_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the ProdCategoryMapping table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategoryMapping_Get_List
+
+AS
+
+
+				
+				SELECT
+					[Id],
+					[CategoryID],
+					[SubCategoryID],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdCategoryMapping]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategoryMapping_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the ProdCategoryMapping table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategoryMapping_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [Id] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([Id])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [Id]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdCategoryMapping]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[Id], O.[CategoryID], O.[SubCategoryID], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
+				FROM
+				    [dbo].[ProdCategoryMapping] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[Id] = PageIndex.[Id]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdCategoryMapping]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategoryMapping_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the ProdCategoryMapping table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategoryMapping_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@CategoryId int   ,
+
+	@SubCategoryId int   ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[ProdCategoryMapping]
+					(
+					[CategoryID]
+					,[SubCategoryID]
+					,[IsActive]
+					,[CreatedDate]
+					,[ModifiedDate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@CategoryId
+					,@SubCategoryId
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategoryMapping_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the ProdCategoryMapping table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategoryMapping_Update
+(
+
+	@Id int   ,
+
+	@CategoryId int   ,
+
+	@SubCategoryId int   ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[ProdCategoryMapping]
+				SET
+					[CategoryID] = @CategoryId
+					,[SubCategoryID] = @SubCategoryId
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[Id] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategoryMapping_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the ProdCategoryMapping table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategoryMapping_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[ProdCategoryMapping] WITH (ROWLOCK) 
+				WHERE
+					[Id] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategoryMapping_GetByCategoryId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_GetByCategoryId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_GetByCategoryId
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ProdCategoryMapping table through a foreign key
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategoryMapping_GetByCategoryId
+(
+
+	@CategoryId int   
 )
 AS
 
@@ -1224,17 +3971,17 @@ AS
 				SET ANSI_NULLS OFF
 				
 				SELECT
-					[ID],
-					[ItemID],
-					[Cost],
-					[CostVary],
-					[Createdate],
+					[Id],
+					[CategoryID],
+					[SubCategoryID],
+					[IsActive],
+					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[ItemSell]
+					[dbo].[ProdCategoryMapping]
 				WHERE
-					[ItemID] = @ItemId
+					[CategoryID] = @CategoryId
 				
 				SELECT @@ROWCOUNT
 				SET ANSI_NULLS ON
@@ -1250,21 +3997,518 @@ GO
 
 	
 
--- Drop the dbo.ItemSell_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ItemSell_GetById
+-- Drop the dbo.ProdCategoryMapping_GetBySubCategoryId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_GetBySubCategoryId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_GetBySubCategoryId
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Select records from the ItemSell table through an index
+-- Created By:  ()
+-- Purpose: Select records from the ProdCategoryMapping table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ItemSell_GetById
+CREATE PROCEDURE dbo.ProdCategoryMapping_GetBySubCategoryId
+(
+
+	@SubCategoryId int   
+)
+AS
+
+
+				SET ANSI_NULLS OFF
+				
+				SELECT
+					[Id],
+					[CategoryID],
+					[SubCategoryID],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdCategoryMapping]
+				WHERE
+					[SubCategoryID] = @SubCategoryId
+				
+				SELECT @@ROWCOUNT
+				SET ANSI_NULLS ON
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategoryMapping_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ProdCategoryMapping table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategoryMapping_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[Id],
+					[CategoryID],
+					[SubCategoryID],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdCategoryMapping]
+				WHERE
+					[Id] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdCategoryMapping_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategoryMapping_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdCategoryMapping_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the ProdCategoryMapping table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdCategoryMapping_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@CategoryId int   = null ,
+
+	@SubCategoryId int   = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [Id]
+	, [CategoryID]
+	, [SubCategoryID]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdCategoryMapping]
+    WHERE 
+	 ([Id] = @Id OR @Id IS NULL)
+	AND ([CategoryID] = @CategoryId OR @CategoryId IS NULL)
+	AND ([SubCategoryID] = @SubCategoryId OR @SubCategoryId IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [Id]
+	, [CategoryID]
+	, [SubCategoryID]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ProdCategoryMapping]
+    WHERE 
+	 ([Id] = @Id AND @Id is not null)
+	OR ([CategoryID] = @CategoryId AND @CategoryId is not null)
+	OR ([SubCategoryID] = @SubCategoryId AND @SubCategoryId is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdType_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdType_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the ProdType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdType_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[Name],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ProdType]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdType_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdType_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the ProdType table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdType_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdType]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
+				FROM
+				    [dbo].[ProdType] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[ProdType]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdType_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdType_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the ProdType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdType_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@Name nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[ProdType]
+					(
+					[Name]
+					,[IsActive]
+					,[CreatedDate]
+					,[ModifiedDate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@Name
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdType_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdType_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the ProdType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdType_Update
+(
+
+	@Id int   ,
+
+	@Name nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[ProdType]
+				SET
+					[Name] = @Name
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdType_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdType_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the ProdType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdType_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[ProdType] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ProdType_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdType_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ProdType table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdType_GetById
 (
 
 	@Id int   
@@ -1274,14 +4518,13 @@ AS
 
 				SELECT
 					[ID],
-					[ItemID],
-					[Cost],
-					[CostVary],
-					[Createdate],
+					[Name],
+					[IsActive],
+					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[ItemSell]
+					[dbo].[ProdType]
 				WHERE
 					[ID] = @Id
 				SELECT @@ROWCOUNT
@@ -1298,34 +4541,32 @@ GO
 
 	
 
--- Drop the dbo.ItemSell_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ItemSell_Find
+-- Drop the dbo.ProdType_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdType_Find
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Finds records in the ItemSell table passing nullable parameters
+-- Created By:  ()
+-- Purpose: Finds records in the ProdType table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ItemSell_Find
+CREATE PROCEDURE dbo.ProdType_Find
 (
 
 	@SearchUsingOR bit   = null ,
 
 	@Id int   = null ,
 
-	@ItemId int   = null ,
+	@Name nvarchar (MAX)  = null ,
 
-	@Cost nvarchar (MAX)  = null ,
+	@IsActive bit   = null ,
 
-	@CostVary decimal (18, 0)  = null ,
-
-	@Createdate datetime   = null ,
+	@CreatedDate datetime   = null ,
 
 	@ModifiedDate datetime   = null ,
 
@@ -1339,20 +4580,18 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [ItemID]
-	, [Cost]
-	, [CostVary]
-	, [Createdate]
+	, [Name]
+	, [IsActive]
+	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
     FROM
-	[dbo].[ItemSell]
+	[dbo].[ProdType]
     WHERE 
 	 ([ID] = @Id OR @Id IS NULL)
-	AND ([ItemID] = @ItemId OR @ItemId IS NULL)
-	AND ([Cost] = @Cost OR @Cost IS NULL)
-	AND ([CostVary] = @CostVary OR @CostVary IS NULL)
-	AND ([Createdate] = @Createdate OR @Createdate IS NULL)
+	AND ([Name] = @Name OR @Name IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
 	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
 	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
 						
@@ -1361,20 +4600,18 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [ItemID]
-	, [Cost]
-	, [CostVary]
-	, [Createdate]
+	, [Name]
+	, [IsActive]
+	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
     FROM
-	[dbo].[ItemSell]
+	[dbo].[ProdType]
     WHERE 
 	 ([ID] = @Id AND @Id is not null)
-	OR ([ItemID] = @ItemId AND @ItemId is not null)
-	OR ([Cost] = @Cost AND @Cost is not null)
-	OR ([CostVary] = @CostVary AND @CostVary is not null)
-	OR ([Createdate] = @Createdate AND @Createdate is not null)
+	OR ([Name] = @Name AND @Name is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
 	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
 	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
 	SELECT @@ROWCOUNT			
@@ -1399,7 +4636,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the ProdTable table
 ----------------------------------------------------------------------------------------------------
 */
@@ -1451,7 +4688,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the ProdTable table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -1552,7 +4789,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the ProdTable table
 ----------------------------------------------------------------------------------------------------
 */
@@ -1653,7 +4890,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the ProdTable table
 ----------------------------------------------------------------------------------------------------
 */
@@ -1738,7 +4975,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the ProdTable table
 ----------------------------------------------------------------------------------------------------
 */
@@ -1776,7 +5013,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdTable table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -1835,7 +5072,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdTable table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -1894,7 +5131,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdTable table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -1945,65 +5182,6 @@ GO
 
 	
 
--- Drop the dbo.ProdTable_GetByCategoryId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdTable_GetByCategoryId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdTable_GetByCategoryId
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the ProdTable table through a foreign key
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdTable_GetByCategoryId
-(
-
-	@CategoryId int   
-)
-AS
-
-
-				SET ANSI_NULLS OFF
-				
-				SELECT
-					[ID],
-					[ItemID],
-					[CategoryID],
-					[CompanyID],
-					[TypeID],
-					[SupplementID],
-					[MedicineForID],
-					[PurchaseID],
-					[SellID],
-					[OfferID],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate],
-					[ImageUrl]
-				FROM
-					[dbo].[ProdTable]
-				WHERE
-					[CategoryID] = @CategoryId
-				
-				SELECT @@ROWCOUNT
-				SET ANSI_NULLS ON
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
 -- Drop the dbo.ProdTable_GetByCompanyId procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdTable_GetByCompanyId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.ProdTable_GetByCompanyId
@@ -2012,7 +5190,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdTable table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -2071,7 +5249,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdTable table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -2122,6 +5300,65 @@ GO
 
 	
 
+-- Drop the dbo.ProdTable_GetByCategoryId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdTable_GetByCategoryId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ProdTable_GetByCategoryId
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ProdTable table through a foreign key
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ProdTable_GetByCategoryId
+(
+
+	@CategoryId int   
+)
+AS
+
+
+				SET ANSI_NULLS OFF
+				
+				SELECT
+					[ID],
+					[ItemID],
+					[CategoryID],
+					[CompanyID],
+					[TypeID],
+					[SupplementID],
+					[MedicineForID],
+					[PurchaseID],
+					[SellID],
+					[OfferID],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate],
+					[ImageUrl]
+				FROM
+					[dbo].[ProdTable]
+				WHERE
+					[CategoryID] = @CategoryId
+				
+				SELECT @@ROWCOUNT
+				SET ANSI_NULLS ON
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
 -- Drop the dbo.ProdTable_GetBySupplementId procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdTable_GetBySupplementId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.ProdTable_GetBySupplementId
@@ -2130,7 +5367,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdTable table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -2189,7 +5426,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdTable table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -2248,7 +5485,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ProdTable table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -2304,7 +5541,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the ProdTable table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -2437,21 +5674,21 @@ GO
 
 	
 
--- Drop the dbo.Gender_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Gender_Get_List
+-- Drop the dbo.OrderStatus_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.OrderStatus_Get_List
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets all records from the Gender table
+-- Created By:  ()
+-- Purpose: Gets all records from the OrderStatus table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.Gender_Get_List
+CREATE PROCEDURE dbo.OrderStatus_Get_List
 
 AS
 
@@ -2459,13 +5696,13 @@ AS
 				
 				SELECT
 					[ID],
-					[GName],
+					[Name],
 					[ISActive],
-					[CreatedDAte],
+					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[Gender]
+					[dbo].[OrderStatus]
 					
 				SELECT @@ROWCOUNT
 			
@@ -2480,21 +5717,21 @@ GO
 
 	
 
--- Drop the dbo.Gender_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Gender_GetPaged
+-- Drop the dbo.OrderStatus_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.OrderStatus_GetPaged
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets records from the Gender table passing page index and page count parameters
+-- Created By:  ()
+-- Purpose: Gets records from the OrderStatus table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.Gender_GetPaged
+CREATE PROCEDURE dbo.OrderStatus_GetPaged
 (
 
 	@WhereClause varchar (8000)  ,
@@ -2529,7 +5766,7 @@ AS
 				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
 				SET @SQL = @SQL + ' SELECT'
 				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[Gender]'
+				SET @SQL = @SQL + ' FROM [dbo].[OrderStatus]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -2549,9 +5786,9 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[ID], O.[GName], O.[ISActive], O.[CreatedDAte], O.[ModifiedDate], O.[DeletedDate]
+				SELECT O.[ID], O.[Name], O.[ISActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
 				FROM
-				    [dbo].[Gender] O,
+				    [dbo].[OrderStatus] O,
 				    #PageIndex PageIndex
 				WHERE
 				    PageIndex.IndexId > @PageLowerBound
@@ -2561,7 +5798,7 @@ AS
                 
 				-- get row count
 				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[Gender]'
+				SET @SQL = @SQL + ' FROM [dbo].[OrderStatus]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -2581,26 +5818,26 @@ GO
 
 	
 
--- Drop the dbo.Gender_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Gender_Insert
+-- Drop the dbo.OrderStatus_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.OrderStatus_Insert
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the Gender table
+-- Created By:  ()
+-- Purpose: Inserts a record into the OrderStatus table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.Gender_Insert
+CREATE PROCEDURE dbo.OrderStatus_Insert
 (
 
 	@Id int    OUTPUT,
 
-	@Gname nvarchar (MAX)  ,
+	@Name nvarchar (MAX)  ,
 
 	@IsActive bit   ,
 
@@ -2614,17 +5851,17 @@ AS
 
 
 				
-				INSERT INTO [dbo].[Gender]
+				INSERT INTO [dbo].[OrderStatus]
 					(
-					[GName]
+					[Name]
 					,[ISActive]
-					,[CreatedDAte]
+					,[CreatedDate]
 					,[ModifiedDate]
 					,[DeletedDate]
 					)
 				VALUES
 					(
-					@Gname
+					@Name
 					,@IsActive
 					,@CreatedDate
 					,@ModifiedDate
@@ -2646,26 +5883,26 @@ GO
 
 	
 
--- Drop the dbo.Gender_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Gender_Update
+-- Drop the dbo.OrderStatus_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.OrderStatus_Update
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Updates a record in the Gender table
+-- Created By:  ()
+-- Purpose: Updates a record in the OrderStatus table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.Gender_Update
+CREATE PROCEDURE dbo.OrderStatus_Update
 (
 
 	@Id int   ,
 
-	@Gname nvarchar (MAX)  ,
+	@Name nvarchar (MAX)  ,
 
 	@IsActive bit   ,
 
@@ -2682,11 +5919,11 @@ AS
 				
 				-- Modify the updatable columns
 				UPDATE
-					[dbo].[Gender]
+					[dbo].[OrderStatus]
 				SET
-					[GName] = @Gname
+					[Name] = @Name
 					,[ISActive] = @IsActive
-					,[CreatedDAte] = @CreatedDate
+					,[CreatedDate] = @CreatedDate
 					,[ModifiedDate] = @ModifiedDate
 					,[DeletedDate] = @DeletedDate
 				WHERE
@@ -2704,21 +5941,21 @@ GO
 
 	
 
--- Drop the dbo.Gender_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Gender_Delete
+-- Drop the dbo.OrderStatus_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.OrderStatus_Delete
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the Gender table
+-- Created By:  ()
+-- Purpose: Deletes a record in the OrderStatus table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.Gender_Delete
+CREATE PROCEDURE dbo.OrderStatus_Delete
 (
 
 	@Id int   
@@ -2726,7 +5963,7 @@ CREATE PROCEDURE dbo.Gender_Delete
 AS
 
 
-				DELETE FROM [dbo].[Gender] WITH (ROWLOCK) 
+				DELETE FROM [dbo].[OrderStatus] WITH (ROWLOCK) 
 				WHERE
 					[ID] = @Id
 					
@@ -2742,21 +5979,21 @@ GO
 
 	
 
--- Drop the dbo.Gender_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Gender_GetById
+-- Drop the dbo.OrderStatus_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.OrderStatus_GetById
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Select records from the Gender table through an index
+-- Created By:  ()
+-- Purpose: Select records from the OrderStatus table through an index
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.Gender_GetById
+CREATE PROCEDURE dbo.OrderStatus_GetById
 (
 
 	@Id int   
@@ -2766,13 +6003,13 @@ AS
 
 				SELECT
 					[ID],
-					[GName],
+					[Name],
 					[ISActive],
-					[CreatedDAte],
+					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[Gender]
+					[dbo].[OrderStatus]
 				WHERE
 					[ID] = @Id
 				SELECT @@ROWCOUNT
@@ -2789,28 +6026,28 @@ GO
 
 	
 
--- Drop the dbo.Gender_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Gender_Find
+-- Drop the dbo.OrderStatus_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.OrderStatus_Find
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Finds records in the Gender table passing nullable parameters
+-- Created By:  ()
+-- Purpose: Finds records in the OrderStatus table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.Gender_Find
+CREATE PROCEDURE dbo.OrderStatus_Find
 (
 
 	@SearchUsingOR bit   = null ,
 
 	@Id int   = null ,
 
-	@Gname nvarchar (MAX)  = null ,
+	@Name nvarchar (MAX)  = null ,
 
 	@IsActive bit   = null ,
 
@@ -2828,18 +6065,18 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [GName]
+	, [Name]
 	, [ISActive]
-	, [CreatedDAte]
+	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
     FROM
-	[dbo].[Gender]
+	[dbo].[OrderStatus]
     WHERE 
 	 ([ID] = @Id OR @Id IS NULL)
-	AND ([GName] = @Gname OR @Gname IS NULL)
+	AND ([Name] = @Name OR @Name IS NULL)
 	AND ([ISActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDAte] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
 	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
 	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
 						
@@ -2848,895 +6085,17 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [GName]
+	, [Name]
 	, [ISActive]
-	, [CreatedDAte]
+	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
     FROM
-	[dbo].[Gender]
+	[dbo].[OrderStatus]
     WHERE 
 	 ([ID] = @Id AND @Id is not null)
-	OR ([GName] = @Gname AND @Gname is not null)
+	OR ([Name] = @Name AND @Name is not null)
 	OR ([ISActive] = @IsActive AND @IsActive is not null)
-	OR ([CreatedDAte] = @CreatedDate AND @CreatedDate is not null)
-	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
-	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Items_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Items_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the Items table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Items_Get_List
-
-AS
-
-
-				
-				SELECT
-					[ID],
-					[ItemName],
-					[IsActive],
-					[CreatedDate],
-					[Modifieddate],
-					[DeletedDate]
-				FROM
-					[dbo].[Items]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Items_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Items_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the Items table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Items_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [ID] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[Items]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[ID], O.[ItemName], O.[IsActive], O.[CreatedDate], O.[Modifieddate], O.[DeletedDate]
-				FROM
-				    [dbo].[Items] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[ID] = PageIndex.[ID]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[Items]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Items_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Items_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the Items table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Items_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@ItemName nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@Modifieddate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[Items]
-					(
-					[ItemName]
-					,[IsActive]
-					,[CreatedDate]
-					,[Modifieddate]
-					,[DeletedDate]
-					)
-				VALUES
-					(
-					@ItemName
-					,@IsActive
-					,@CreatedDate
-					,@Modifieddate
-					,@DeletedDate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Items_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Items_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the Items table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Items_Update
-(
-
-	@Id int   ,
-
-	@ItemName nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@Modifieddate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[Items]
-				SET
-					[ItemName] = @ItemName
-					,[IsActive] = @IsActive
-					,[CreatedDate] = @CreatedDate
-					,[Modifieddate] = @Modifieddate
-					,[DeletedDate] = @DeletedDate
-				WHERE
-[ID] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Items_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Items_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the Items table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Items_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[Items] WITH (ROWLOCK) 
-				WHERE
-					[ID] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Items_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Items_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the Items table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Items_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[ID],
-					[ItemName],
-					[IsActive],
-					[CreatedDate],
-					[Modifieddate],
-					[DeletedDate]
-				FROM
-					[dbo].[Items]
-				WHERE
-					[ID] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Items_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Items_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the Items table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Items_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@ItemName nvarchar (MAX)  = null ,
-
-	@IsActive bit   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@Modifieddate datetime   = null ,
-
-	@DeletedDate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [ID]
-	, [ItemName]
-	, [IsActive]
-	, [CreatedDate]
-	, [Modifieddate]
-	, [DeletedDate]
-    FROM
-	[dbo].[Items]
-    WHERE 
-	 ([ID] = @Id OR @Id IS NULL)
-	AND ([ItemName] = @ItemName OR @ItemName IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([Modifieddate] = @Modifieddate OR @Modifieddate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [ID]
-	, [ItemName]
-	, [IsActive]
-	, [CreatedDate]
-	, [Modifieddate]
-	, [DeletedDate]
-    FROM
-	[dbo].[Items]
-    WHERE 
-	 ([ID] = @Id AND @Id is not null)
-	OR ([ItemName] = @ItemName AND @ItemName is not null)
-	OR ([IsActive] = @IsActive AND @IsActive is not null)
-	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
-	OR ([Modifieddate] = @Modifieddate AND @Modifieddate is not null)
-	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.DeliveredDays_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.DeliveredDays_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the DeliveredDays table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.DeliveredDays_Get_List
-
-AS
-
-
-				
-				SELECT
-					[ID],
-					[DeliveryIN],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[DeliveredDays]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.DeliveredDays_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.DeliveredDays_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the DeliveredDays table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.DeliveredDays_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [ID] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[DeliveredDays]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[ID], O.[DeliveryIN], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
-				FROM
-				    [dbo].[DeliveredDays] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[ID] = PageIndex.[ID]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[DeliveredDays]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.DeliveredDays_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.DeliveredDays_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the DeliveredDays table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.DeliveredDays_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@DeliveryIn nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[DeliveredDays]
-					(
-					[DeliveryIN]
-					,[IsActive]
-					,[CreatedDate]
-					,[ModifiedDate]
-					,[DeletedDate]
-					)
-				VALUES
-					(
-					@DeliveryIn
-					,@IsActive
-					,@CreatedDate
-					,@ModifiedDate
-					,@DeletedDate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.DeliveredDays_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.DeliveredDays_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the DeliveredDays table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.DeliveredDays_Update
-(
-
-	@Id int   ,
-
-	@DeliveryIn nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[DeliveredDays]
-				SET
-					[DeliveryIN] = @DeliveryIn
-					,[IsActive] = @IsActive
-					,[CreatedDate] = @CreatedDate
-					,[ModifiedDate] = @ModifiedDate
-					,[DeletedDate] = @DeletedDate
-				WHERE
-[ID] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.DeliveredDays_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.DeliveredDays_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the DeliveredDays table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.DeliveredDays_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[DeliveredDays] WITH (ROWLOCK) 
-				WHERE
-					[ID] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.DeliveredDays_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.DeliveredDays_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the DeliveredDays table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.DeliveredDays_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[ID],
-					[DeliveryIN],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[DeliveredDays]
-				WHERE
-					[ID] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.DeliveredDays_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.DeliveredDays_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the DeliveredDays table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.DeliveredDays_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@DeliveryIn nvarchar (MAX)  = null ,
-
-	@IsActive bit   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@ModifiedDate datetime   = null ,
-
-	@DeletedDate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [ID]
-	, [DeliveryIN]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[DeliveredDays]
-    WHERE 
-	 ([ID] = @Id OR @Id IS NULL)
-	AND ([DeliveryIN] = @DeliveryIn OR @DeliveryIn IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [ID]
-	, [DeliveryIN]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[DeliveredDays]
-    WHERE 
-	 ([ID] = @Id AND @Id is not null)
-	OR ([DeliveryIN] = @DeliveryIn AND @DeliveryIn is not null)
-	OR ([IsActive] = @IsActive AND @IsActive is not null)
 	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
 	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
 	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
@@ -3762,7 +6121,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the Cities table
 ----------------------------------------------------------------------------------------------------
 */
@@ -3807,7 +6166,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the Cities table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -3908,7 +6267,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the Cities table
 ----------------------------------------------------------------------------------------------------
 */
@@ -3981,7 +6340,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the Cities table
 ----------------------------------------------------------------------------------------------------
 */
@@ -4045,7 +6404,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the Cities table
 ----------------------------------------------------------------------------------------------------
 */
@@ -4083,7 +6442,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Cities table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -4135,7 +6494,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Cities table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -4184,7 +6543,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the Cities table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -4275,6 +6634,445 @@ GO
 
 	
 
+-- Drop the dbo.Gender_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Gender_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the Gender table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Gender_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[GName],
+					[ISActive],
+					[CreatedDAte],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[Gender]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Gender_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Gender_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the Gender table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Gender_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[Gender]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[GName], O.[ISActive], O.[CreatedDAte], O.[ModifiedDate], O.[DeletedDate]
+				FROM
+				    [dbo].[Gender] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[Gender]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Gender_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Gender_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the Gender table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Gender_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@Gname nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[Gender]
+					(
+					[GName]
+					,[ISActive]
+					,[CreatedDAte]
+					,[ModifiedDate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@Gname
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Gender_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Gender_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the Gender table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Gender_Update
+(
+
+	@Id int   ,
+
+	@Gname nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[Gender]
+				SET
+					[GName] = @Gname
+					,[ISActive] = @IsActive
+					,[CreatedDAte] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Gender_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Gender_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the Gender table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Gender_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[Gender] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Gender_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Gender_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the Gender table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Gender_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[GName],
+					[ISActive],
+					[CreatedDAte],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[Gender]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Gender_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Gender_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Gender_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the Gender table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Gender_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@Gname nvarchar (MAX)  = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [GName]
+	, [ISActive]
+	, [CreatedDAte]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[Gender]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([GName] = @Gname OR @Gname IS NULL)
+	AND ([ISActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDAte] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [GName]
+	, [ISActive]
+	, [CreatedDAte]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[Gender]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([GName] = @Gname AND @Gname is not null)
+	OR ([ISActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDAte] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
 -- Drop the dbo.Distributars_Get_List procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Distributars_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.Distributars_Get_List
@@ -4283,7 +7081,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the Distributars table
 ----------------------------------------------------------------------------------------------------
 */
@@ -4337,7 +7135,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the Distributars table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -4438,7 +7236,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the Distributars table
 ----------------------------------------------------------------------------------------------------
 */
@@ -4547,7 +7345,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the Distributars table
 ----------------------------------------------------------------------------------------------------
 */
@@ -4638,7 +7436,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the Distributars table
 ----------------------------------------------------------------------------------------------------
 */
@@ -4676,7 +7474,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Distributars table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -4737,7 +7535,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Distributars table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -4798,7 +7596,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Distributars table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -4859,7 +7657,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Distributars table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -4920,7 +7718,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Distributars table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -4978,7 +7776,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the Distributars table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -5123,6 +7921,445 @@ GO
 
 	
 
+-- Drop the dbo.UserType_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.UserType_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the UserType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.UserType_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[UserType],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[UserType]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.UserType_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.UserType_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the UserType table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.UserType_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[UserType]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[UserType], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
+				FROM
+				    [dbo].[UserType] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[UserType]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.UserType_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.UserType_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the UserType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.UserType_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@UserType nvarchar (100)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[UserType]
+					(
+					[UserType]
+					,[IsActive]
+					,[CreatedDate]
+					,[ModifiedDate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@UserType
+					,@IsActive
+					,@CreatedDate
+					,@ModifiedDate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.UserType_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.UserType_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the UserType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.UserType_Update
+(
+
+	@Id int   ,
+
+	@UserType nvarchar (100)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[UserType]
+				SET
+					[UserType] = @UserType
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.UserType_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.UserType_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the UserType table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.UserType_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[UserType] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.UserType_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.UserType_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the UserType table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.UserType_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[UserType],
+					[IsActive],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[UserType]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.UserType_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.UserType_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.UserType_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the UserType table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.UserType_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@UserType nvarchar (100)  = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [UserType]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[UserType]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([UserType] = @UserType OR @UserType IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [UserType]
+	, [IsActive]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[UserType]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([UserType] = @UserType AND @UserType is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
 -- Drop the dbo.Customers_Get_List procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Customers_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.Customers_Get_List
@@ -5131,7 +8368,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the Customers table
 ----------------------------------------------------------------------------------------------------
 */
@@ -5182,7 +8419,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the Customers table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -5283,7 +8520,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the Customers table
 ----------------------------------------------------------------------------------------------------
 */
@@ -5380,7 +8617,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the Customers table
 ----------------------------------------------------------------------------------------------------
 */
@@ -5462,7 +8699,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the Customers table
 ----------------------------------------------------------------------------------------------------
 */
@@ -5500,7 +8737,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Customers table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -5558,7 +8795,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Customers table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -5616,7 +8853,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Customers table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -5671,7 +8908,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the Customers table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -5798,21 +9035,21 @@ GO
 
 	
 
--- Drop the dbo.ProdType_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdType_Get_List
+-- Drop the dbo.DeliveredDays_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.DeliveredDays_Get_List
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets all records from the ProdType table
+-- Created By:  ()
+-- Purpose: Gets all records from the DeliveredDays table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ProdType_Get_List
+CREATE PROCEDURE dbo.DeliveredDays_Get_List
 
 AS
 
@@ -5820,13 +9057,13 @@ AS
 				
 				SELECT
 					[ID],
-					[Name],
+					[DeliveryIN],
 					[IsActive],
 					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[ProdType]
+					[dbo].[DeliveredDays]
 					
 				SELECT @@ROWCOUNT
 			
@@ -5841,21 +9078,21 @@ GO
 
 	
 
--- Drop the dbo.ProdType_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdType_GetPaged
+-- Drop the dbo.DeliveredDays_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.DeliveredDays_GetPaged
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets records from the ProdType table passing page index and page count parameters
+-- Created By:  ()
+-- Purpose: Gets records from the DeliveredDays table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ProdType_GetPaged
+CREATE PROCEDURE dbo.DeliveredDays_GetPaged
 (
 
 	@WhereClause varchar (8000)  ,
@@ -5890,7 +9127,7 @@ AS
 				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
 				SET @SQL = @SQL + ' SELECT'
 				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdType]'
+				SET @SQL = @SQL + ' FROM [dbo].[DeliveredDays]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -5910,9 +9147,9 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[ID], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
+				SELECT O.[ID], O.[DeliveryIN], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
 				FROM
-				    [dbo].[ProdType] O,
+				    [dbo].[DeliveredDays] O,
 				    #PageIndex PageIndex
 				WHERE
 				    PageIndex.IndexId > @PageLowerBound
@@ -5922,7 +9159,7 @@ AS
                 
 				-- get row count
 				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdType]'
+				SET @SQL = @SQL + ' FROM [dbo].[DeliveredDays]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -5942,26 +9179,26 @@ GO
 
 	
 
--- Drop the dbo.ProdType_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdType_Insert
+-- Drop the dbo.DeliveredDays_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.DeliveredDays_Insert
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the ProdType table
+-- Created By:  ()
+-- Purpose: Inserts a record into the DeliveredDays table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ProdType_Insert
+CREATE PROCEDURE dbo.DeliveredDays_Insert
 (
 
 	@Id int    OUTPUT,
 
-	@Name nvarchar (MAX)  ,
+	@DeliveryIn nvarchar (MAX)  ,
 
 	@IsActive bit   ,
 
@@ -5975,9 +9212,9 @@ AS
 
 
 				
-				INSERT INTO [dbo].[ProdType]
+				INSERT INTO [dbo].[DeliveredDays]
 					(
-					[Name]
+					[DeliveryIN]
 					,[IsActive]
 					,[CreatedDate]
 					,[ModifiedDate]
@@ -5985,7 +9222,7 @@ AS
 					)
 				VALUES
 					(
-					@Name
+					@DeliveryIn
 					,@IsActive
 					,@CreatedDate
 					,@ModifiedDate
@@ -6007,26 +9244,26 @@ GO
 
 	
 
--- Drop the dbo.ProdType_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdType_Update
+-- Drop the dbo.DeliveredDays_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.DeliveredDays_Update
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Updates a record in the ProdType table
+-- Created By:  ()
+-- Purpose: Updates a record in the DeliveredDays table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ProdType_Update
+CREATE PROCEDURE dbo.DeliveredDays_Update
 (
 
 	@Id int   ,
 
-	@Name nvarchar (MAX)  ,
+	@DeliveryIn nvarchar (MAX)  ,
 
 	@IsActive bit   ,
 
@@ -6043,9 +9280,9 @@ AS
 				
 				-- Modify the updatable columns
 				UPDATE
-					[dbo].[ProdType]
+					[dbo].[DeliveredDays]
 				SET
-					[Name] = @Name
+					[DeliveryIN] = @DeliveryIn
 					,[IsActive] = @IsActive
 					,[CreatedDate] = @CreatedDate
 					,[ModifiedDate] = @ModifiedDate
@@ -6065,21 +9302,21 @@ GO
 
 	
 
--- Drop the dbo.ProdType_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdType_Delete
+-- Drop the dbo.DeliveredDays_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.DeliveredDays_Delete
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the ProdType table
+-- Created By:  ()
+-- Purpose: Deletes a record in the DeliveredDays table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ProdType_Delete
+CREATE PROCEDURE dbo.DeliveredDays_Delete
 (
 
 	@Id int   
@@ -6087,7 +9324,7 @@ CREATE PROCEDURE dbo.ProdType_Delete
 AS
 
 
-				DELETE FROM [dbo].[ProdType] WITH (ROWLOCK) 
+				DELETE FROM [dbo].[DeliveredDays] WITH (ROWLOCK) 
 				WHERE
 					[ID] = @Id
 					
@@ -6103,21 +9340,21 @@ GO
 
 	
 
--- Drop the dbo.ProdType_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdType_GetById
+-- Drop the dbo.DeliveredDays_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.DeliveredDays_GetById
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Select records from the ProdType table through an index
+-- Created By:  ()
+-- Purpose: Select records from the DeliveredDays table through an index
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ProdType_GetById
+CREATE PROCEDURE dbo.DeliveredDays_GetById
 (
 
 	@Id int   
@@ -6127,13 +9364,13 @@ AS
 
 				SELECT
 					[ID],
-					[Name],
+					[DeliveryIN],
 					[IsActive],
 					[CreatedDate],
 					[ModifiedDate],
 					[DeletedDate]
 				FROM
-					[dbo].[ProdType]
+					[dbo].[DeliveredDays]
 				WHERE
 					[ID] = @Id
 				SELECT @@ROWCOUNT
@@ -6150,28 +9387,28 @@ GO
 
 	
 
--- Drop the dbo.ProdType_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdType_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdType_Find
+-- Drop the dbo.DeliveredDays_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DeliveredDays_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.DeliveredDays_Find
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Finds records in the ProdType table passing nullable parameters
+-- Created By:  ()
+-- Purpose: Finds records in the DeliveredDays table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ProdType_Find
+CREATE PROCEDURE dbo.DeliveredDays_Find
 (
 
 	@SearchUsingOR bit   = null ,
 
 	@Id int   = null ,
 
-	@Name nvarchar (MAX)  = null ,
+	@DeliveryIn nvarchar (MAX)  = null ,
 
 	@IsActive bit   = null ,
 
@@ -6189,16 +9426,16 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [Name]
+	, [DeliveryIN]
 	, [IsActive]
 	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
     FROM
-	[dbo].[ProdType]
+	[dbo].[DeliveredDays]
     WHERE 
 	 ([ID] = @Id OR @Id IS NULL)
-	AND ([Name] = @Name OR @Name IS NULL)
+	AND ([DeliveryIN] = @DeliveryIn OR @DeliveryIn IS NULL)
 	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
 	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
 	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
@@ -6209,16 +9446,16 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [Name]
+	, [DeliveryIN]
 	, [IsActive]
 	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
     FROM
-	[dbo].[ProdType]
+	[dbo].[DeliveredDays]
     WHERE 
 	 ([ID] = @Id AND @Id is not null)
-	OR ([Name] = @Name AND @Name is not null)
+	OR ([DeliveryIN] = @DeliveryIn AND @DeliveryIn is not null)
 	OR ([IsActive] = @IsActive AND @IsActive is not null)
 	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
 	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
@@ -6237,460 +9474,21 @@ GO
 
 	
 
--- Drop the dbo.ProdCategory_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdCategory_Get_List
+-- Drop the dbo.CustomerBilling_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_Get_List
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets all records from the ProdCategory table
+-- Created By:  ()
+-- Purpose: Gets all records from the CustomerBilling table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.ProdCategory_Get_List
-
-AS
-
-
-				
-				SELECT
-					[Id],
-					[Name],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[ProdCategory]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdCategory_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdCategory_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the ProdCategory table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdCategory_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [Id] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([Id])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [Id]'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdCategory]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[Id], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
-				FROM
-				    [dbo].[ProdCategory] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[Id] = PageIndex.[Id]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdCategory]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdCategory_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdCategory_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the ProdCategory table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdCategory_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[ProdCategory]
-					(
-					[Name]
-					,[IsActive]
-					,[CreatedDate]
-					,[ModifiedDate]
-					,[DeletedDate]
-					)
-				VALUES
-					(
-					@Name
-					,@IsActive
-					,@CreatedDate
-					,@ModifiedDate
-					,@DeletedDate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdCategory_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdCategory_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the ProdCategory table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdCategory_Update
-(
-
-	@Id int   ,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[ProdCategory]
-				SET
-					[Name] = @Name
-					,[IsActive] = @IsActive
-					,[CreatedDate] = @CreatedDate
-					,[ModifiedDate] = @ModifiedDate
-					,[DeletedDate] = @DeletedDate
-				WHERE
-[Id] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdCategory_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdCategory_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the ProdCategory table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdCategory_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[ProdCategory] WITH (ROWLOCK) 
-				WHERE
-					[Id] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdCategory_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdCategory_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the ProdCategory table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdCategory_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[Id],
-					[Name],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[ProdCategory]
-				WHERE
-					[Id] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdCategory_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdCategory_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdCategory_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the ProdCategory table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdCategory_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@Name nvarchar (MAX)  = null ,
-
-	@IsActive bit   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@ModifiedDate datetime   = null ,
-
-	@DeletedDate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [Id]
-	, [Name]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[ProdCategory]
-    WHERE 
-	 ([Id] = @Id OR @Id IS NULL)
-	AND ([Name] = @Name OR @Name IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [Id]
-	, [Name]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[ProdCategory]
-    WHERE 
-	 ([Id] = @Id AND @Id is not null)
-	OR ([Name] = @Name AND @Name is not null)
-	OR ([IsActive] = @IsActive AND @IsActive is not null)
-	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
-	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
-	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdMedicineFor_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdMedicineFor_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the ProdMedicineFor table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdMedicineFor_Get_List
+CREATE PROCEDURE dbo.CustomerBilling_Get_List
 
 AS
 
@@ -6699,454 +9497,22 @@ AS
 				SELECT
 					[ID],
 					[Name],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[ProdMedicineFor]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdMedicineFor_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdMedicineFor_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the ProdMedicineFor table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdMedicineFor_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [ID] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdMedicineFor]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[ID], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
-				FROM
-				    [dbo].[ProdMedicineFor] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[ID] = PageIndex.[ID]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdMedicineFor]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdMedicineFor_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdMedicineFor_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the ProdMedicineFor table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdMedicineFor_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[ProdMedicineFor]
-					(
-					[Name]
-					,[IsActive]
-					,[CreatedDate]
-					,[ModifiedDate]
-					,[DeletedDate]
-					)
-				VALUES
-					(
-					@Name
-					,@IsActive
-					,@CreatedDate
-					,@ModifiedDate
-					,@DeletedDate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdMedicineFor_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdMedicineFor_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the ProdMedicineFor table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdMedicineFor_Update
-(
-
-	@Id int   ,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[ProdMedicineFor]
-				SET
-					[Name] = @Name
-					,[IsActive] = @IsActive
-					,[CreatedDate] = @CreatedDate
-					,[ModifiedDate] = @ModifiedDate
-					,[DeletedDate] = @DeletedDate
-				WHERE
-[ID] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdMedicineFor_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdMedicineFor_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the ProdMedicineFor table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdMedicineFor_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[ProdMedicineFor] WITH (ROWLOCK) 
-				WHERE
-					[ID] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdMedicineFor_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdMedicineFor_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the ProdMedicineFor table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdMedicineFor_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[ID],
-					[Name],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[ProdMedicineFor]
-				WHERE
-					[ID] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdMedicineFor_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdMedicineFor_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdMedicineFor_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the ProdMedicineFor table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdMedicineFor_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@Name nvarchar (MAX)  = null ,
-
-	@IsActive bit   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@ModifiedDate datetime   = null ,
-
-	@DeletedDate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[ProdMedicineFor]
-    WHERE 
-	 ([ID] = @Id OR @Id IS NULL)
-	AND ([Name] = @Name OR @Name IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[ProdMedicineFor]
-    WHERE 
-	 ([ID] = @Id AND @Id is not null)
-	OR ([Name] = @Name AND @Name is not null)
-	OR ([IsActive] = @IsActive AND @IsActive is not null)
-	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
-	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
-	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.States_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.States_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the States table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.States_Get_List
-
-AS
-
-
-				
-				SELECT
-					[ID],
+					[Address],
+					[LandMark],
+					[PinCode],
+					[Phone],
+					[CityID],
+					[StateID],
 					[CountryID],
-					[Name],
-					[Pin],
 					[IsActive],
+					[OrderID],
+					[CustomerID],
+					[AddressTypeiD],
 					[CreatedDate],
 					[ModifiedDate],
-					[DeletedDate],
-					[PinCode]
+					[DeletedDate]
 				FROM
-					[dbo].[States]
+					[dbo].[CustomerBilling]
 					
 				SELECT @@ROWCOUNT
 			
@@ -7161,21 +9527,21 @@ GO
 
 	
 
--- Drop the dbo.States_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.States_GetPaged
+-- Drop the dbo.CustomerBilling_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_GetPaged
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Gets records from the States table passing page index and page count parameters
+-- Created By:  ()
+-- Purpose: Gets records from the CustomerBilling table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.States_GetPaged
+CREATE PROCEDURE dbo.CustomerBilling_GetPaged
 (
 
 	@WhereClause varchar (8000)  ,
@@ -7210,7 +9576,7 @@ AS
 				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
 				SET @SQL = @SQL + ' SELECT'
 				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[States]'
+				SET @SQL = @SQL + ' FROM [dbo].[CustomerBilling]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -7230,9 +9596,9 @@ AS
 				SET ROWCOUNT 0
 				
 				-- Return paged results
-				SELECT O.[ID], O.[CountryID], O.[Name], O.[Pin], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate], O.[PinCode]
+				SELECT O.[ID], O.[Name], O.[Address], O.[LandMark], O.[PinCode], O.[Phone], O.[CityID], O.[StateID], O.[CountryID], O.[IsActive], O.[OrderID], O.[CustomerID], O.[AddressTypeiD], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
 				FROM
-				    [dbo].[States] O,
+				    [dbo].[CustomerBilling] O,
 				    #PageIndex PageIndex
 				WHERE
 				    PageIndex.IndexId > @PageLowerBound
@@ -7242,7 +9608,7 @@ AS
                 
 				-- get row count
 				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[States]'
+				SET @SQL = @SQL + ' FROM [dbo].[CustomerBilling]'
 				IF LEN(@WhereClause) > 0
 				BEGIN
 					SET @SQL = @SQL + ' WHERE ' + @WhereClause
@@ -7262,66 +9628,94 @@ GO
 
 	
 
--- Drop the dbo.States_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.States_Insert
+-- Drop the dbo.CustomerBilling_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_Insert
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the States table
+-- Created By:  ()
+-- Purpose: Inserts a record into the CustomerBilling table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.States_Insert
+CREATE PROCEDURE dbo.CustomerBilling_Insert
 (
 
 	@Id int    OUTPUT,
 
-	@CountryId int   ,
-
 	@Name nvarchar (MAX)  ,
 
-	@Pin bigint   ,
+	@Address nvarchar (MAX)  ,
+
+	@LandMark nvarchar (MAX)  ,
+
+	@PinCode bigint   ,
+
+	@Phone bigint   ,
+
+	@CityId int   ,
+
+	@StateId int   ,
+
+	@CountryId int   ,
 
 	@IsActive bit   ,
+
+	@OrderId int   ,
+
+	@CustomerId int   ,
+
+	@AddressTypeid int   ,
 
 	@CreatedDate datetime   ,
 
 	@ModifiedDate datetime   ,
 
-	@DeletedDate datetime   ,
-
-	@PinCode nvarchar (MAX)  
+	@DeletedDate datetime   
 )
 AS
 
 
 				
-				INSERT INTO [dbo].[States]
+				INSERT INTO [dbo].[CustomerBilling]
 					(
-					[CountryID]
-					,[Name]
-					,[Pin]
+					[Name]
+					,[Address]
+					,[LandMark]
+					,[PinCode]
+					,[Phone]
+					,[CityID]
+					,[StateID]
+					,[CountryID]
 					,[IsActive]
+					,[OrderID]
+					,[CustomerID]
+					,[AddressTypeiD]
 					,[CreatedDate]
 					,[ModifiedDate]
 					,[DeletedDate]
-					,[PinCode]
 					)
 				VALUES
 					(
-					@CountryId
-					,@Name
-					,@Pin
+					@Name
+					,@Address
+					,@LandMark
+					,@PinCode
+					,@Phone
+					,@CityId
+					,@StateId
+					,@CountryId
 					,@IsActive
+					,@OrderId
+					,@CustomerId
+					,@AddressTypeid
 					,@CreatedDate
 					,@ModifiedDate
 					,@DeletedDate
-					,@PinCode
 					)
 				-- Get the identity value
 				SET @Id = SCOPE_IDENTITY()
@@ -7339,40 +9733,54 @@ GO
 
 	
 
--- Drop the dbo.States_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.States_Update
+-- Drop the dbo.CustomerBilling_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_Update
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Updates a record in the States table
+-- Created By:  ()
+-- Purpose: Updates a record in the CustomerBilling table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.States_Update
+CREATE PROCEDURE dbo.CustomerBilling_Update
 (
 
 	@Id int   ,
 
-	@CountryId int   ,
-
 	@Name nvarchar (MAX)  ,
 
-	@Pin bigint   ,
+	@Address nvarchar (MAX)  ,
+
+	@LandMark nvarchar (MAX)  ,
+
+	@PinCode bigint   ,
+
+	@Phone bigint   ,
+
+	@CityId int   ,
+
+	@StateId int   ,
+
+	@CountryId int   ,
 
 	@IsActive bit   ,
+
+	@OrderId int   ,
+
+	@CustomerId int   ,
+
+	@AddressTypeid int   ,
 
 	@CreatedDate datetime   ,
 
 	@ModifiedDate datetime   ,
 
-	@DeletedDate datetime   ,
-
-	@PinCode nvarchar (MAX)  
+	@DeletedDate datetime   
 )
 AS
 
@@ -7381,16 +9789,23 @@ AS
 				
 				-- Modify the updatable columns
 				UPDATE
-					[dbo].[States]
+					[dbo].[CustomerBilling]
 				SET
-					[CountryID] = @CountryId
-					,[Name] = @Name
-					,[Pin] = @Pin
+					[Name] = @Name
+					,[Address] = @Address
+					,[LandMark] = @LandMark
+					,[PinCode] = @PinCode
+					,[Phone] = @Phone
+					,[CityID] = @CityId
+					,[StateID] = @StateId
+					,[CountryID] = @CountryId
 					,[IsActive] = @IsActive
+					,[OrderID] = @OrderId
+					,[CustomerID] = @CustomerId
+					,[AddressTypeiD] = @AddressTypeid
 					,[CreatedDate] = @CreatedDate
 					,[ModifiedDate] = @ModifiedDate
 					,[DeletedDate] = @DeletedDate
-					,[PinCode] = @PinCode
 				WHERE
 [ID] = @Id 
 				
@@ -7406,21 +9821,21 @@ GO
 
 	
 
--- Drop the dbo.States_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.States_Delete
+-- Drop the dbo.CustomerBilling_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_Delete
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the States table
+-- Created By:  ()
+-- Purpose: Deletes a record in the CustomerBilling table
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.States_Delete
+CREATE PROCEDURE dbo.CustomerBilling_Delete
 (
 
 	@Id int   
@@ -7428,7 +9843,7 @@ CREATE PROCEDURE dbo.States_Delete
 AS
 
 
-				DELETE FROM [dbo].[States] WITH (ROWLOCK) 
+				DELETE FROM [dbo].[CustomerBilling] WITH (ROWLOCK) 
 				WHERE
 					[ID] = @Id
 					
@@ -7444,21 +9859,81 @@ GO
 
 	
 
--- Drop the dbo.States_GetByCountryId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_GetByCountryId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.States_GetByCountryId
+-- Drop the dbo.CustomerBilling_GetByCityId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByCityId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_GetByCityId
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Select records from the States table through a foreign key
+-- Created By:  ()
+-- Purpose: Select records from the CustomerBilling table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.States_GetByCountryId
+CREATE PROCEDURE dbo.CustomerBilling_GetByCityId
+(
+
+	@CityId int   
+)
+AS
+
+
+				SET ANSI_NULLS OFF
+				
+				SELECT
+					[ID],
+					[Name],
+					[Address],
+					[LandMark],
+					[PinCode],
+					[Phone],
+					[CityID],
+					[StateID],
+					[CountryID],
+					[IsActive],
+					[OrderID],
+					[CustomerID],
+					[AddressTypeiD],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[CustomerBilling]
+				WHERE
+					[CityID] = @CityId
+				
+				SELECT @@ROWCOUNT
+				SET ANSI_NULLS ON
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.CustomerBilling_GetByCountryId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByCountryId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_GetByCountryId
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the CustomerBilling table through a foreign key
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.CustomerBilling_GetByCountryId
 (
 
 	@CountryId int   
@@ -7470,16 +9945,23 @@ AS
 				
 				SELECT
 					[ID],
-					[CountryID],
 					[Name],
-					[Pin],
+					[Address],
+					[LandMark],
+					[PinCode],
+					[Phone],
+					[CityID],
+					[StateID],
+					[CountryID],
 					[IsActive],
+					[OrderID],
+					[CustomerID],
+					[AddressTypeiD],
 					[CreatedDate],
 					[ModifiedDate],
-					[DeletedDate],
-					[PinCode]
+					[DeletedDate]
 				FROM
-					[dbo].[States]
+					[dbo].[CustomerBilling]
 				WHERE
 					[CountryID] = @CountryId
 				
@@ -7497,21 +9979,201 @@ GO
 
 	
 
--- Drop the dbo.States_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.States_GetById
+-- Drop the dbo.CustomerBilling_GetByCustomerId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByCustomerId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_GetByCustomerId
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Select records from the States table through an index
+-- Created By:  ()
+-- Purpose: Select records from the CustomerBilling table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.States_GetById
+CREATE PROCEDURE dbo.CustomerBilling_GetByCustomerId
+(
+
+	@CustomerId int   
+)
+AS
+
+
+				SET ANSI_NULLS OFF
+				
+				SELECT
+					[ID],
+					[Name],
+					[Address],
+					[LandMark],
+					[PinCode],
+					[Phone],
+					[CityID],
+					[StateID],
+					[CountryID],
+					[IsActive],
+					[OrderID],
+					[CustomerID],
+					[AddressTypeiD],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[CustomerBilling]
+				WHERE
+					[CustomerID] = @CustomerId
+				
+				SELECT @@ROWCOUNT
+				SET ANSI_NULLS ON
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.CustomerBilling_GetByOrderId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByOrderId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_GetByOrderId
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the CustomerBilling table through a foreign key
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.CustomerBilling_GetByOrderId
+(
+
+	@OrderId int   
+)
+AS
+
+
+				SET ANSI_NULLS OFF
+				
+				SELECT
+					[ID],
+					[Name],
+					[Address],
+					[LandMark],
+					[PinCode],
+					[Phone],
+					[CityID],
+					[StateID],
+					[CountryID],
+					[IsActive],
+					[OrderID],
+					[CustomerID],
+					[AddressTypeiD],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[CustomerBilling]
+				WHERE
+					[OrderID] = @OrderId
+				
+				SELECT @@ROWCOUNT
+				SET ANSI_NULLS ON
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.CustomerBilling_GetByStateId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByStateId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_GetByStateId
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the CustomerBilling table through a foreign key
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.CustomerBilling_GetByStateId
+(
+
+	@StateId int   
+)
+AS
+
+
+				SET ANSI_NULLS OFF
+				
+				SELECT
+					[ID],
+					[Name],
+					[Address],
+					[LandMark],
+					[PinCode],
+					[Phone],
+					[CityID],
+					[StateID],
+					[CountryID],
+					[IsActive],
+					[OrderID],
+					[CustomerID],
+					[AddressTypeiD],
+					[CreatedDate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[CustomerBilling]
+				WHERE
+					[StateID] = @StateId
+				
+				SELECT @@ROWCOUNT
+				SET ANSI_NULLS ON
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.CustomerBilling_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the CustomerBilling table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.CustomerBilling_GetById
 (
 
 	@Id int   
@@ -7521,16 +10183,23 @@ AS
 
 				SELECT
 					[ID],
-					[CountryID],
 					[Name],
-					[Pin],
+					[Address],
+					[LandMark],
+					[PinCode],
+					[Phone],
+					[CityID],
+					[StateID],
+					[CountryID],
 					[IsActive],
+					[OrderID],
+					[CustomerID],
+					[AddressTypeiD],
 					[CreatedDate],
 					[ModifiedDate],
-					[DeletedDate],
-					[PinCode]
+					[DeletedDate]
 				FROM
-					[dbo].[States]
+					[dbo].[CustomerBilling]
 				WHERE
 					[ID] = @Id
 				SELECT @@ROWCOUNT
@@ -7547,42 +10216,56 @@ GO
 
 	
 
--- Drop the dbo.States_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.States_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.States_Find
+-- Drop the dbo.CustomerBilling_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.CustomerBilling_Find
 GO
 
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
--- Purpose: Finds records in the States table passing nullable parameters
+-- Created By:  ()
+-- Purpose: Finds records in the CustomerBilling table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
 
 
-CREATE PROCEDURE dbo.States_Find
+CREATE PROCEDURE dbo.CustomerBilling_Find
 (
 
 	@SearchUsingOR bit   = null ,
 
 	@Id int   = null ,
+
+	@Name nvarchar (MAX)  = null ,
+
+	@Address nvarchar (MAX)  = null ,
+
+	@LandMark nvarchar (MAX)  = null ,
+
+	@PinCode bigint   = null ,
+
+	@Phone bigint   = null ,
+
+	@CityId int   = null ,
+
+	@StateId int   = null ,
 
 	@CountryId int   = null ,
 
-	@Name nvarchar (MAX)  = null ,
-
-	@Pin bigint   = null ,
-
 	@IsActive bit   = null ,
+
+	@OrderId int   = null ,
+
+	@CustomerId int   = null ,
+
+	@AddressTypeid int   = null ,
 
 	@CreatedDate datetime   = null ,
 
 	@ModifiedDate datetime   = null ,
 
-	@DeletedDate datetime   = null ,
-
-	@PinCode nvarchar (MAX)  = null 
+	@DeletedDate datetime   = null 
 )
 AS
 
@@ -7592,1369 +10275,80 @@ AS
   BEGIN
     SELECT
 	  [ID]
-	, [CountryID]
 	, [Name]
-	, [Pin]
+	, [Address]
+	, [LandMark]
+	, [PinCode]
+	, [Phone]
+	, [CityID]
+	, [StateID]
+	, [CountryID]
 	, [IsActive]
+	, [OrderID]
+	, [CustomerID]
+	, [AddressTypeiD]
 	, [CreatedDate]
 	, [ModifiedDate]
 	, [DeletedDate]
-	, [PinCode]
     FROM
-	[dbo].[States]
+	[dbo].[CustomerBilling]
     WHERE 
 	 ([ID] = @Id OR @Id IS NULL)
-	AND ([CountryID] = @CountryId OR @CountryId IS NULL)
 	AND ([Name] = @Name OR @Name IS NULL)
-	AND ([Pin] = @Pin OR @Pin IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+	AND ([Address] = @Address OR @Address IS NULL)
+	AND ([LandMark] = @LandMark OR @LandMark IS NULL)
 	AND ([PinCode] = @PinCode OR @PinCode IS NULL)
+	AND ([Phone] = @Phone OR @Phone IS NULL)
+	AND ([CityID] = @CityId OR @CityId IS NULL)
+	AND ([StateID] = @StateId OR @StateId IS NULL)
+	AND ([CountryID] = @CountryId OR @CountryId IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([OrderID] = @OrderId OR @OrderId IS NULL)
+	AND ([CustomerID] = @CustomerId OR @CustomerId IS NULL)
+	AND ([AddressTypeiD] = @AddressTypeid OR @AddressTypeid IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
 						
   END
   ELSE
   BEGIN
     SELECT
 	  [ID]
-	, [CountryID]
 	, [Name]
-	, [Pin]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
+	, [Address]
+	, [LandMark]
 	, [PinCode]
+	, [Phone]
+	, [CityID]
+	, [StateID]
+	, [CountryID]
+	, [IsActive]
+	, [OrderID]
+	, [CustomerID]
+	, [AddressTypeiD]
+	, [CreatedDate]
+	, [ModifiedDate]
+	, [DeletedDate]
     FROM
-	[dbo].[States]
+	[dbo].[CustomerBilling]
     WHERE 
 	 ([ID] = @Id AND @Id is not null)
-	OR ([CountryID] = @CountryId AND @CountryId is not null)
 	OR ([Name] = @Name AND @Name is not null)
-	OR ([Pin] = @Pin AND @Pin is not null)
-	OR ([IsActive] = @IsActive AND @IsActive is not null)
-	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
-	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
-	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	OR ([Address] = @Address AND @Address is not null)
+	OR ([LandMark] = @LandMark AND @LandMark is not null)
 	OR ([PinCode] = @PinCode AND @PinCode is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdSupplymentType_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdSupplymentType_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the ProdSupplymentType table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdSupplymentType_Get_List
-
-AS
-
-
-				
-				SELECT
-					[ID],
-					[Name],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[ProdSupplymentType]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdSupplymentType_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdSupplymentType_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the ProdSupplymentType table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdSupplymentType_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [ID] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdSupplymentType]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[ID], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
-				FROM
-				    [dbo].[ProdSupplymentType] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[ID] = PageIndex.[ID]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdSupplymentType]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdSupplymentType_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdSupplymentType_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the ProdSupplymentType table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdSupplymentType_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[ProdSupplymentType]
-					(
-					[Name]
-					,[IsActive]
-					,[CreatedDate]
-					,[ModifiedDate]
-					,[DeletedDate]
-					)
-				VALUES
-					(
-					@Name
-					,@IsActive
-					,@CreatedDate
-					,@ModifiedDate
-					,@DeletedDate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdSupplymentType_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdSupplymentType_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the ProdSupplymentType table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdSupplymentType_Update
-(
-
-	@Id int   ,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[ProdSupplymentType]
-				SET
-					[Name] = @Name
-					,[IsActive] = @IsActive
-					,[CreatedDate] = @CreatedDate
-					,[ModifiedDate] = @ModifiedDate
-					,[DeletedDate] = @DeletedDate
-				WHERE
-[ID] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdSupplymentType_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdSupplymentType_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the ProdSupplymentType table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdSupplymentType_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[ProdSupplymentType] WITH (ROWLOCK) 
-				WHERE
-					[ID] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdSupplymentType_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdSupplymentType_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the ProdSupplymentType table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdSupplymentType_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[ID],
-					[Name],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[ProdSupplymentType]
-				WHERE
-					[ID] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdSupplymentType_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdSupplymentType_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdSupplymentType_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the ProdSupplymentType table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdSupplymentType_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@Name nvarchar (MAX)  = null ,
-
-	@IsActive bit   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@ModifiedDate datetime   = null ,
-
-	@DeletedDate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[ProdSupplymentType]
-    WHERE 
-	 ([ID] = @Id OR @Id IS NULL)
-	AND ([Name] = @Name OR @Name IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[ProdSupplymentType]
-    WHERE 
-	 ([ID] = @Id AND @Id is not null)
-	OR ([Name] = @Name AND @Name is not null)
+	OR ([Phone] = @Phone AND @Phone is not null)
+	OR ([CityID] = @CityId AND @CityId is not null)
+	OR ([StateID] = @StateId AND @StateId is not null)
+	OR ([CountryID] = @CountryId AND @CountryId is not null)
 	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([OrderID] = @OrderId AND @OrderId is not null)
+	OR ([CustomerID] = @CustomerId AND @CustomerId is not null)
+	OR ([AddressTypeiD] = @AddressTypeid AND @AddressTypeid is not null)
 	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
 	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
 	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.OrderStatus_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.OrderStatus_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the OrderStatus table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.OrderStatus_Get_List
-
-AS
-
-
-				
-				SELECT
-					[ID],
-					[Name],
-					[ISActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[OrderStatus]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.OrderStatus_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.OrderStatus_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the OrderStatus table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.OrderStatus_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [ID] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[OrderStatus]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[ID], O.[Name], O.[ISActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
-				FROM
-				    [dbo].[OrderStatus] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[ID] = PageIndex.[ID]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[OrderStatus]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.OrderStatus_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.OrderStatus_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the OrderStatus table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.OrderStatus_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[OrderStatus]
-					(
-					[Name]
-					,[ISActive]
-					,[CreatedDate]
-					,[ModifiedDate]
-					,[DeletedDate]
-					)
-				VALUES
-					(
-					@Name
-					,@IsActive
-					,@CreatedDate
-					,@ModifiedDate
-					,@DeletedDate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.OrderStatus_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.OrderStatus_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the OrderStatus table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.OrderStatus_Update
-(
-
-	@Id int   ,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[OrderStatus]
-				SET
-					[Name] = @Name
-					,[ISActive] = @IsActive
-					,[CreatedDate] = @CreatedDate
-					,[ModifiedDate] = @ModifiedDate
-					,[DeletedDate] = @DeletedDate
-				WHERE
-[ID] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.OrderStatus_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.OrderStatus_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the OrderStatus table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.OrderStatus_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[OrderStatus] WITH (ROWLOCK) 
-				WHERE
-					[ID] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.OrderStatus_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.OrderStatus_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the OrderStatus table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.OrderStatus_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[ID],
-					[Name],
-					[ISActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[OrderStatus]
-				WHERE
-					[ID] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.OrderStatus_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.OrderStatus_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.OrderStatus_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the OrderStatus table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.OrderStatus_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@Name nvarchar (MAX)  = null ,
-
-	@IsActive bit   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@ModifiedDate datetime   = null ,
-
-	@DeletedDate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [ISActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[OrderStatus]
-    WHERE 
-	 ([ID] = @Id OR @Id IS NULL)
-	AND ([Name] = @Name OR @Name IS NULL)
-	AND ([ISActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [ISActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[OrderStatus]
-    WHERE 
-	 ([ID] = @Id AND @Id is not null)
-	OR ([Name] = @Name AND @Name is not null)
-	OR ([ISActive] = @IsActive AND @IsActive is not null)
-	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
-	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
-	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Countries_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Countries_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the Countries table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Countries_Get_List
-
-AS
-
-
-				
-				SELECT
-					[ID],
-					[Name],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[Deleteddate]
-				FROM
-					[dbo].[Countries]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Countries_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Countries_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the Countries table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Countries_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [ID] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[Countries]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[ID], O.[Name], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[Deleteddate]
-				FROM
-				    [dbo].[Countries] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[ID] = PageIndex.[ID]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[Countries]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Countries_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Countries_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the Countries table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Countries_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@Deleteddate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[Countries]
-					(
-					[Name]
-					,[IsActive]
-					,[CreatedDate]
-					,[ModifiedDate]
-					,[Deleteddate]
-					)
-				VALUES
-					(
-					@Name
-					,@IsActive
-					,@CreatedDate
-					,@ModifiedDate
-					,@Deleteddate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Countries_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Countries_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the Countries table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Countries_Update
-(
-
-	@Id int   ,
-
-	@Name nvarchar (MAX)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@Deleteddate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[Countries]
-				SET
-					[Name] = @Name
-					,[IsActive] = @IsActive
-					,[CreatedDate] = @CreatedDate
-					,[ModifiedDate] = @ModifiedDate
-					,[Deleteddate] = @Deleteddate
-				WHERE
-[ID] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Countries_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Countries_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the Countries table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Countries_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[Countries] WITH (ROWLOCK) 
-				WHERE
-					[ID] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Countries_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Countries_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the Countries table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Countries_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[ID],
-					[Name],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[Deleteddate]
-				FROM
-					[dbo].[Countries]
-				WHERE
-					[ID] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.Countries_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Countries_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.Countries_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the Countries table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.Countries_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@Name nvarchar (MAX)  = null ,
-
-	@IsActive bit   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@ModifiedDate datetime   = null ,
-
-	@Deleteddate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [Deleteddate]
-    FROM
-	[dbo].[Countries]
-    WHERE 
-	 ([ID] = @Id OR @Id IS NULL)
-	AND ([Name] = @Name OR @Name IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([Deleteddate] = @Deleteddate OR @Deleteddate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [Deleteddate]
-    FROM
-	[dbo].[Countries]
-    WHERE 
-	 ([ID] = @Id AND @Id is not null)
-	OR ([Name] = @Name AND @Name is not null)
-	OR ([IsActive] = @IsActive AND @IsActive is not null)
-	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
-	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
-	OR ([Deleteddate] = @Deleteddate AND @Deleteddate is not null)
 	SELECT @@ROWCOUNT			
   END
 				
@@ -8977,7 +10371,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the Orders table
 ----------------------------------------------------------------------------------------------------
 */
@@ -9027,7 +10421,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the Orders table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -9128,7 +10522,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the Orders table
 ----------------------------------------------------------------------------------------------------
 */
@@ -9221,7 +10615,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the Orders table
 ----------------------------------------------------------------------------------------------------
 */
@@ -9300,7 +10694,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the Orders table
 ----------------------------------------------------------------------------------------------------
 */
@@ -9338,7 +10732,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Orders table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -9395,7 +10789,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Orders table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -9452,7 +10846,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Orders table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -9509,7 +10903,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the Orders table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -9563,7 +10957,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the Orders table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -9692,7 +11086,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the OrderDetails table
 ----------------------------------------------------------------------------------------------------
 */
@@ -9738,7 +11132,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the OrderDetails table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -9839,7 +11233,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the OrderDetails table
 ----------------------------------------------------------------------------------------------------
 */
@@ -9916,7 +11310,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the OrderDetails table
 ----------------------------------------------------------------------------------------------------
 */
@@ -9983,7 +11377,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the OrderDetails table
 ----------------------------------------------------------------------------------------------------
 */
@@ -10021,7 +11415,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the OrderDetails table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -10074,7 +11468,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the OrderDetails table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -10127,7 +11521,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the OrderDetails table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -10180,7 +11574,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the OrderDetails table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -10230,7 +11624,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the OrderDetails table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -10327,6 +11721,445 @@ GO
 
 	
 
+-- Drop the dbo.Items_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Items_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the Items table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Items_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[ItemName],
+					[IsActive],
+					[CreatedDate],
+					[Modifieddate],
+					[DeletedDate]
+				FROM
+					[dbo].[Items]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Items_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Items_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the Items table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Items_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[Items]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[ItemName], O.[IsActive], O.[CreatedDate], O.[Modifieddate], O.[DeletedDate]
+				FROM
+				    [dbo].[Items] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[Items]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Items_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Items_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the Items table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Items_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@ItemName nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@Modifieddate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[Items]
+					(
+					[ItemName]
+					,[IsActive]
+					,[CreatedDate]
+					,[Modifieddate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@ItemName
+					,@IsActive
+					,@CreatedDate
+					,@Modifieddate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Items_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Items_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the Items table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Items_Update
+(
+
+	@Id int   ,
+
+	@ItemName nvarchar (MAX)  ,
+
+	@IsActive bit   ,
+
+	@CreatedDate datetime   ,
+
+	@Modifieddate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[Items]
+				SET
+					[ItemName] = @ItemName
+					,[IsActive] = @IsActive
+					,[CreatedDate] = @CreatedDate
+					,[Modifieddate] = @Modifieddate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Items_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Items_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the Items table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Items_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[Items] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Items_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Items_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the Items table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Items_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[ItemName],
+					[IsActive],
+					[CreatedDate],
+					[Modifieddate],
+					[DeletedDate]
+				FROM
+					[dbo].[Items]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.Items_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.Items_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.Items_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the Items table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.Items_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@ItemName nvarchar (MAX)  = null ,
+
+	@IsActive bit   = null ,
+
+	@CreatedDate datetime   = null ,
+
+	@Modifieddate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [ItemName]
+	, [IsActive]
+	, [CreatedDate]
+	, [Modifieddate]
+	, [DeletedDate]
+    FROM
+	[dbo].[Items]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([ItemName] = @ItemName OR @ItemName IS NULL)
+	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
+	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
+	AND ([Modifieddate] = @Modifieddate OR @Modifieddate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [ItemName]
+	, [IsActive]
+	, [CreatedDate]
+	, [Modifieddate]
+	, [DeletedDate]
+    FROM
+	[dbo].[Items]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([ItemName] = @ItemName AND @ItemName is not null)
+	OR ([IsActive] = @IsActive AND @IsActive is not null)
+	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
+	OR ([Modifieddate] = @Modifieddate AND @Modifieddate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
 -- Drop the dbo.DistributorsOrders_Get_List procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.DistributorsOrders_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.DistributorsOrders_Get_List
@@ -10335,7 +12168,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the DistributorsOrders table
 ----------------------------------------------------------------------------------------------------
 */
@@ -10379,7 +12212,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the DistributorsOrders table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -10480,7 +12313,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the DistributorsOrders table
 ----------------------------------------------------------------------------------------------------
 */
@@ -10549,7 +12382,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the DistributorsOrders table
 ----------------------------------------------------------------------------------------------------
 */
@@ -10610,7 +12443,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the DistributorsOrders table
 ----------------------------------------------------------------------------------------------------
 */
@@ -10648,7 +12481,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the DistributorsOrders table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -10699,7 +12532,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the DistributorsOrders table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -10750,7 +12583,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the DistributorsOrders table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -10798,7 +12631,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the DistributorsOrders table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -10883,6 +12716,511 @@ GO
 
 	
 
+-- Drop the dbo.ItemSell_Get_List procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ItemSell_Get_List
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets all records from the ItemSell table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ItemSell_Get_List
+
+AS
+
+
+				
+				SELECT
+					[ID],
+					[ItemID],
+					[Cost],
+					[CostVary],
+					[Createdate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ItemSell]
+					
+				SELECT @@ROWCOUNT
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ItemSell_GetPaged procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ItemSell_GetPaged
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Gets records from the ItemSell table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ItemSell_GetPaged
+(
+
+	@WhereClause varchar (8000)  ,
+
+	@OrderBy varchar (2000)  ,
+
+	@PageIndex int   ,
+
+	@PageSize int   
+)
+AS
+
+
+				
+				BEGIN
+				DECLARE @PageLowerBound int
+				DECLARE @PageUpperBound int
+				
+				-- Set the page bounds
+				SET @PageLowerBound = @PageSize * @PageIndex
+				SET @PageUpperBound = @PageLowerBound + @PageSize
+
+				-- Create a temp table to store the select results
+				CREATE TABLE #PageIndex
+				(
+				    [IndexId] int IDENTITY (1, 1) NOT NULL,
+				    [ID] int 
+				)
+				
+				-- Insert into the temp table
+				DECLARE @SQL AS nvarchar(4000)
+				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
+				SET @SQL = @SQL + ' SELECT'
+				SET @SQL = @SQL + ' [ID]'
+				SET @SQL = @SQL + ' FROM [dbo].[ItemSell]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				
+				-- Only get the number of rows needed here.
+				SET ROWCOUNT @PageUpperBound
+				
+				-- Populate the temp table
+				EXEC sp_executesql @SQL
+
+				-- Reset Rowcount back to all
+				SET ROWCOUNT 0
+				
+				-- Return paged results
+				SELECT O.[ID], O.[ItemID], O.[Cost], O.[CostVary], O.[Createdate], O.[ModifiedDate], O.[DeletedDate]
+				FROM
+				    [dbo].[ItemSell] O,
+				    #PageIndex PageIndex
+				WHERE
+				    PageIndex.IndexId > @PageLowerBound
+					AND O.[ID] = PageIndex.[ID]
+				ORDER BY
+				    PageIndex.IndexId
+                
+				-- get row count
+				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
+				SET @SQL = @SQL + ' FROM [dbo].[ItemSell]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				EXEC sp_executesql @SQL
+			
+				END
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ItemSell_Insert procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ItemSell_Insert
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Inserts a record into the ItemSell table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ItemSell_Insert
+(
+
+	@Id int    OUTPUT,
+
+	@ItemId int   ,
+
+	@Cost nvarchar (MAX)  ,
+
+	@CostVary decimal (18, 0)  ,
+
+	@Createdate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				INSERT INTO [dbo].[ItemSell]
+					(
+					[ItemID]
+					,[Cost]
+					,[CostVary]
+					,[Createdate]
+					,[ModifiedDate]
+					,[DeletedDate]
+					)
+				VALUES
+					(
+					@ItemId
+					,@Cost
+					,@CostVary
+					,@Createdate
+					,@ModifiedDate
+					,@DeletedDate
+					)
+				-- Get the identity value
+				SET @Id = SCOPE_IDENTITY()
+									
+							
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ItemSell_Update procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ItemSell_Update
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Updates a record in the ItemSell table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ItemSell_Update
+(
+
+	@Id int   ,
+
+	@ItemId int   ,
+
+	@Cost nvarchar (MAX)  ,
+
+	@CostVary decimal (18, 0)  ,
+
+	@Createdate datetime   ,
+
+	@ModifiedDate datetime   ,
+
+	@DeletedDate datetime   
+)
+AS
+
+
+				
+				
+				-- Modify the updatable columns
+				UPDATE
+					[dbo].[ItemSell]
+				SET
+					[ItemID] = @ItemId
+					,[Cost] = @Cost
+					,[CostVary] = @CostVary
+					,[Createdate] = @Createdate
+					,[ModifiedDate] = @ModifiedDate
+					,[DeletedDate] = @DeletedDate
+				WHERE
+[ID] = @Id 
+				
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ItemSell_Delete procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ItemSell_Delete
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Deletes a record in the ItemSell table
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ItemSell_Delete
+(
+
+	@Id int   
+)
+AS
+
+
+				DELETE FROM [dbo].[ItemSell] WITH (ROWLOCK) 
+				WHERE
+					[ID] = @Id
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ItemSell_GetByItemId procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_GetByItemId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ItemSell_GetByItemId
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ItemSell table through a foreign key
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ItemSell_GetByItemId
+(
+
+	@ItemId int   
+)
+AS
+
+
+				SET ANSI_NULLS OFF
+				
+				SELECT
+					[ID],
+					[ItemID],
+					[Cost],
+					[CostVary],
+					[Createdate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ItemSell]
+				WHERE
+					[ItemID] = @ItemId
+				
+				SELECT @@ROWCOUNT
+				SET ANSI_NULLS ON
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ItemSell_GetById procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ItemSell_GetById
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Select records from the ItemSell table through an index
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ItemSell_GetById
+(
+
+	@Id int   
+)
+AS
+
+
+				SELECT
+					[ID],
+					[ItemID],
+					[Cost],
+					[CostVary],
+					[Createdate],
+					[ModifiedDate],
+					[DeletedDate]
+				FROM
+					[dbo].[ItemSell]
+				WHERE
+					[ID] = @Id
+				SELECT @@ROWCOUNT
+					
+			
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
+-- Drop the dbo.ItemSell_Find procedure
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemSell_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+DROP PROCEDURE dbo.ItemSell_Find
+GO
+
+/*
+----------------------------------------------------------------------------------------------------
+
+-- Created By:  ()
+-- Purpose: Finds records in the ItemSell table passing nullable parameters
+----------------------------------------------------------------------------------------------------
+*/
+
+
+CREATE PROCEDURE dbo.ItemSell_Find
+(
+
+	@SearchUsingOR bit   = null ,
+
+	@Id int   = null ,
+
+	@ItemId int   = null ,
+
+	@Cost nvarchar (MAX)  = null ,
+
+	@CostVary decimal (18, 0)  = null ,
+
+	@Createdate datetime   = null ,
+
+	@ModifiedDate datetime   = null ,
+
+	@DeletedDate datetime   = null 
+)
+AS
+
+
+				
+  IF ISNULL(@SearchUsingOR, 0) <> 1
+  BEGIN
+    SELECT
+	  [ID]
+	, [ItemID]
+	, [Cost]
+	, [CostVary]
+	, [Createdate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ItemSell]
+    WHERE 
+	 ([ID] = @Id OR @Id IS NULL)
+	AND ([ItemID] = @ItemId OR @ItemId IS NULL)
+	AND ([Cost] = @Cost OR @Cost IS NULL)
+	AND ([CostVary] = @CostVary OR @CostVary IS NULL)
+	AND ([Createdate] = @Createdate OR @Createdate IS NULL)
+	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
+	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
+						
+  END
+  ELSE
+  BEGIN
+    SELECT
+	  [ID]
+	, [ItemID]
+	, [Cost]
+	, [CostVary]
+	, [Createdate]
+	, [ModifiedDate]
+	, [DeletedDate]
+    FROM
+	[dbo].[ItemSell]
+    WHERE 
+	 ([ID] = @Id AND @Id is not null)
+	OR ([ItemID] = @ItemId AND @ItemId is not null)
+	OR ([Cost] = @Cost AND @Cost is not null)
+	OR ([CostVary] = @CostVary AND @CostVary is not null)
+	OR ([Createdate] = @Createdate AND @Createdate is not null)
+	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
+	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
+	SELECT @@ROWCOUNT			
+  END
+				
+
+GO
+SET QUOTED_IDENTIFIER ON 
+GO
+SET NOCOUNT ON
+GO
+SET ANSI_NULLS OFF 
+GO
+
+	
+
 -- Drop the dbo.ItemPurchase_Get_List procedure
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ItemPurchase_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
 DROP PROCEDURE dbo.ItemPurchase_Get_List
@@ -10891,7 +13229,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets all records from the ItemPurchase table
 ----------------------------------------------------------------------------------------------------
 */
@@ -10935,7 +13273,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Gets records from the ItemPurchase table passing page index and page count parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -11036,7 +13374,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Inserts a record into the ItemPurchase table
 ----------------------------------------------------------------------------------------------------
 */
@@ -11105,7 +13443,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Updates a record in the ItemPurchase table
 ----------------------------------------------------------------------------------------------------
 */
@@ -11166,7 +13504,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Deletes a record in the ItemPurchase table
 ----------------------------------------------------------------------------------------------------
 */
@@ -11204,7 +13542,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ItemPurchase table through a foreign key
 ----------------------------------------------------------------------------------------------------
 */
@@ -11255,7 +13593,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Select records from the ItemPurchase table through an index
 ----------------------------------------------------------------------------------------------------
 */
@@ -11303,7 +13641,7 @@ GO
 /*
 ----------------------------------------------------------------------------------------------------
 
--- Created By: VedicKart ()
+-- Created By:  ()
 -- Purpose: Finds records in the ItemPurchase table passing nullable parameters
 ----------------------------------------------------------------------------------------------------
 */
@@ -11373,1334 +13711,6 @@ AS
 	OR ([ISActive] = @IsActive AND @IsActive is not null)
 	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
 	OR ([Modifieddate] = @Modifieddate AND @Modifieddate is not null)
-	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdOffer_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdOffer_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the ProdOffer table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdOffer_Get_List
-
-AS
-
-
-				
-				SELECT
-					[ID],
-					[OfferPercent],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[ProdOffer]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdOffer_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdOffer_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the ProdOffer table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdOffer_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [ID] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdOffer]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[ID], O.[OfferPercent], O.[IsActive], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
-				FROM
-				    [dbo].[ProdOffer] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[ID] = PageIndex.[ID]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[ProdOffer]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdOffer_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdOffer_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the ProdOffer table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdOffer_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@OfferPercent decimal (18, 0)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[ProdOffer]
-					(
-					[OfferPercent]
-					,[IsActive]
-					,[CreatedDate]
-					,[ModifiedDate]
-					,[DeletedDate]
-					)
-				VALUES
-					(
-					@OfferPercent
-					,@IsActive
-					,@CreatedDate
-					,@ModifiedDate
-					,@DeletedDate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdOffer_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdOffer_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the ProdOffer table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdOffer_Update
-(
-
-	@Id int   ,
-
-	@OfferPercent decimal (18, 0)  ,
-
-	@IsActive bit   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[ProdOffer]
-				SET
-					[OfferPercent] = @OfferPercent
-					,[IsActive] = @IsActive
-					,[CreatedDate] = @CreatedDate
-					,[ModifiedDate] = @ModifiedDate
-					,[DeletedDate] = @DeletedDate
-				WHERE
-[ID] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdOffer_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdOffer_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the ProdOffer table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdOffer_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[ProdOffer] WITH (ROWLOCK) 
-				WHERE
-					[ID] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdOffer_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdOffer_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the ProdOffer table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdOffer_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[ID],
-					[OfferPercent],
-					[IsActive],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[ProdOffer]
-				WHERE
-					[ID] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.ProdOffer_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.ProdOffer_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.ProdOffer_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the ProdOffer table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.ProdOffer_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@OfferPercent decimal (18, 0)  = null ,
-
-	@IsActive bit   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@ModifiedDate datetime   = null ,
-
-	@DeletedDate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [ID]
-	, [OfferPercent]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[ProdOffer]
-    WHERE 
-	 ([ID] = @Id OR @Id IS NULL)
-	AND ([OfferPercent] = @OfferPercent OR @OfferPercent IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [ID]
-	, [OfferPercent]
-	, [IsActive]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[ProdOffer]
-    WHERE 
-	 ([ID] = @Id AND @Id is not null)
-	OR ([OfferPercent] = @OfferPercent AND @OfferPercent is not null)
-	OR ([IsActive] = @IsActive AND @IsActive is not null)
-	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
-	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
-	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
-	SELECT @@ROWCOUNT			
-  END
-				
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_Get_List procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Get_List') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_Get_List
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets all records from the CustomerBilling table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_Get_List
-
-AS
-
-
-				
-				SELECT
-					[ID],
-					[Name],
-					[Address],
-					[LandMark],
-					[PinCode],
-					[Phone],
-					[CityID],
-					[StateID],
-					[CountryID],
-					[IsActive],
-					[OrderID],
-					[CustomerID],
-					[AddressTypeiD],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[CustomerBilling]
-					
-				SELECT @@ROWCOUNT
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_GetPaged procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetPaged') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_GetPaged
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Gets records from the CustomerBilling table passing page index and page count parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_GetPaged
-(
-
-	@WhereClause varchar (8000)  ,
-
-	@OrderBy varchar (2000)  ,
-
-	@PageIndex int   ,
-
-	@PageSize int   
-)
-AS
-
-
-				
-				BEGIN
-				DECLARE @PageLowerBound int
-				DECLARE @PageUpperBound int
-				
-				-- Set the page bounds
-				SET @PageLowerBound = @PageSize * @PageIndex
-				SET @PageUpperBound = @PageLowerBound + @PageSize
-
-				-- Create a temp table to store the select results
-				CREATE TABLE #PageIndex
-				(
-				    [IndexId] int IDENTITY (1, 1) NOT NULL,
-				    [ID] int 
-				)
-				
-				-- Insert into the temp table
-				DECLARE @SQL AS nvarchar(4000)
-				SET @SQL = 'INSERT INTO #PageIndex ([ID])'
-				SET @SQL = @SQL + ' SELECT'
-				SET @SQL = @SQL + ' [ID]'
-				SET @SQL = @SQL + ' FROM [dbo].[CustomerBilling]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				IF LEN(@OrderBy) > 0
-				BEGIN
-					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
-				END
-				
-				-- Only get the number of rows needed here.
-				SET ROWCOUNT @PageUpperBound
-				
-				-- Populate the temp table
-				EXEC sp_executesql @SQL
-
-				-- Reset Rowcount back to all
-				SET ROWCOUNT 0
-				
-				-- Return paged results
-				SELECT O.[ID], O.[Name], O.[Address], O.[LandMark], O.[PinCode], O.[Phone], O.[CityID], O.[StateID], O.[CountryID], O.[IsActive], O.[OrderID], O.[CustomerID], O.[AddressTypeiD], O.[CreatedDate], O.[ModifiedDate], O.[DeletedDate]
-				FROM
-				    [dbo].[CustomerBilling] O,
-				    #PageIndex PageIndex
-				WHERE
-				    PageIndex.IndexId > @PageLowerBound
-					AND O.[ID] = PageIndex.[ID]
-				ORDER BY
-				    PageIndex.IndexId
-                
-				-- get row count
-				SET @SQL = 'SELECT COUNT(1) AS TotalRowCount'
-				SET @SQL = @SQL + ' FROM [dbo].[CustomerBilling]'
-				IF LEN(@WhereClause) > 0
-				BEGIN
-					SET @SQL = @SQL + ' WHERE ' + @WhereClause
-				END
-				EXEC sp_executesql @SQL
-			
-				END
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_Insert procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Insert') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_Insert
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Inserts a record into the CustomerBilling table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_Insert
-(
-
-	@Id int    OUTPUT,
-
-	@Name nvarchar (MAX)  ,
-
-	@Address nvarchar (MAX)  ,
-
-	@LandMark nvarchar (MAX)  ,
-
-	@PinCode bigint   ,
-
-	@Phone bigint   ,
-
-	@CityId int   ,
-
-	@StateId int   ,
-
-	@CountryId int   ,
-
-	@IsActive bit   ,
-
-	@OrderId int   ,
-
-	@CustomerId int   ,
-
-	@AddressTypeid int   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				INSERT INTO [dbo].[CustomerBilling]
-					(
-					[Name]
-					,[Address]
-					,[LandMark]
-					,[PinCode]
-					,[Phone]
-					,[CityID]
-					,[StateID]
-					,[CountryID]
-					,[IsActive]
-					,[OrderID]
-					,[CustomerID]
-					,[AddressTypeiD]
-					,[CreatedDate]
-					,[ModifiedDate]
-					,[DeletedDate]
-					)
-				VALUES
-					(
-					@Name
-					,@Address
-					,@LandMark
-					,@PinCode
-					,@Phone
-					,@CityId
-					,@StateId
-					,@CountryId
-					,@IsActive
-					,@OrderId
-					,@CustomerId
-					,@AddressTypeid
-					,@CreatedDate
-					,@ModifiedDate
-					,@DeletedDate
-					)
-				-- Get the identity value
-				SET @Id = SCOPE_IDENTITY()
-									
-							
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_Update procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Update') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_Update
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Updates a record in the CustomerBilling table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_Update
-(
-
-	@Id int   ,
-
-	@Name nvarchar (MAX)  ,
-
-	@Address nvarchar (MAX)  ,
-
-	@LandMark nvarchar (MAX)  ,
-
-	@PinCode bigint   ,
-
-	@Phone bigint   ,
-
-	@CityId int   ,
-
-	@StateId int   ,
-
-	@CountryId int   ,
-
-	@IsActive bit   ,
-
-	@OrderId int   ,
-
-	@CustomerId int   ,
-
-	@AddressTypeid int   ,
-
-	@CreatedDate datetime   ,
-
-	@ModifiedDate datetime   ,
-
-	@DeletedDate datetime   
-)
-AS
-
-
-				
-				
-				-- Modify the updatable columns
-				UPDATE
-					[dbo].[CustomerBilling]
-				SET
-					[Name] = @Name
-					,[Address] = @Address
-					,[LandMark] = @LandMark
-					,[PinCode] = @PinCode
-					,[Phone] = @Phone
-					,[CityID] = @CityId
-					,[StateID] = @StateId
-					,[CountryID] = @CountryId
-					,[IsActive] = @IsActive
-					,[OrderID] = @OrderId
-					,[CustomerID] = @CustomerId
-					,[AddressTypeiD] = @AddressTypeid
-					,[CreatedDate] = @CreatedDate
-					,[ModifiedDate] = @ModifiedDate
-					,[DeletedDate] = @DeletedDate
-				WHERE
-[ID] = @Id 
-				
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_Delete procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Delete') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_Delete
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Deletes a record in the CustomerBilling table
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_Delete
-(
-
-	@Id int   
-)
-AS
-
-
-				DELETE FROM [dbo].[CustomerBilling] WITH (ROWLOCK) 
-				WHERE
-					[ID] = @Id
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_GetByCityId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByCityId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_GetByCityId
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the CustomerBilling table through a foreign key
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_GetByCityId
-(
-
-	@CityId int   
-)
-AS
-
-
-				SET ANSI_NULLS OFF
-				
-				SELECT
-					[ID],
-					[Name],
-					[Address],
-					[LandMark],
-					[PinCode],
-					[Phone],
-					[CityID],
-					[StateID],
-					[CountryID],
-					[IsActive],
-					[OrderID],
-					[CustomerID],
-					[AddressTypeiD],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[CustomerBilling]
-				WHERE
-					[CityID] = @CityId
-				
-				SELECT @@ROWCOUNT
-				SET ANSI_NULLS ON
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_GetByCountryId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByCountryId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_GetByCountryId
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the CustomerBilling table through a foreign key
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_GetByCountryId
-(
-
-	@CountryId int   
-)
-AS
-
-
-				SET ANSI_NULLS OFF
-				
-				SELECT
-					[ID],
-					[Name],
-					[Address],
-					[LandMark],
-					[PinCode],
-					[Phone],
-					[CityID],
-					[StateID],
-					[CountryID],
-					[IsActive],
-					[OrderID],
-					[CustomerID],
-					[AddressTypeiD],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[CustomerBilling]
-				WHERE
-					[CountryID] = @CountryId
-				
-				SELECT @@ROWCOUNT
-				SET ANSI_NULLS ON
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_GetByCustomerId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByCustomerId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_GetByCustomerId
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the CustomerBilling table through a foreign key
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_GetByCustomerId
-(
-
-	@CustomerId int   
-)
-AS
-
-
-				SET ANSI_NULLS OFF
-				
-				SELECT
-					[ID],
-					[Name],
-					[Address],
-					[LandMark],
-					[PinCode],
-					[Phone],
-					[CityID],
-					[StateID],
-					[CountryID],
-					[IsActive],
-					[OrderID],
-					[CustomerID],
-					[AddressTypeiD],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[CustomerBilling]
-				WHERE
-					[CustomerID] = @CustomerId
-				
-				SELECT @@ROWCOUNT
-				SET ANSI_NULLS ON
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_GetByOrderId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByOrderId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_GetByOrderId
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the CustomerBilling table through a foreign key
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_GetByOrderId
-(
-
-	@OrderId int   
-)
-AS
-
-
-				SET ANSI_NULLS OFF
-				
-				SELECT
-					[ID],
-					[Name],
-					[Address],
-					[LandMark],
-					[PinCode],
-					[Phone],
-					[CityID],
-					[StateID],
-					[CountryID],
-					[IsActive],
-					[OrderID],
-					[CustomerID],
-					[AddressTypeiD],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[CustomerBilling]
-				WHERE
-					[OrderID] = @OrderId
-				
-				SELECT @@ROWCOUNT
-				SET ANSI_NULLS ON
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_GetByStateId procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetByStateId') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_GetByStateId
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the CustomerBilling table through a foreign key
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_GetByStateId
-(
-
-	@StateId int   
-)
-AS
-
-
-				SET ANSI_NULLS OFF
-				
-				SELECT
-					[ID],
-					[Name],
-					[Address],
-					[LandMark],
-					[PinCode],
-					[Phone],
-					[CityID],
-					[StateID],
-					[CountryID],
-					[IsActive],
-					[OrderID],
-					[CustomerID],
-					[AddressTypeiD],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[CustomerBilling]
-				WHERE
-					[StateID] = @StateId
-				
-				SELECT @@ROWCOUNT
-				SET ANSI_NULLS ON
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_GetById procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_GetById') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_GetById
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Select records from the CustomerBilling table through an index
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_GetById
-(
-
-	@Id int   
-)
-AS
-
-
-				SELECT
-					[ID],
-					[Name],
-					[Address],
-					[LandMark],
-					[PinCode],
-					[Phone],
-					[CityID],
-					[StateID],
-					[CountryID],
-					[IsActive],
-					[OrderID],
-					[CustomerID],
-					[AddressTypeiD],
-					[CreatedDate],
-					[ModifiedDate],
-					[DeletedDate]
-				FROM
-					[dbo].[CustomerBilling]
-				WHERE
-					[ID] = @Id
-				SELECT @@ROWCOUNT
-					
-			
-
-GO
-SET QUOTED_IDENTIFIER ON 
-GO
-SET NOCOUNT ON
-GO
-SET ANSI_NULLS OFF 
-GO
-
-	
-
--- Drop the dbo.CustomerBilling_Find procedure
-IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'dbo.CustomerBilling_Find') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-DROP PROCEDURE dbo.CustomerBilling_Find
-GO
-
-/*
-----------------------------------------------------------------------------------------------------
-
--- Created By: VedicKart ()
--- Purpose: Finds records in the CustomerBilling table passing nullable parameters
-----------------------------------------------------------------------------------------------------
-*/
-
-
-CREATE PROCEDURE dbo.CustomerBilling_Find
-(
-
-	@SearchUsingOR bit   = null ,
-
-	@Id int   = null ,
-
-	@Name nvarchar (MAX)  = null ,
-
-	@Address nvarchar (MAX)  = null ,
-
-	@LandMark nvarchar (MAX)  = null ,
-
-	@PinCode bigint   = null ,
-
-	@Phone bigint   = null ,
-
-	@CityId int   = null ,
-
-	@StateId int   = null ,
-
-	@CountryId int   = null ,
-
-	@IsActive bit   = null ,
-
-	@OrderId int   = null ,
-
-	@CustomerId int   = null ,
-
-	@AddressTypeid int   = null ,
-
-	@CreatedDate datetime   = null ,
-
-	@ModifiedDate datetime   = null ,
-
-	@DeletedDate datetime   = null 
-)
-AS
-
-
-				
-  IF ISNULL(@SearchUsingOR, 0) <> 1
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [Address]
-	, [LandMark]
-	, [PinCode]
-	, [Phone]
-	, [CityID]
-	, [StateID]
-	, [CountryID]
-	, [IsActive]
-	, [OrderID]
-	, [CustomerID]
-	, [AddressTypeiD]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[CustomerBilling]
-    WHERE 
-	 ([ID] = @Id OR @Id IS NULL)
-	AND ([Name] = @Name OR @Name IS NULL)
-	AND ([Address] = @Address OR @Address IS NULL)
-	AND ([LandMark] = @LandMark OR @LandMark IS NULL)
-	AND ([PinCode] = @PinCode OR @PinCode IS NULL)
-	AND ([Phone] = @Phone OR @Phone IS NULL)
-	AND ([CityID] = @CityId OR @CityId IS NULL)
-	AND ([StateID] = @StateId OR @StateId IS NULL)
-	AND ([CountryID] = @CountryId OR @CountryId IS NULL)
-	AND ([IsActive] = @IsActive OR @IsActive IS NULL)
-	AND ([OrderID] = @OrderId OR @OrderId IS NULL)
-	AND ([CustomerID] = @CustomerId OR @CustomerId IS NULL)
-	AND ([AddressTypeiD] = @AddressTypeid OR @AddressTypeid IS NULL)
-	AND ([CreatedDate] = @CreatedDate OR @CreatedDate IS NULL)
-	AND ([ModifiedDate] = @ModifiedDate OR @ModifiedDate IS NULL)
-	AND ([DeletedDate] = @DeletedDate OR @DeletedDate IS NULL)
-						
-  END
-  ELSE
-  BEGIN
-    SELECT
-	  [ID]
-	, [Name]
-	, [Address]
-	, [LandMark]
-	, [PinCode]
-	, [Phone]
-	, [CityID]
-	, [StateID]
-	, [CountryID]
-	, [IsActive]
-	, [OrderID]
-	, [CustomerID]
-	, [AddressTypeiD]
-	, [CreatedDate]
-	, [ModifiedDate]
-	, [DeletedDate]
-    FROM
-	[dbo].[CustomerBilling]
-    WHERE 
-	 ([ID] = @Id AND @Id is not null)
-	OR ([Name] = @Name AND @Name is not null)
-	OR ([Address] = @Address AND @Address is not null)
-	OR ([LandMark] = @LandMark AND @LandMark is not null)
-	OR ([PinCode] = @PinCode AND @PinCode is not null)
-	OR ([Phone] = @Phone AND @Phone is not null)
-	OR ([CityID] = @CityId AND @CityId is not null)
-	OR ([StateID] = @StateId AND @StateId is not null)
-	OR ([CountryID] = @CountryId AND @CountryId is not null)
-	OR ([IsActive] = @IsActive AND @IsActive is not null)
-	OR ([OrderID] = @OrderId AND @OrderId is not null)
-	OR ([CustomerID] = @CustomerId AND @CustomerId is not null)
-	OR ([AddressTypeiD] = @AddressTypeid AND @AddressTypeid is not null)
-	OR ([CreatedDate] = @CreatedDate AND @CreatedDate is not null)
-	OR ([ModifiedDate] = @ModifiedDate AND @ModifiedDate is not null)
 	OR ([DeletedDate] = @DeletedDate AND @DeletedDate is not null)
 	SELECT @@ROWCOUNT			
   END

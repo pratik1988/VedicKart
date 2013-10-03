@@ -22,7 +22,6 @@ namespace HearbalKart.Business.Classes
        TList<States> objStateslist = new TList<States>();
        States objStates = new States();
 
-
        #region insertCustomers
        public string insertCustomers(Customers orduser)
        {

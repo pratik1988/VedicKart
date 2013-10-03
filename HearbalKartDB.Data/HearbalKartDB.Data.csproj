@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -6,23 +7,25 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EDE809F7-84D9-42C2-AE5A-96BFB132BF3E}</ProjectGuid>
     <ProjectType>Local</ProjectType>
-	<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
     <ApplicationIcon>
-	</ApplicationIcon>
+    </ApplicationIcon>
     <AssemblyKeyContainerName>
-	</AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
     <AssemblyName>HearbalKartDB.Data</AssemblyName>
     <AssemblyOriginatorKeyFile>..\HearbalKartDB.snk</AssemblyOriginatorKeyFile>
-	<SignAssembly>false</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
     <RootNamespace>HearbalKartDB.Data</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <StartupObject></StartupObject>
-    <FileUpgradeFlags></FileUpgradeFlags>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -53,7 +56,7 @@
     </ConfigurationOverrideFile>
     <DefineConstants>TRACE</DefineConstants>
     <DocumentationFile>HearbalKartDB.Data.xml</DocumentationFile>
-	 <DebugType>pdbonly</DebugType>
+    <DebugType>pdbonly</DebugType>
     <DebugSymbols>false</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
@@ -86,15 +89,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-	<Reference Include="System.Core">
-		<RequiredTargetFramework>4.0</RequiredTargetFramework>
-	</Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations"/>
-    <Reference Include="System.Web"/>
-    <Reference Include="System.Data"/>
-    <Reference Include="System.Design"/>
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -102,7 +105,7 @@
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-    </Reference>    
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
@@ -114,327 +117,282 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>      
-    
-     
-	<ProjectReference Include="..\HearbalKartDB.Entities\HearbalKartDB.Entities.csproj">
+    </Reference>
+    <ProjectReference Include="..\HearbalKartDB.Entities\HearbalKartDB.Entities.csproj">
       <Name>HearbalKartDB.Entities</Name>
-      <Project>{FD75E6D6-6F2A-4006-B5E9-B390D4F33815}</Project>
+      <Project>{19937FAA-A183-4750-8394-C27FCB756DCC}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
-	
-	
-	
-	
-    
-    	
-	
-	
-	
-	</ItemGroup>
-	
-		
-	<!-- Custom code folder: E:\Office\Vedickart\HearbalKartDB.Data\App_Code -->
-	<ItemGroup>	
-		<Folder Include="App_Code\" />
-        <Compile Include="App_Code\**\*.cs">
-          <SubType>Code</SubType>
-        </Compile>		
-	</ItemGroup>
-
-	<!-- Include any user files -->
-	<ItemGroup>	
-		<Compile Include="**\*.user.*" Exclude="**\*.csproj.user;**\.svn\**" >
-          <SubType>Code</SubType>
-        </Compile>		
-	</ItemGroup>
-	
-	<ItemGroup>
-			<Compile Include="Bases\UserTypeProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\UserTypeProviderBase.generatedCore.cs">
-			  <DependentUpon>UserTypeProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ProdCompanyProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ProdCompanyProviderBase.generatedCore.cs">
-			  <DependentUpon>ProdCompanyProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ItemSellProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ItemSellProviderBase.generatedCore.cs">
-			  <DependentUpon>ItemSellProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ProdTableProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ProdTableProviderBase.generatedCore.cs">
-			  <DependentUpon>ProdTableProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\GenderProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\GenderProviderBase.generatedCore.cs">
-			  <DependentUpon>GenderProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ItemsProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ItemsProviderBase.generatedCore.cs">
-			  <DependentUpon>ItemsProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\DeliveredDaysProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\DeliveredDaysProviderBase.generatedCore.cs">
-			  <DependentUpon>DeliveredDaysProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\CitiesProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\CitiesProviderBase.generatedCore.cs">
-			  <DependentUpon>CitiesProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\DistributarsProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\DistributarsProviderBase.generatedCore.cs">
-			  <DependentUpon>DistributarsProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\CustomersProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\CustomersProviderBase.generatedCore.cs">
-			  <DependentUpon>CustomersProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ProdTypeProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ProdTypeProviderBase.generatedCore.cs">
-			  <DependentUpon>ProdTypeProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ProdCategoryProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ProdCategoryProviderBase.generatedCore.cs">
-			  <DependentUpon>ProdCategoryProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ProdMedicineForProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ProdMedicineForProviderBase.generatedCore.cs">
-			  <DependentUpon>ProdMedicineForProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\StatesProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\StatesProviderBase.generatedCore.cs">
-			  <DependentUpon>StatesProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ProdSupplymentTypeProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ProdSupplymentTypeProviderBase.generatedCore.cs">
-			  <DependentUpon>ProdSupplymentTypeProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\OrderStatusProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\OrderStatusProviderBase.generatedCore.cs">
-			  <DependentUpon>OrderStatusProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\CountriesProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\CountriesProviderBase.generatedCore.cs">
-			  <DependentUpon>CountriesProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\OrdersProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\OrdersProviderBase.generatedCore.cs">
-			  <DependentUpon>OrdersProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\OrderDetailsProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\OrderDetailsProviderBase.generatedCore.cs">
-			  <DependentUpon>OrderDetailsProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\DistributorsOrdersProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\DistributorsOrdersProviderBase.generatedCore.cs">
-			  <DependentUpon>DistributorsOrdersProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ItemPurchaseProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ItemPurchaseProviderBase.generatedCore.cs">
-			  <DependentUpon>ItemPurchaseProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\ProdOfferProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\ProdOfferProviderBase.generatedCore.cs">
-			  <DependentUpon>ProdOfferProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\CustomerBillingProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\CustomerBillingProviderBase.generatedCore.cs">
-			  <DependentUpon>CustomerBillingProviderBase.cs</DependentUpon>
-			  <SubType>Code</SubType>
-			</Compile>
-		<Compile Include="..\AssemblyInfo.cs">
-		  <SubType>Code</SubType>
-		</Compile>
-			
-
-			<Compile Include="DataRepository.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-
-			<Compile Include="Bases\INetTiersProvider.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\NetTiersProvider.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\NetTiersProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\NetTiersProviderCollection.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\NetTiersServiceSection.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-			<Compile Include="Bases\EntityProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\EntityProviderBaseCore.generated.cs">
-			  <SubType>Code</SubType>
-			  <DependentUpon>EntityProviderBase.cs</DependentUpon>
-			</Compile>
-			
-			<Compile Include="Bases\EntityViewProviderBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Bases\EntityViewProviderBaseCore.generated.cs">
-			  <SubType>Code</SubType>
-			  <DependentUpon>EntityViewProviderBase.cs</DependentUpon>
-			</Compile>
-			
-			<Compile Include="Query\ExpressionParserBase.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Query\SqlExpressionParser.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Query\SqlStringBuilder.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Query\SqlUtil.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Query\StringTokenizer.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="Utility.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="ITransactionManager.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="TransactionManager.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="FileConfigurationSouce.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-            <Compile Include="FileConfigurationSouceElement.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="IEntityProvider.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			<Compile Include="IEntityViewProvider.cs">
-			  <SubType>Code</SubType>
-			</Compile>
-			
-		
-		
-
-		
-		
-		
-		
-		 <AppDesigner Include="Properties\" />
-	</ItemGroup>
-	
-	
-	
-	
+  </ItemGroup>
+  <!-- Custom code folder: E:\Office\Vedickart\HearbalKartDB.Data\App_Code -->
+  <ItemGroup>
+    <Compile Include="App_Code\**\*.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include any user files -->
+  <ItemGroup>
+    <Compile Include="**\*.user.*" Exclude="**\*.csproj.user;**\.svn\**">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bases\CitiesProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\CitiesProviderBase.generatedCore.cs">
+      <DependentUpon>CitiesProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\CountriesProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\CountriesProviderBase.generatedCore.cs">
+      <DependentUpon>CountriesProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\CustomerBillingProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\CustomerBillingProviderBase.generatedCore.cs">
+      <DependentUpon>CustomerBillingProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\CustomersProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\CustomersProviderBase.generatedCore.cs">
+      <DependentUpon>CustomersProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\DeliveredDaysProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\DeliveredDaysProviderBase.generatedCore.cs">
+      <DependentUpon>DeliveredDaysProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\DistributarsProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\DistributarsProviderBase.generatedCore.cs">
+      <DependentUpon>DistributarsProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\DistributorsOrdersProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\DistributorsOrdersProviderBase.generatedCore.cs">
+      <DependentUpon>DistributorsOrdersProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\GenderProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\GenderProviderBase.generatedCore.cs">
+      <DependentUpon>GenderProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ItemPurchaseProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ItemPurchaseProviderBase.generatedCore.cs">
+      <DependentUpon>ItemPurchaseProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ItemsProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ItemsProviderBase.generatedCore.cs">
+      <DependentUpon>ItemsProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ItemSellProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ItemSellProviderBase.generatedCore.cs">
+      <DependentUpon>ItemSellProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\OrderDetailsProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\OrderDetailsProviderBase.generatedCore.cs">
+      <DependentUpon>OrderDetailsProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\OrdersProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\OrdersProviderBase.generatedCore.cs">
+      <DependentUpon>OrdersProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\OrderStatusProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\OrderStatusProviderBase.generatedCore.cs">
+      <DependentUpon>OrderStatusProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdCategoryProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdCategoryProviderBase.generatedCore.cs">
+      <DependentUpon>ProdCategoryProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdCategoryMappingProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdCategoryMappingProviderBase.generatedCore.cs">
+      <DependentUpon>ProdCategoryMappingProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdCompanyProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdCompanyProviderBase.generatedCore.cs">
+      <DependentUpon>ProdCompanyProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdMedicineForProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdMedicineForProviderBase.generatedCore.cs">
+      <DependentUpon>ProdMedicineForProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdOfferProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdOfferProviderBase.generatedCore.cs">
+      <DependentUpon>ProdOfferProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdSubcategoryProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdSubcategoryProviderBase.generatedCore.cs">
+      <DependentUpon>ProdSubcategoryProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdSupplymentTypeProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdSupplymentTypeProviderBase.generatedCore.cs">
+      <DependentUpon>ProdSupplymentTypeProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdTableProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdTableProviderBase.generatedCore.cs">
+      <DependentUpon>ProdTableProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdTypeProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\ProdTypeProviderBase.generatedCore.cs">
+      <DependentUpon>ProdTypeProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\StatesProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\StatesProviderBase.generatedCore.cs">
+      <DependentUpon>StatesProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\UserTypeProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\UserTypeProviderBase.generatedCore.cs">
+      <DependentUpon>UserTypeProviderBase.cs</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="..\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\INetTiersProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\NetTiersProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\NetTiersProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\NetTiersProviderCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\NetTiersServiceSection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\EntityProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\EntityProviderBaseCore.generated.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>EntityProviderBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Bases\EntityViewProviderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Bases\EntityViewProviderBaseCore.generated.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>EntityViewProviderBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Query\ExpressionParserBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Query\SqlExpressionParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Query\SqlStringBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Query\SqlUtil.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Query\StringTokenizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utility.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ITransactionManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TransactionManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileConfigurationSouce.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FileConfigurationSouceElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IEntityProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IEntityViewProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-	<PostBuildEvent>
-	</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
-
 </Project>

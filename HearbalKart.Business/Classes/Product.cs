@@ -5,14 +5,22 @@ using System.Text;
 using HearbalKartDB.Entities;
 using HearbalKartDB.Data;
 using System.Configuration;
+using System.Collections;
 
 namespace HearbalKart.Business.Classes
 {
-    
+
     public class Product
     {
         TList<ProdCategory> ObjprodcategoryList = new TList<ProdCategory>();
         ProdCategory Objprodcategory = new ProdCategory();
+        ProdCategoryMapping Objprodcategorymapp = new ProdCategoryMapping();
+        TList<ProdCategoryMapping> ObjprodcategoryListmapping = new TList<ProdCategoryMapping>();
+        ProdCategoryMapping Objprodcategorymapping = new ProdCategoryMapping();
+
+        TList<ProdSubcategory> ObjprodSubcategoryList = new TList<ProdSubcategory>();
+        ProdSubcategory ObjprodSubcategory = new ProdSubcategory();
+
         TList<ProdCompany> Objprodcomplist = new TList<ProdCompany>();
         ProdCompany objprodcomp = new ProdCompany();
         TList<ProdMedicineFor> Objprodmedinelist = new TList<ProdMedicineFor>();
@@ -71,6 +79,105 @@ namespace HearbalKart.Business.Classes
                 if (DataRepository.ProdCategoryProvider.Update(orduser))
                 {
                     // Show proper message
+                }
+                else
+                {
+                    return "Information could not be saved.";
+                }
+                transaction.Commit();
+                return "Information Update successfully.";
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                return "Information could not be saved.Please contact Administrator.";
+            }
+        }
+        #endregion
+
+        #region insertProdSubCategory
+        public string insertProdSubCategory(ProdSubcategory orduser, List<int> prodID)
+        {
+            TransactionManager transaction = null;
+            try
+            {
+                ProdCategoryMapping objprodctgmapping = new ProdCategoryMapping();
+                transaction = DataRepository.Provider.CreateTransaction();
+                transaction.BeginTransaction();
+                orduser.IsActive = true;
+                if (DataRepository.ProdSubcategoryProvider.Insert(orduser))
+                {
+                    foreach (int id in prodID)
+                    {
+                        objprodctgmapping.IsActive = true;
+                        objprodctgmapping.CategoryId = id;
+                        objprodctgmapping.SubCategoryId = orduser.Id;
+                        objprodctgmapping.CreatedDate = DateTime.Now;
+                        if (DataRepository.ProdCategoryMappingProvider.Insert(objprodctgmapping))
+                        {
+                            // Show proper message
+                        }
+                        else
+                        {
+                            return "Information could not be saved.";
+                        }
+                    }
+                }
+
+                transaction.Commit();
+                return "Information Insert successfully.";
+            }
+            catch (Exception e)
+            {
+                transaction.Rollback();
+                return "Information could not be saved.Please contact Administrator.";
+            }
+        }
+        #endregion
+
+        #region UpdateProdSubCategory
+        public string UpdateProdSubCategory(ProdSubcategory orduser, List<int> prodID)
+        {
+            TransactionManager transaction = null;
+            try
+            {
+                ProdCategoryMapping objprodctgmapping = new ProdCategoryMapping();
+                ProdCategoryMapping objprodctgmapping1 = new ProdCategoryMapping();
+                TList<ProdCategoryMapping> objprodctgmappinglist = new TList<ProdCategoryMapping>();
+                TList<ProdCategoryMapping> objprodctgmappinglist1 = new TList<ProdCategoryMapping>();
+                objprodctgmappinglist1 = GetAllProdCategoriesmapping(orduser.Id);
+                transaction = DataRepository.Provider.CreateTransaction();
+                transaction.BeginTransaction();
+                if (DataRepository.ProdSubcategoryProvider.Update(orduser))
+                {
+                    foreach (var q in objprodctgmappinglist1)
+                    {
+                        objprodctgmapping1 = null;
+                        objprodctgmapping1 = GetProdmappcategoryByID(Convert.ToInt32(q.Id));
+                        if (DataRepository.ProdCategoryMappingProvider.Delete(objprodctgmapping1))
+                        {
+                            // Show proper message
+                        }
+                        else
+                        {
+                            return "Information could not be Delete.";
+                        }
+                    }
+                    foreach (int id in prodID)
+                    {
+                        objprodctgmapping.IsActive = true;
+                        objprodctgmapping.CategoryId = id;
+                        objprodctgmapping.SubCategoryId = orduser.Id;
+                        objprodctgmapping.CreatedDate = DateTime.Now;
+                        if (DataRepository.ProdCategoryMappingProvider.Insert(objprodctgmapping))
+                        {
+                            // Show proper message
+                        }
+                        else
+                        {
+                            return "Information could not be saved.";
+                        }
+                    }
                 }
                 else
                 {
@@ -369,7 +476,7 @@ namespace HearbalKart.Business.Classes
         #endregion
 
         #region insertProd
-        public string insertProd(Items obitem,ItemPurchase objitmpurchase,ItemSell ObjitmSell,ProdTable objtable)
+        public string insertProd(Items obitem, ItemPurchase objitmpurchase, ItemSell ObjitmSell, ProdTable objtable)
         {
             TransactionManager transaction = null;
             try
@@ -399,7 +506,7 @@ namespace HearbalKart.Business.Classes
                     }
                     else
                     {
-                            transaction.Rollback();
+                        transaction.Rollback();
                         return "Information could not be saved.";
                     }
                 }
@@ -475,11 +582,60 @@ namespace HearbalKart.Business.Classes
             return ObjprodcategoryList;
         }
 
+        public ProdCategoryMapping GetProdmappcategoryByID(int id)
+        {
+            Objprodcategorymapp = null;
+            Objprodcategorymapp = DataRepository.ProdCategoryMappingProvider.GetById(id);
+            return Objprodcategorymapp;
+        }
+        public TList<ProdCategoryMapping> GetAllProdCategoriesmapping(int ctgID)
+        {
+            string whereclaus = ProdCategoryMappingColumn.SubCategoryId + " =" + ctgID + "and " + ProdTableColumn.IsActive + "=1";
+            int Total = 0;
+            string orderby = string.Empty;
+            ObjprodcategoryListmapping = null;
+            ObjprodcategoryListmapping = DataRepository.ProdCategoryMappingProvider.GetPaged(whereclaus, orderby, 0, int.MaxValue, out Total);
+            //DataRepository.CustomersProvider.DeepLoad(objcust, true);
+            if ((ObjprodcategoryListmapping != null) && (ObjprodcategoryListmapping.Count > 0))
+            {
+                return ObjprodcategoryListmapping;
+            }
+            return null;
+        }
+
+        public TList<ProdCategoryMapping> GetAllProdCategoriesmapping(int ctgID, int mainCtgID)
+        {
+            string whereclaus = ProdCategoryMappingColumn.SubCategoryId + " =" + ctgID + "and " + ProdCategoryMappingColumn.CategoryId + " =" + mainCtgID + "and " + ProdTableColumn.IsActive + "=1";
+            int Total = 0;
+            string orderby = string.Empty;
+            ObjprodcategoryListmapping = null;
+            ObjprodcategoryListmapping = DataRepository.ProdCategoryMappingProvider.GetPaged(whereclaus, orderby, 0, int.MaxValue, out Total);
+            //DataRepository.CustomersProvider.DeepLoad(objcust, true);
+            if ((ObjprodcategoryListmapping != null) && (ObjprodcategoryListmapping.Count > 0))
+            {
+                return ObjprodcategoryListmapping;
+            }
+            return null;
+        }
         public ProdCategory GetProdcategoryByID(int id)
         {
             Objprodcategory = null;
             Objprodcategory = DataRepository.ProdCategoryProvider.GetById(id);
             return Objprodcategory;
+        }
+
+        public TList<ProdSubcategory> GetAllProdSubCategories()
+        {
+            ObjprodSubcategoryList = null;
+            ObjprodSubcategoryList = DataRepository.ProdSubcategoryProvider.GetAll();
+            return ObjprodSubcategoryList;
+        }
+
+        public ProdSubcategory GetProdSubcategoryByID(int id)
+        {
+            ObjprodSubcategory = null;
+            ObjprodSubcategory = DataRepository.ProdSubcategoryProvider.GetById(id);
+            return ObjprodSubcategory;
         }
 
         public TList<ProdCompany> GetAllProdCompanies()

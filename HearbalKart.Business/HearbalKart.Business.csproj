@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Classes\AccountValidation.cs" />
+    <Compile Include="Classes\CategoryProd.cs" />
     <Compile Include="Classes\CustomerClass.cs" />
+    <Compile Include="Classes\Enum.cs" />
     <Compile Include="Classes\Order.cs" />
     <Compile Include="Classes\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,7 +68,6 @@
       <Name>HearbalKartDB.Web</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
