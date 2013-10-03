@@ -7,6 +7,7 @@
    <%@ Register Src="~/UserControls/ADMIN/Products/ProdType.ascx" TagName="Prodcttype" TagPrefix="uc5" %>
    <%@ Register Src="~/UserControls/ADMIN/Products/ProdOffer.ascx" TagName="Prodctoffer" TagPrefix="uc6" %>
    <%@ Register Src="~/UserControls/ADMIN/Products/ProdTable.ascx" TagName="Prodct" TagPrefix="uc7" %>
+<%@ Register Src="~/UserControls/ADMIN/Products/ProdSubCategory.ascx" TagName="Prodsubctg" TagPrefix="uc8" %>
     <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="cph">
@@ -31,6 +32,24 @@
                                 </td>
                                 <td class="customerstatistics">
                                  <uc2:Prodcomp ID="prodcomp" runat="server" />
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+        <table class="dashboard">
+            <tr>
+                <td class="maincol">
+                    <table class="stats">
+                        <tbody>
+                            <tr>
+                                <td class="customerstatistics">
+                               <uc8:Prodsubctg ID="prodsubctg" runat="server" />
+                               
                                 </td>
                             </tr>
 
