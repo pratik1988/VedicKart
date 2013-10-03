@@ -140,6 +140,7 @@
         document.getElementById('fade').style.display = 'none';
         return isValid;
     }
+   
     function Checkprodcomp() {
         var errorMessage = "";
         var isValid = true;
