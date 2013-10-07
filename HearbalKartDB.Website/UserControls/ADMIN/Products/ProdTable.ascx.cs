@@ -33,7 +33,7 @@ public partial class UserControls_ADMIN_Products_ProdTable : System.Web.UI.UserC
     bool isactive = true;
     ProdCompany Objprodcomp = new ProdCompany();
     ProdType objprodtype = new ProdType();
-    ProdCategory objprodctg = new ProdCategory();
+    ProdSubcategory objprodctg = new ProdSubcategory();
     ProdSupplymentType objprodsupple = new ProdSupplymentType();
     ProdMedicineFor objmed = new ProdMedicineFor();
     ProdOffer objoffer = new ProdOffer();
@@ -91,7 +91,7 @@ public partial class UserControls_ADMIN_Products_ProdTable : System.Web.UI.UserC
                 {
                     objitempurchase = ObjprodClass.GetItempurchaseByID(Convert.ToInt32(u.PurchaseId));
                     objitemsell = ObjprodClass.GetItemsellByID(Convert.ToInt32(u.SellId));
-                    objprodctg = ObjprodClass.GetProdcategoryByID(Convert.ToInt32(u.CategoryId));
+                    objprodctg = ObjprodClass.GetProdSubcategoryByID(Convert.ToInt32(u.CategoryId));
                     objprodtype = ObjprodClass.GetProdTypeByID(Convert.ToInt32(u.TypeId));
                     objprodsupple = ObjprodClass.GetProdsupplymentByID(Convert.ToInt32(u.SupplementId));
                     Objprodcomp = ObjprodClass.GetProdcompByID(Convert.ToInt32(u.CompanyId));
@@ -102,7 +102,7 @@ public partial class UserControls_ADMIN_Products_ProdTable : System.Web.UI.UserC
                         & objmed != null && objoffer != null)
                     {
                         lblprodname.Text = objitem.ItemName.ToString().Trim();
-                        lblProdctg.Text = objprodctg.Name.ToString().Trim();
+                        lblProdctg.Text = objprodctg.SubCategoryName.ToString().Trim();
                         lblProdtype.Text = objprodtype.Name.ToString().Trim();
                         lblProdsupp.Text = objprodsupple.Name.ToString().Trim();
                         lblProdcomp.Text = Objprodcomp.CompanyName.ToString().Trim();
@@ -144,7 +144,7 @@ public partial class UserControls_ADMIN_Products_ProdTable : System.Web.UI.UserC
         if (objitem != null)
         {
             TXTprod.Text = objitem.ItemName;
-            DrpCategory.SelectedValue = objprod.CategoryId.ToString();
+            //DrpCategory.SelectedValue = objprod.CategoryId.ToString();
             drpcompany.SelectedValue = objprod.CompanyId.ToString();
             DrpmedicineFor.SelectedValue = objprod.MedicineForId.ToString();
             DrpOffer.SelectedValue = objprod.OfferId.ToString();
@@ -239,7 +239,8 @@ public partial class UserControls_ADMIN_Products_ProdTable : System.Web.UI.UserC
                     objitemsell.Cost = txtitmSell.Text.Trim();
                     objitemsell.Createdate = DateTime.Now;
                     objitemsell.CostVary = Convert.ToDecimal(Convert.ToInt32(txtitmSell.Text.Trim()) - Convert.ToInt32(txtitmpurchase.Text.Trim()));
-                    objprod.CategoryId = Convert.ToInt32(DrpCategory.SelectedItem.Value);
+                    //objprod.CategoryId = Convert.ToInt32(DrpCategory.SelectedItem.Value);
+                    objprod.CategoryId = 10;
                     objprod.CompanyId = Convert.ToInt32(drpcompany.SelectedItem.Value);
                     objprod.TypeId = Convert.ToInt32(Drptype.SelectedItem.Value);
                     objprod.SupplementId = Convert.ToInt32(Drpsupplement.SelectedItem.Value);
