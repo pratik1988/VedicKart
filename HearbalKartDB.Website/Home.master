@@ -1,0 +1,26 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Mainmaster.master" AutoEventWireup="true" CodeFile="Home.master.cs" Inherits="Home1" %>
+
+<%@ Register Src="~/UserControls/HOME/LeftMenu.ascx" TagName="LMenu" TagPrefix="uc4" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    
+    <div id="banner-fade">
+        <!-- start Basic Jquery Slider -->
+        <ul class="bjqs">
+            <li>
+                <img src="images/nemo.jpg" title="Automatically generated caption"></li>
+            <li>
+                <img src="images/up.jpg" title="Automatically generated caption"></li>
+            <li>
+                <img src="images/walle.jpg" title="Automatically generated caption"></li>
+        </ul>
+        <!-- end Basic jQuery Slider -->
+
+    </div>
+
+    <div class="container_prtion">
+        <uc4:LMenu ID="LMenuID" runat="server" />
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+

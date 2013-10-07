@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Mainmaster.master.cs" Inherits="Mainmaster" %>
+
+<%@ Register Src="~/UserControls/HOME/Footer.ascx" TagName="Footer" TagPrefix="uc1" %>
+<%@ Register Src="~/UserControls/HOME/Header.ascx" TagName="Header" TagPrefix="uc2" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" type="text/css" href="css/menucss.css" />
+    <link rel="stylesheet" type="text/css" href="css/elastislide.css" />
+    <link href="Testing/ImageStyle.css" rel="stylesheet" />
+    <script src="scripts/jquery-1.7.1.min.js"></script>
+    <script src="scripts/bjqs-1.3.min.js"></script>
+    <script class="secret-source">
+        jQuery(document).ready(function ($) {
+
+            $('#banner-fade').bjqs({
+                height: 400,
+                width: 1050,
+                responsive: true
+            });
+            $('#banner-fade_inner').bjqs({
+                height: 400,
+                width: 1050,
+                responsive: true
+            });
+
+        });
+    </script>
+
+    <script src="scripts/modernizr.custom.17475.js"></script>
+    <script src="scripts/alice-1380124456.js"></script>
+    <script src="scripts/custom.js"></script>
+
+    <script src="scripts/jquery.sticky.js"></script>
+    <%--<script>
+        $(window).scroll(function () {
+            var header = $(document).scrollTop();
+            if (header < 100) // Change this number to the amount you want to scroll before the header sticks
+            {
+                //$('#ng').sticky({ topSpacing: 110 });
+            }
+            else {
+                $('#ng').sticky({ topSpacing: 0 });
+            }
+        });
+  </script>--%>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="idscpt" runat="server" />
+
+        <ul class="sticklr sticklr-js" style="position: fixed; top: 98.5px; width: 24px;">
+            <li style="height: 24px;">
+                <a title="Site switcher" class="icon-tag" href="#" style="height: 16px; width: 16px;">1</a>
+              
+            </li>
+            <li style="height: 24px;">
+                <a title="Search" class="icon-zoom" href="#" style="height: 16px; width: 16px;">2</a>
+                
+            </li>
+            <li style="height: 24px;">
+                <a title="Multiple-column ready" class="icon-sitemap" href="#" style="height: 16px; width: 16px;">3</a>
+            </li>
+            <li style="height: 24px;">
+                <a title="Sign-in" class="icon-login" href="#" style="height: 16px; width: 16px;">4</a>
+               
+            </li>
+            <li style="height: 24px;">
+                <a title="Calendar" class="icon-calendar" href="#" style="height: 16px; width: 16px;">5</a>
+                
+            </li>
+            <li style="height: 24px;">
+                <a title="Notification" class="icon-email" href="#" style="height: 16px; width: 16px;">6</a>
+                
+            </li>
+        </ul>
+
+        <div id="wrapper">
+            <uc2:Header ID="Header" runat="server" />
+            <asp:UpdatePanel ID="updateid" runat="server">
+                <ContentTemplate>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </ContentTemplate>
+
+            </asp:UpdatePanel>
+
+        </div>
+        <uc1:Footer ID="Footer" runat="server" />
+    </form>
+</body>
+</html>
