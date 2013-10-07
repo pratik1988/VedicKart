@@ -36,8 +36,15 @@ namespace HearbalKart.Business.Classes
         ItemSell ObjProditmsell = new ItemSell();
         ProdTable objprod = new ProdTable();
         TList<ProdTable> objprodlist = new TList<ProdTable>();
-
-
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public static List<Product> AddValuesToDataList()
+        {
+            List<Product> _items = new List<Product>();
+            _items.Add(new Product { ID = 1, Name = "Brands" });
+            _items.Add(new Product { ID = 2, Name = "Price" });
+            return _items;
+        }
 
         #region insertProdCategory
         public string insertProdCategory(ProdCategory orduser)
@@ -588,6 +595,7 @@ namespace HearbalKart.Business.Classes
             Objprodcategorymapp = DataRepository.ProdCategoryMappingProvider.GetById(id);
             return Objprodcategorymapp;
         }
+
         public TList<ProdCategoryMapping> GetAllProdCategoriesmapping(int ctgID)
         {
             string whereclaus = ProdCategoryMappingColumn.SubCategoryId + " =" + ctgID + "and " + ProdTableColumn.IsActive + "=1";
@@ -602,7 +610,25 @@ namespace HearbalKart.Business.Classes
             }
             return null;
         }
-
+        public List<int> GetAllProdmapBymainCtgID(int ctgID)
+        {
+            List<int> objsubctgID = new List<int>();
+            string whereclaus = ProdCategoryMappingColumn.CategoryId + " =" + ctgID + "and " + ProdTableColumn.IsActive + "=1";
+            int Total = 0;
+            string orderby = string.Empty;
+            ObjprodcategoryListmapping = null;
+            ObjprodcategoryListmapping = DataRepository.ProdCategoryMappingProvider.GetPaged(whereclaus, orderby, 0, int.MaxValue, out Total);
+            //DataRepository.CustomersProvider.DeepLoad(objcust, true);
+            if ((ObjprodcategoryListmapping != null) && (ObjprodcategoryListmapping.Count > 0))
+            {
+                foreach (var r in ObjprodcategoryListmapping)
+                {
+                    objsubctgID.Add(Convert.ToInt32(r.SubCategoryId));
+                }
+                return objsubctgID;
+            }
+            return null;
+        }
         public TList<ProdCategoryMapping> GetAllProdCategoriesmapping(int ctgID, int mainCtgID)
         {
             string whereclaus = ProdCategoryMappingColumn.SubCategoryId + " =" + ctgID + "and " + ProdCategoryMappingColumn.CategoryId + " =" + mainCtgID + "and " + ProdTableColumn.IsActive + "=1";
@@ -741,6 +767,9 @@ namespace HearbalKart.Business.Classes
             ObjProditmsell = DataRepository.ItemSellProvider.GetById(id);
             return ObjProditmsell;
         }
+
+
+        
     }
 
 }

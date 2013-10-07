@@ -13,8 +13,7 @@ namespace HearbalKart.Business.Classes
         TList<OrderStatus> OBJordrStatusList = new TList<OrderStatus>();
         TList<Orders> Objorders = new TList<Orders>();
         OrderStatus objorderStatus = new OrderStatus();
-
-
+        
         #region insertOrderStatus
         public string insertOrderStatus(OrderStatus orduser)
         {

@@ -16,4 +16,5 @@ namespace HearbalKart.Business.Classes
         Liquid=1,
         Solid=2
     }
+    
 }

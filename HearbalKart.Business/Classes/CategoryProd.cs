@@ -12,8 +12,19 @@ namespace HearbalKart.Business.Classes
     public class CategoryProd
     {
         TList<ProdTable> objprodtablelist = new TList<ProdTable>();
+        TList<ProdCompany> Objprodcomplist = new TList<ProdCompany>();
+        public IEnumerable<ProdCompany> GetCompanyByID(IEnumerable<int> ctgID)
+        {
 
 
+            Objprodcomplist = null;
+            var objprodtable = DataRepository.ProdCompanyProvider.GetAll().Where(x => ctgID.Contains(Convert.ToInt32(x.Id)));
+            if ((objprodtable != null))
+            {
+                return objprodtable;
+            }
+            return null;
+        }
         public TList<ProdTable> GetproductsByCtgID(int ctgID)
         {
             string whereclaus = ProdTableColumn.CategoryId + " =" + ctgID + "and " + ProdTableColumn.IsActive + "=1";
@@ -30,6 +41,18 @@ namespace HearbalKart.Business.Classes
             {
 
                 return objprodtablelist;
+            }
+            return null;
+        }
+        public IEnumerable<ProdTable> GetproductsByCtgID(IEnumerable<int> ctgID)
+        {
+            
+
+            objprodtablelist = null;
+            var objprodtable = DataRepository.ProdTableProvider.GetAll().Where(x => ctgID.Contains(Convert.ToInt32(x.CategoryId)));
+            if ((objprodtable != null))
+            {
+                return objprodtable;
             }
             return null;
         }
