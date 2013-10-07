@@ -13,8 +13,8 @@
 
 .navigation {
 width:100%; background:url(../images/menubg.jpg) repeat-x; margin:0px ; padding:0px; float:left; width:100%; border-top-left-radius:4px; border-top-right-radius:4px;
+z-index:9999;
 }
-
 .ie7 .navigation {
     line-height: 25px;
 }
@@ -141,7 +141,19 @@ color:#fff; padding: 8px 20px; float:left; background:url(../images/menus_breake
 .new-arrival-tab {
 
 }
+.line.mts ul {
+margin:0 0 0 10px;
+}
+    .line.mts ul li ul {
+        margin:0 0 0 10px;  
+    }
+        .line.mts ul li ul li {
+        float:left; display:inline-block; margin: 0 17px 0 0;
+        }
 
+.sel-cat-jewellery {
+/*display:none;*/
+}
 ul.cat-main {
     margin: 0;
     padding: 0 8px 0 15px;
@@ -694,7 +706,8 @@ width:100%; float:left; list-style-type:none;
 }
 
 .new-arrival-bg .new-ar-sm-container {
-    padding-left: 68px;
+    padding-left: 10px;
+    float:left;
     margin: 8px 0 0;
 }
 
