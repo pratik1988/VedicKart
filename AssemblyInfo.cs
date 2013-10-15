@@ -12,7 +12,7 @@ using System.Security.Permissions;
 [assembly: AssemblyTitle("HearbalKartDB")]
 [assembly: AssemblyDescription("HearbalKartDB base framework generated using .netTiers, more info www.nettiers.com")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("VedicKart")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct(".netTiers v2.3.1.891")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
