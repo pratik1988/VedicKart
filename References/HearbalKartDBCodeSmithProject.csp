@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <codeSmith xmlns="http://www.codesmithtools.com/schema/csp.xsd">
   <variables>
-    <add key="ConnectionString1" value="Data Source=RAPTOR-VAIO;Initial Catalog=HearbalKartDB;Integrated Security=True" />
+    <add key="ConnectionString1" value="Data Source=(local);Initial Catalog=HearbalKartDB;Integrated Security=True" />
   </variables>
   <propertySets>
-    <propertySet name="NetTiers.txt" output="NetTiers.txt" template="C:\Users\Administrator\Documents\CodeSmith Generator\Samples\v6.5\Templates\Frameworks\NetTiers\NetTiers.cst">
+    <propertySet name="NetTiers.txt" output="NetTiers.txt" template="C:\Users\Raptor\Documents\CodeSmith Generator\Samples\v6.5\Templates\Frameworks\NetTiers\NetTiers.cst">
       <property name="ExecuteSql">False</property>
       <property name="SQLFolderName">SQL</property>
       <property name="ViewReport">True</property>
@@ -36,7 +36,7 @@
       <property name="OverwriteWebConfig">False</property>
       <property name="IncludeAtlasLibrary">False</property>
       <property name="IncludeAtlasToolkit">False</property>
-      <property name="GenerateWebsiteAdmin">False</property>
+      <property name="GenerateWebsiteAdmin">True</property>
       <property name="DateFormat">MM/dd/yyyy</property>
       <property name="RetryEnabled">False</property>
       <property name="RetryMaxAttempts">5</property>
@@ -68,7 +68,7 @@
       <property name="GenerateWinLibrary">False</property>
       <property name="RootNameSpace">HearbalKartDB</property>
       <property name="OutputDirectory">E:\Office\Vedickart</property>
-      <property name="MappingFile">E:\Office\Vedickart\HearbalKartDBMapping.config</property>
+      <property name="MappingFile">C:\Users\Raptor\Documents\CodeSmith Generator\Templates\NetTiers\HearbalKartDB\HearbalKartDBMapping.config</property>
       <property name="ComponentLayerNameSpace" />
       <property name="SourceTables">
         <connectionString>$(ConnectionString1)</connectionString>
@@ -76,67 +76,7 @@
         <tableList>
       <table>
         <owner>dbo</owner>
-        <name>UserType</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>ProdCompany</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>ItemSell</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>ProdTable</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>Gender</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>Items</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>DeliveredDays</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
         <name>Cities</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>Distributars</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>Customers</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>ProdType</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>ProdCategory</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>ProdMedicineFor</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>States</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>ProdSupplymentType</name>
-      </table>
-      <table>
-        <owner>dbo</owner>
-        <name>OrderStatus</name>
       </table>
       <table>
         <owner>dbo</owner>
@@ -144,11 +84,19 @@
       </table>
       <table>
         <owner>dbo</owner>
-        <name>Orders</name>
+        <name>CustomerBilling</name>
       </table>
       <table>
         <owner>dbo</owner>
-        <name>OrderDetails</name>
+        <name>Customers</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>DeliveredDays</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Distributars</name>
       </table>
       <table>
         <owner>dbo</owner>
@@ -156,7 +104,47 @@
       </table>
       <table>
         <owner>dbo</owner>
+        <name>Gender</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
         <name>ItemPurchase</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Items</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ItemSell</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>OrderDetails</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>Orders</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>OrderStatus</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProdCategory</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProdCategoryMapping</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProdCompany</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProdMedicineFor</name>
       </table>
       <table>
         <owner>dbo</owner>
@@ -164,7 +152,27 @@
       </table>
       <table>
         <owner>dbo</owner>
-        <name>CustomerBilling</name>
+        <name>ProdSubcategory</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProdSupplymentType</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProdTable</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>ProdType</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>States</name>
+      </table>
+      <table>
+        <owner>dbo</owner>
+        <name>UserType</name>
       </table>
     </tableList>
       </property>
@@ -178,7 +186,6 @@
         <connectionString>$(ConnectionString1)</connectionString>
         <providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
       </property>
-      <property name="CompanyName">VedicKart</property>
       <property name="RetrySleepStyle">Constant</property>
       <property name="IncludeGeneratedDate">False</property>
       <property name="NameConversion">None</property>
