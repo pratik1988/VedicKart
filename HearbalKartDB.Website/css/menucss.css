@@ -1,5 +1,37 @@
 
 
+
+.tabheader {
+    height: 41px;
+    position: absolute;
+    top: 97px;
+    width: 1000px;
+}
+.maincategory {
+     font: bold 18px sans-serif;
+    padding: 0 31px;
+      color: #FFFFFF;
+    display: inline;
+    float: left;
+    font-size: 12px;
+    height: 41px;
+    line-height: 41px;
+    padding: 0;
+    position: relative;
+}
+.test {
+     display: block;
+    margin: 3px 0 -3px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+.ayurveda {
+    color: #3F5803;
+    font-size: 10px;
+    font-weight: normal;
+}
+
+
 #nav-wrapper {
     margin: 90px auto 0;
     position: relative;
@@ -12,8 +44,11 @@
 }
 
 .navigation {
-width:100%; background:url(../images/menubg.jpg) repeat-x; margin:0px ; padding:0px; float:left; width:100%; border-top-left-radius:4px; border-top-right-radius:4px;
-z-index:9999;
+ /*background-color:#849f1e;*/
+ background:url('../images/Capture.png')repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    height: 40px;
+    width: 978px
 }
 .ie7 .navigation {
     line-height: 25px;
@@ -59,16 +94,23 @@ z-index:9999;
 }
 
 .navigation > ul {
-    margin: 0;
-    padding: 0;
+    color: #F9F9F9;
+    margin: 7px 0;
+    position: relative;
 }
 
     .navigation > ul > li {
-        display: inline-block;
-        list-style: none outside none;
-        position: relative;
+    border-radius: 2px 2px 0 0;
+    border-right: 1px solid #064661;
+    float: left;
+    padding: 4px 37px 2px;
+    transition: padding 0.5s ease-in-out 0s, background-color 0s linear 0.2s, height 0s linear 0.2s, border-color 0s linear 0.2s;
+     /*background:  url('../images/menuitmBack.png');*/
+     background-color:#00CA00;
     }
-
+    ol, ul {
+    list-style: none outside none;
+}
 .ie7 .navigation > ul > li {
     display: inline;
 }
@@ -78,7 +120,24 @@ z-index:9999;
 }
 
 .navigation > ul > li > a {
-color:#fff; padding: 8px 20px; float:left; background:url(../images/menus_breaker.jpg) top right no-repeat;
+    color: #FFFFFF;
+    font-size: 12px;
+    height: 21px;
+    line-height: 26px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0s linear 0.2s;
+}
+.navigation > ul > li > a:hover {
+color: #FFFFFF;
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0s linear 0.2s;
 }
     .navigation > ul > li > a span {
     padding:6px 0;
@@ -669,7 +728,7 @@ ul.sale-section {
     background: -ms-linear-gradient(top,#f9f9f9 0,#dcdcdc 100%);
     background: linear-gradient(to bottom,#f9f9f9 0,#dcdcdc 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9',endColorstr='#dcdcdc',GradientType=0);
-    width: 1050px!important;
+    width: 978px!important;
     padding-bottom: 15px;
     color: #404040;
     border-left: 1px solid #bdbdbd;

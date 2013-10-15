@@ -24,6 +24,7 @@ namespace HearbalKartDB.Website
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
         AccountValidation objaccount = new AccountValidation();
+        Customers objcust = new Customers();
 		protected void Page_Load(object sender, EventArgs e)
 		{   
 		}
@@ -33,8 +34,8 @@ namespace HearbalKartDB.Website
             String Pass = Txtpass.Text;
             if (UserName != null && Pass != null)
             {
-                int checkuser = objaccount.validateUser(UserName, Pass);
-                if (checkuser != 0)
+                objcust = objaccount.validateUser(UserName, Pass);
+                if (objcust != null)
                 {
                     Session["UserName"] = UserName;
                     Response.Redirect("~/ADMIN/DashBoard.aspx", false);

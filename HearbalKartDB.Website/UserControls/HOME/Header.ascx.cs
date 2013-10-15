@@ -31,12 +31,17 @@ public partial class UserControls_HOME_Header : System.Web.UI.UserControl
             BindCtgRtp();
         }
     }
+    public void Cartitemtext(string text)
+    {
+        txtcartitm.Text = text;
+    }
     #region Custom Methods
     public void BindCtgRtp()
     {
         objprodctglist = ObjprodClass.GetAllProdCategories();
         rptmnctg.DataSource = objprodctglist;
         rptmnctg.DataBind();
+        
     }
     #endregion
     #region DataBound

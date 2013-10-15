@@ -15,12 +15,14 @@ using HearbalKartDB.Entities;
 using HearbalKart.Business.Classes;
 using System.Linq;
 using System.IO;
+using System.Web.UI.WebControls;
 #endregion
 
 public partial class Home : System.Web.UI.Page
 {
     #region Pageload
     TList<ProdTable> objprodtablelist = new TList<ProdTable>();
+    ProdTable objprod = new ProdTable();
     IEnumerable<ProdTable> objenumprodtable;
     CategoryProd objctgprodclass = new CategoryProd();
     TList<ProdCategory> objprodctg = new TList<ProdCategory>();
@@ -45,20 +47,6 @@ public partial class Home : System.Web.UI.Page
             rptctg.DataSource = objprodctg;
             rptctg.DataBind();
         }
-        objprodtablelist = objctgprodclass.GetproductsByCtgID((int)CategoryTypes.Liquid);
-        if (objprodtablelist != null)
-        {
-            //rptctglqd.DataSource = objprodtablelist;
-            //rptctglqd.DataBind();
-            
-        }
-        objprodtablelist = null;
-        objprodtablelist = objctgprodclass.GetproductsByCtgID((int)CategoryTypes.Solid);
-        if (objprodtablelist != null)
-        {
-            //rptctgsolid.DataSource = objprodtablelist;
-            //rptctgsolid.DataBind();
-        }
     }
     #endregion
 
@@ -71,19 +59,20 @@ public partial class Home : System.Web.UI.Page
             ProdTable Prod = e.Item.DataItem as ProdTable;
             HyperLink lnkProdLqdName = (HyperLink)e.Item.FindControl("lnkProdLqdName");
             Label lblLqdprodSum = (Label)e.Item.FindControl("lblLqdprodSum");
-            Image IMGLqdProd = (Image)e.Item.FindControl("IMGLqdProd");
+            LinkButton addcartID = (LinkButton)e.Item.FindControl("addcartID");
             if (Prod != null)
             {
                 objitem = null;
                 objitem = ObjprodClass.GetItemsByID(Convert.ToInt32(Prod.ItemId));
                 objitemsell = ObjprodClass.GetItemsellByID(Convert.ToInt32(Prod.SellId));
                 lnkProdLqdName.Text = objitem.ItemName;
-                IMGLqdProd.ImageUrl = Prod.ImageUrl;
+                //IMGLqdProd.ImageUrl = Prod.ImageUrl;
+                addcartID.CommandArgument = Convert.ToString(Prod.Id);
                 lblLqdprodSum.Text = objitemsell.Cost;
             }
         }
     }
-    #endregion
+
 
     protected void rptctg_ItemDataBound(object sender, DataListItemEventArgs e)
     {
@@ -103,10 +92,12 @@ public partial class Home : System.Web.UI.Page
                     rptctglqd.DataBind();
                 }
             }
-            
+
             lnkCtgName.Text = Prod.Name;
         }
     }
+    #endregion
+
     protected void lnkCtgName_Click(object sender, EventArgs e)
     {
         Session["CTGID"] = null;
@@ -119,7 +110,59 @@ public partial class Home : System.Web.UI.Page
         Session["ProdSubCTG"] = objprodsubCtg;
         if ((Session["CTGID"] != null) && (Session["ProdSubCTG"] != null))
         {
-            Response.Redirect("~/CategoryProducts.aspx", false);
+            Response.Redirect("~/CategoryProducts.aspx", true);
         }
     }
+
+    #region DataList ItmCommand
+    protected void rptctglqd_ItemCommand(object source, DataListCommandEventArgs e)
+    {
+        if (e.CommandName == "addtocart")
+        {
+            UserControls_HOME_Header ctrl2 = (UserControls_HOME_Header)Page.Master.Master.FindControl("Header");
+            UserControls_HOME_Cart ct = (UserControls_HOME_Cart)ctrl2.FindControl("cartprod");
+            DataList gv = ct.Dlst;
+            List<ProdTable> objprod4cart = new List<ProdTable>();
+            objprod = ObjprodClass.GetProdByID(Convert.ToInt32(e.CommandArgument));
+            if (Session["cart"] != null)
+            {
+                int val = 0;
+                objprod4cart = (List<ProdTable>)Session["cart"];
+                if (objprod != null)
+                {
+                    foreach (var item in objprod4cart)
+                    {
+                        if (item.Id == objprod.Id)
+                        {
+                            val = 1;
+                        }
+                    }
+                    if (val != 1)
+                    {
+                        Session["cart"] = null;
+                        objprod4cart.Add(objprod);
+                        Session["cart"] = objprod4cart;
+                        ct.CartDivdisplay(true);
+                    }
+                }
+            }
+            else
+            {
+                Session["cart"] = objprod4cart;
+                ct.CartDivdisplay(true);
+                objprod4cart.Add(objprod);
+
+            }
+            ct.ttlcost(0);
+            gv.DataSource = objprod4cart;
+            ctrl2.Cartitemtext(objprod4cart.Count().ToString());
+            ct.Cartitems(objprod4cart.Count().ToString());
+            ct.ttlitems(objprod4cart.Count.ToString());
+            gv.DataBind();
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "aa", "jQuery(document).ready(function(){ShowCart('true');});", true);
+        }
+
+    }
+
+    #endregion
 }

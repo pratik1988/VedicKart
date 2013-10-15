@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mainmaster.master" AutoEventWireup="true" CodeFile="CategoryProducts.aspx.cs" Inherits="CategoryProducts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <style>
+		.content{height:41px;overflow:auto; }
+		.content p:nth-child(even){color:#999; font-family:Georgia,serif; font-size:17px; font-style:italic;}
+		.content p:nth-child(3n+0){color:#c96;}
+	</style>
     <script type="text/javascript">
         $(function () {
             var stickyRibbonTop = $('#menuID').offset().top;
@@ -16,6 +21,22 @@
             });
         });
     </script>
+    <link href="Testing/jquery.mCustomScrollbar.css" rel="stylesheet" />
+    <script src="scripts/jquery.mCustomScrollbar.js"></script>
+	<script>
+	    (function ($) {
+	        var i = 0;
+	        $(window).load(function () {
+	            $("#content_1").mCustomScrollbar({
+	                scrollButtons: {
+	                    enable: true
+	                }
+	            });
+	            i = 1;
+	            
+	        });
+	    })(jQuery);
+	</script>
     <div class="container_prtion">
         <div class="left_portion" id="menuID" >
             <div class="refinedcontentdd">
@@ -30,15 +51,10 @@
                             </div>
                     </h3>
                     <div style="margin: 0px;" class="NcatSelul tinyscrl">
-                        <div style="width: 2px; background: none repeat scroll 0% 0% rgb(158, 158, 158);" class="scrollbar disable">
-                            <div style="width: 4px; height: 23px;" class="track">
-                                <div style="width: 6px; top: 0px; height: 23px;" class="thumb">
-                                    <div class="end">&nbsp;</div>
-                                </div>
-                            </div>
-                        </div>
+                       
                         <div style="height: 23px;" class="viewport">
                                     <div class="overview" style="top: 0px;">
+                                        <div id="content_1" class="content">
                                         <div style="margin: 0px; display: block;" class="NcatSelulli">
                                             <asp:DataList ID="MnuDlstsub" runat="server" class="NcatSelulli" RepeatDirection="Vertical" RepeatColumns="1" OnItemDataBound="MnuDlstsub_ItemDataBound">
                                                 <ItemTemplate>
@@ -46,11 +62,12 @@
                                                     <label class="ColorCheckboxdeselect">
                                                         &nbsp;
                                                     </label>
-                                                    <asp:HyperLink ID="Hyperlnk"  relmselect="apparels" style="width: 130px; float: left;" class="RefineByLink" runat="server"/>
+                                                    <asp:HyperLink ID="Hyperlnk"  relmselect="apparels" style=" float: left;" class="RefineByLink" runat="server"/>
                                                 </ItemTemplate>
                                             </asp:DataList>
                                             </a>
                                         </div>
+                                            </div>
                                     </div>
                                 </div>
                         </div>

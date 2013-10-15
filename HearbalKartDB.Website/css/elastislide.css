@@ -30,7 +30,7 @@
 .elastislide-horizontal {
 	padding: 0px;
 }
-#carousel{padding: 0 0 0 12px; width: 214px; max-height:inherit !important;}
+#carousel{padding: 0 0 0 12px; width:95%;  max-height:inherit !important;}
 #carousel li{max-width:inherit !important;max-height:inherit !important; padding: 0 15px;}
 #carousel1{width:100%; max-height:inherit !important;}
 #carousel1 li{max-width:inherit !important;max-height:inherit !important; padding: 0 15px;}
